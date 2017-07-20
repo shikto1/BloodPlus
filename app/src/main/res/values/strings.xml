@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Blood+</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="registerHere"><u><b>Register here</b></u></string>
+    <string name="clickMe"><u><b>Touch Me</b></u></string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string-array name="bloodGroup">
+        <item>A+</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B-</item>
+        <item>AB+</item>
+        <item>AB-</item>
+        <item>O+</item>
+        <item>O-</item>
+    </string-array>
+
+    <string-array name="locationArray">
+        <item>Manikganj</item>
+        <item>Dhamrai</item>
+        <item>Kalampur</item>
+        <item>Islampur</item>
+        <item>Nobinagar</item>
+        <item>Savar</item>
+        <item>Dhaka</item>
+    </string-array>
+
+</resources>

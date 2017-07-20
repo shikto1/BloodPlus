@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/padding"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.shishir.blood.Fragment.SearchFrgment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:layout_marginTop="@dimen/padding"
+            android:id="@+id/bloodGroupSpinnerAtSearchFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ms_hint="Blood Group"
+            app:ms_floatingLabelColor="@color/redColor"
+            app:ms_arrowColor="@color/redColor"></fr.ganfra.materialspinner.MaterialSpinner>
+        <fr.ganfra.materialspinner.MaterialSpinner
+            android:id="@+id/locationSpinnerAtSearchFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:ms_floatingLabelColor="@color/redColor"
+            app:ms_hint="Location"
+            app:ms_arrowColor="@color/redColor"></fr.ganfra.materialspinner.MaterialSpinner>
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+        <Button
+            android:id="@+id/searchButtonAtSearchFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:textSize="@dimen/normalTextSize"
+            android:background="@drawable/background_of_button"
+            android:textColor="@color/white"/>
+
+    </LinearLayout>
+
+</LinearLayout>

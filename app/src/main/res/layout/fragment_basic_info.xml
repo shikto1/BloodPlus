@@ -1,0 +1,144 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/padding"
+    android:paddingRight="@dimen/padding">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"></RelativeLayout>
+            //This is fake and only for focusing
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/nameLayoutAtBasicInfo"
+                android:layout_width="match_parent"
+                android:paddingTop="@dimen/padding"
+                android:layout_marginBottom="@dimen/padding"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/fullNameEtAtBasicInfo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Full Name"
+                    android:singleLine="true"
+                    android:textSize="@dimen/normalTextSize" />
+            </android.support.design.widget.TextInputLayout>
+
+
+            <RadioGroup
+                android:id="@+id/genderGroupAtBasicInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/largeMargin"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/maleRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/padding"
+                    android:text="Male"
+                    android:textSize="@dimen/normalTextSize" />
+
+                <RadioButton
+                    android:id="@+id/femaleRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/padding"
+                    android:text="Female"
+                    android:textSize="@dimen/normalTextSize" />
+
+            </RadioGroup>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/bloodS"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:ms_arrowColor="@color/redColor"
+                app:ms_floatingLabelColor="@color/redColor"
+                app:ms_floatingLabelText="Blood Group"
+                app:ms_hint="Blood Group"></fr.ganfra.materialspinner.MaterialSpinner>
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/locationSpinnerAtBasicInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding"
+                app:ms_arrowColor="@color/redColor"
+                app:ms_floatingLabelText="Location"
+                app:ms_floatingLabelColor="@color/redColor"
+                app:ms_hint="Location"></fr.ganfra.materialspinner.MaterialSpinner>
+
+            <TextView
+                android:id="@+id/dateOfBirthAtBasicInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/largeMargin"
+                android:text="Date of Birth"
+                android:textSize="@dimen/normalTextSize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="@dimen/padding"/>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding"
+                android:layout_marginTop="@dimen/largeMargin">
+
+                <EditText
+                    android:id="@+id/contactNumberEt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Contact Number"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="@dimen/normalTextSize" />
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/lastDonationDateAtBasicInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding"
+                android:text="Last Donation Date(If Donated)"
+                android:textSize="@dimen/normalTextSize" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1.2dp"
+                android:background="@android:color/darker_gray"
+                android:layout_marginBottom="@dimen/padding"/>
+
+            <Button
+                android:id="@+id/submitBtnAtBasicInfo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding"
+                android:background="@drawable/background_of_button"
+                android:text="Submit"
+                android:layout_marginBottom="36dp"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normalTextSize" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>
