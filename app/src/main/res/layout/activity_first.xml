@@ -47,12 +47,12 @@
             android:orientation="horizontal">
             <Button
                 android:id="@+id/loginButtonAtFirstAc"
-                android:background="@drawable/background_of_button"
                 android:layout_width="0dp"
                 android:layout_marginRight="@dimen/smallMargin"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="Admin"
+                android:enabled="false"
                 android:textAppearance="@android:style/TextAppearance"
                 android:textSize="@dimen/normalTextSize"
                 android:textColor="@color/white"/>

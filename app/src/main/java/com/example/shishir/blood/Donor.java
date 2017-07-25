@@ -1,10 +1,12 @@
 package com.example.shishir.blood;
 
+import java.io.Serializable;
+
 /**
  * Created by Shishir on 7/14/2017.
  */
 
-public class Donor {
+public class Donor implements Serializable {
     private String donorName;
     private String gender;
     private String bloodGroup;

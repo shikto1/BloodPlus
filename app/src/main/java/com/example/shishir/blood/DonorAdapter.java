@@ -61,7 +61,7 @@ public class DonorAdapter extends BaseAdapter {
 
         // holder.circularImageView.setImageBitmap(circularBitmap);
         holder.nameTv.setText(donorList.get(position).getDonorName());
-        holder.bloodGroupTv.setText(donorList.get(position).getBloodGroup());
+      //  holder.bloodGroupTv.setText(donorList.get(position).getBloodGroup());
 
 //        if(imagePath!=null){
 //            Drawable d = (Drawable) Drawable.createFromPath(imagePath);

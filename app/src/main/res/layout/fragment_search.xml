@@ -1,47 +1,91 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/padding"
     android:orientation="vertical"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/padding"
     tools:context="com.example.shishir.blood.Fragment.SearchFrgment">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_marginTop="@dimen/padding"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-        <fr.ganfra.materialspinner.MaterialSpinner
-            android:layout_marginTop="@dimen/padding"
-            android:id="@+id/bloodGroupSpinnerAtSearchFragment"
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:ms_hint="Blood Group"
-            app:ms_floatingLabelColor="@color/redColor"
-            app:ms_arrowColor="@color/redColor"></fr.ganfra.materialspinner.MaterialSpinner>
-        <fr.ganfra.materialspinner.MaterialSpinner
-            android:id="@+id/locationSpinnerAtSearchFragment"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:ms_floatingLabelColor="@color/redColor"
-            app:ms_hint="Location"
-            app:ms_arrowColor="@color/redColor"></fr.ganfra.materialspinner.MaterialSpinner>
+            android:layout_marginBottom="@dimen/smallMargin"
+            android:layout_marginTop="@dimen/largeMargin"
+            android:text="Blood Group:"
+            android:textColor="@color/redColor"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/asBloodSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_of_edittext"
+                android:hint="e.g: B+"
+                android:padding="@dimen/largeMargin"
+                android:textSize="@dimen/normalTextSize" />
+
+            <Spinner
+                android:id="@+id/bloodGroupSpinnerAtSearchFragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/asBloodSpinner"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/lo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/asBloodSpinner"
+                android:layout_marginBottom="@dimen/smallMargin"
+                android:layout_marginTop="@dimen/padding"
+                android:text="Location:"
+                android:textColor="@color/redColor"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleTextViewForLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/lo"
+                android:background="@drawable/background_of_edittext"
+                android:hint="e.g: Dhaka"
+                android:padding="@dimen/largeMargin"
+                android:maxLines="1"
+                android:textSize="@dimen/normalTextSize" />
+
+        </RelativeLayout>
     </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <Button
             android:id="@+id/searchButtonAtSearchFragment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Search"
-            android:textSize="@dimen/normalTextSize"
+            android:layout_marginTop="@dimen/padding"
             android:background="@drawable/background_of_button"
-            android:textColor="@color/white"/>
-
+            android:text="Search"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normalTextSize" />
     </LinearLayout>
+
 
 </LinearLayout>

@@ -14,10 +14,12 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,19 +36,23 @@ public class BasicInfoFragment extends Fragment implements View.OnClickListener,
     EditText fullNameEt, contactNumber;
     RadioGroup genderGroup;
     TextView birthDate, lastDonationDate;
-    MaterialSpinner bloodGroup, location;
+    Spinner bloodGroup;
+    TextView asBloodSpinner;
+    AutoCompleteTextView location;
     String gender, bloodGroupStr, locationStr;
     Button submitBtn;
     Calendar calendar;
     int dateFlag;
     InputMethodManager inputMethodManager;
     DonorTableManager donorTableManager;
+    boolean fTime;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_basic_info, container, false);
+        fTime = true;
         findViewById(view);
 
         genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -70,9 +76,12 @@ public class BasicInfoFragment extends Fragment implements View.OnClickListener,
 
         birthDate = (TextView) view.findViewById(R.id.dateOfBirthAtBasicInfo);
         lastDonationDate = (TextView) view.findViewById(R.id.lastDonationDateAtBasicInfo);
+        asBloodSpinner = (TextView) view.findViewById(R.id.asBloodSpinnerInBasicInfo);
 
-        bloodGroup = (MaterialSpinner) view.findViewById(R.id.bloodS);
-        location = (MaterialSpinner) view.findViewById(R.id.locationSpinnerAtBasicInfo);
+
+        bloodGroup = (Spinner) view.findViewById(R.id.bloodS);
+        location = (AutoCompleteTextView) view.findViewById(R.id.autoCompleTextViewForLocationInBasicInfo);
+        location.setThreshold(2);
         submitBtn = (Button) view.findViewById(R.id.submitBtnAtBasicInfo);
         calendar = Calendar.getInstance();
         donorTableManager = new DonorTableManager(getActivity());
@@ -83,6 +92,12 @@ public class BasicInfoFragment extends Fragment implements View.OnClickListener,
 
         birthDate.setOnClickListener(this);
         lastDonationDate.setOnClickListener(this);
+        asBloodSpinner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                bloodGroup.performClick();
+            }
+        });
 
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,7 +142,14 @@ public class BasicInfoFragment extends Fragment implements View.OnClickListener,
         bloodGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                bloodGroupStr = parent.getItemAtPosition(position).toString();
+
+                if (fTime) {
+                    fTime = false;
+                } else {
+                    bloodGroupStr = parent.getItemAtPosition(position).toString();
+                    asBloodSpinner.setText(bloodGroupStr);
+                }
+
             }
 
             @Override
@@ -135,21 +157,19 @@ public class BasicInfoFragment extends Fragment implements View.OnClickListener,
 
             }
         });
-        location.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 locationStr = parent.getItemAtPosition(position).toString();
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
+                inputMethodManager.hideSoftInputFromWindow(location.getWindowToken(), 0);
             }
         });
-
         super.onActivityCreated(savedInstanceState);
     }
 
-
+    @Override
+    public void onResume() {
+        inputMethodManager.hideSoftInputFromWindow(fullNameEt.getWindowToken(), 0);
+        super.onResume();
+    }
 }

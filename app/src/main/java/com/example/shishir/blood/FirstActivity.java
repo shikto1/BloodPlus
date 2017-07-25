@@ -1,7 +1,9 @@
 package com.example.shishir.blood;
 
 import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -49,6 +51,24 @@ public class FirstActivity extends Activity implements View.OnClickListener {
             }
         }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this).setMessage("Sure to exit ???")
+                .setCancelable(false)
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
     }
 }
 

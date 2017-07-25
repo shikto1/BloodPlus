@@ -1,9 +1,8 @@
 <resources>
-    <string name="app_name">Blood+</string>
+    <string name="app_name">BLOOD+</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-
     <string name="action_settings">Settings</string>
     <string name="registerHere"><u><b>Register here</b></u></string>
     <string name="clickMe"><u><b>Touch Me</b></u></string>
@@ -30,6 +29,51 @@
         <item>Nobinagar</item>
         <item>Savar</item>
         <item>Dhaka</item>
+        <item>Mirpur</item>
+        <item>Uttara</item>
+        <item>Dhanmodi</item>
+        <item>Farmgate</item>
+
+        // Barishal Division...........................
+        <item>Barguna</item>
+        <item>Barisal</item>
+        <item>Bhola</item>
+        <item>Jhalokati</item>
+        <item>Patuakhali</item>
+        <item>Pirojpur</item>
+
+        //chittagong Division............................
+        <item>Bandarban</item>
+        <item>Brahmanbaria</item>
+        <item>chandpur</item>
+        <item>Chittagong</item>
+        <item>Comilla</item>
+        <item>Feni</item>
+        <item>Khagrachhari</item>
+        <item>Lakshimipur</item>
+        <item>Noakhali</item>
+        <item>Rangamati</item>
+
+
+        //Dhaka Division...................
+        <item>Dhaka</item>
+        <item>Faridpur</item>
+        <item>Gajipur</item>
+        <item>Gopalganj</item>
+        <item>Jamalpur</item>
+        <item>Kishorganj</item>
+        <item>Madaripur</item>
+        <item>Manikganj</item>
+        <item>Coxs Bazar</item>
+        <item>Munshiganj</item>
+        <item>Mymensingh</item>
+        <item>Narayanganj</item>
+        <item>Narsingdi</item>
+        <item>Netrokona</item>
+        <item>Rajbar</item>
+        <item>Shariatpur</item>
+        <item>Sherpur</item>
+        <item>Tangail</item>
     </string-array>
 
 </resources>

@@ -25,8 +25,10 @@ public class SearchDonorActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         int fr = fragmentManager.getBackStackEntryCount();
-        if (fr > 0)
+        if (fr > 0) {
             fragmentManager.popBackStack();
+            getSupportActionBar().setTitle("BLOOD+");
+        }
         else super.onBackPressed();
     }
 }
