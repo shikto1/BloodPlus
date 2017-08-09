@@ -70,20 +70,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
             case R.id.loginButtonAtLoginPage: {
                 String contactStr = phoneEt.getText().toString();
-                if (contactStr.isEmpty() || contactStr.length() == 0) {
-                    ToastMessage("Enter Contact Number");
-                    break;
-                }
-                if (contactStr.length() > 0 && contactStr.length() < 11) {
-                    ToastMessage("Contact Number Incorrect !");
-                    break;
-                }
+//                if (contactStr.isEmpty() || contactStr.length() == 0) {
+//                    ToastMessage("Enter Contact Number");
+//                    break;
+//                }
+                //            if (contactStr.length() > 0 && contactStr.length() < 11) {
+//                    ToastMessage("Contact Number Incorrect !");
+//                    break;
+//                }
                 String birthStr = birthDate.getText().toString();
-                if (birthStr.length() == 0 || birthStr.isEmpty()) {
-                    ToastMessage("Enter BirthDate !");
-                    break;
-                }
+//                if (birthStr.length() == 0 || birthStr.isEmpty()) {
+//                    ToastMessage("Enter BirthDate !");
+//                    break;
+//                }
                 ToastMessage(contactStr + " \n" + birthStr + "\n" + loggedInCheckBox);
+                startActivity(new Intent(this, NavigationActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
                 // Here i have to check weather the user is a admin or not.......................................
                 break;

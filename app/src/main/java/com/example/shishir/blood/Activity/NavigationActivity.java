@@ -62,7 +62,7 @@ public class NavigationActivity extends AppCompatActivity
         ///If the user is a a normal member.....................................................................................
         transaction.add(R.id.navigationLayout, new MemberHomeScreen()).commit();
         //If the user is a admin then the admin HOme screen will be appeared......................................
-        transaction.add(R.id.navigationLayout, new AdminHomeScreen()).commit();
+        //transaction.add(R.id.navigationLayout, new AdminHomeScreen()).commit();
     }
 
     @Override
