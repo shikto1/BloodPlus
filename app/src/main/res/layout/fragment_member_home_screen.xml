@@ -1,31 +1,54 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding"
-    android:gravity="center"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/searchBtnAtMemberHome"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/updateTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/smallMargin"
-        android:background="@drawable/background_of_button"
-        android:padding="@dimen/largeMargin"
-        android:text="Search Donor"
-        android:textAppearance="@android:style/TextAppearance"
-        android:textColor="@color/white"
-        android:textSize="@dimen/normalTextSize" />
-    <Button
-        android:id="@+id/editBtnAtMemberHome"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/smallMargin"
-        android:background="@drawable/background_of_button"
-        android:padding="@dimen/largeMargin"
-        android:text="Edit Your Info"
-        android:textAppearance="@android:style/TextAppearance"
-        android:textColor="@color/white"
-        android:textSize="@dimen/normalTextSize" />
+        android:text="Be a Donor, Be a Hero"
+        android:textSize="@dimen/normalTextSize"
+        android:textColor="@color/redColor"
+        android:layout_centerHorizontal="true"/>
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/searchBtnAtMemberHome"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="@dimen/smallMargin"
+            android:layout_weight="1"
+            android:background="@drawable/background_of_button"
+            android:padding="@dimen/largeMargin"
+            android:text="Search Donor"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normalTextSize" />
+
+        <Button
+            android:id="@+id/editBtnAtMemberHome"
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="@dimen/smallMargin"
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_weight="1"
+            android:background="@drawable/background_of_button"
+            android:padding="@dimen/largeMargin"
+            android:text="Edit Info"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normalTextSize" />
+
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
