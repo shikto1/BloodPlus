@@ -43,4 +43,12 @@ public class LocalDatabase {
     public String getSelectedLocation() {
         return sharedPreferences.getString("selectedLocation", "");
     }
+
+    public void setLoggedIn(boolean log) {
+        editor.putBoolean("loggedIn", log).commit();
+    }
+
+    public boolean getLoggedIn() {
+        return sharedPreferences.getBoolean("loogedIn",false);
+    }
 }

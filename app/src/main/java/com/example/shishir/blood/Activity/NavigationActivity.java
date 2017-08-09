@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.Fragment.AdminHomeScreen;
 import com.example.shishir.blood.Fragment.MemberHomeScreen;
 import com.example.shishir.blood.R;
@@ -87,7 +88,9 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.logout) {
-            ToastMessage("I will do this part Later");
+            new LocalDatabase(this).setLoggedIn(false);
+            startActivity(new Intent(this, FirstActivity.class));
+            finish();
         }
         return super.onOptionsItemSelected(item);
     }

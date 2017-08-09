@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.R;
 
 import java.util.Calendar;
@@ -24,6 +25,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     TextView birthDate, registerHereBtn;
     Button loginBtn;
     boolean loggedInCheckBox = false;
+    LocalDatabase localDatabase;
     Calendar calendar = Calendar.getInstance();
 
     @Override
@@ -49,6 +51,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         loginBtn = (Button) findViewById(R.id.loginButtonAtLoginPage);
         registerHereBtn = (TextView) findViewById(R.id.registerHereButtonAtLoginPage);
+        localDatabase = new LocalDatabase(this);
 
 
         loginBtn.setOnClickListener(this);
@@ -84,7 +87,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 //                    break;
 //                }
                 ToastMessage(contactStr + " \n" + birthStr + "\n" + loggedInCheckBox);
+                localDatabase.setLoggedIn(loggedInCheckBox);
                 startActivity(new Intent(this, NavigationActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                if (loggedInCheckBox)
+                    finish();
 
                 // Here i have to check weather the user is a admin or not.......................................
                 break;
