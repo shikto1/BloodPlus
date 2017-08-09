@@ -32,6 +32,10 @@
         <activity
             android:name=".Activity.SearchDonorActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".Activity.NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
