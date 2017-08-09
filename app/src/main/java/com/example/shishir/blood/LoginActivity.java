@@ -1,5 +1,6 @@
 package com.example.shishir.blood;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -7,19 +8,24 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shishir.blood.Fragment.PasswordRecoverFragment;
 
+import java.util.Calendar;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
-    TextInputLayout phoneL, passL;
-    EditText phoneEt, passEt;
+    EditText phoneEt;
     CheckBox loggedIn;
-    TextView clickMeBtn, registerHereBtn;
+    TextView birthDate, registerHereBtn;
     Button loginBtn;
+    boolean loggedInCheckBox = false;
+    Calendar calendar = Calendar.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,20 +36,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void findViewById() {
-       // phoneL = (TextInputLayout) findViewById(R.id.phoneNumberInputLayoutAtLoginPage);
-        //passL = (TextInputLayout) findViewById(R.id.passwordInLaoutAtLognPage);
 
-      //  phoneEt = (EditText) findViewById(R.id.phoneNumberEtAtLoginPage);
-        //passEt = (EditText) findViewById(R.id.passwordEtAtLoginPage);
-
+        phoneEt = (EditText) findViewById(R.id.phoneNumberEtAtLoginPage);
+        birthDate = (TextView) findViewById(R.id.birthDateAtLoginPage);
         loggedIn = (CheckBox) findViewById(R.id.loggedInCheckBoxAtLoginPage);
 
-      //  clickMeBtn = (TextView) findViewById(R.id.clickMeButtonAtLoginPage);
-      //  loginBtn = (Button) findViewById(R.id.loginButton);
+        loggedIn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                loggedInCheckBox = isChecked;
+            }
+        });
+
+        loginBtn = (Button) findViewById(R.id.loginButtonAtLoginPage);
         registerHereBtn = (TextView) findViewById(R.id.registerHereButtonAtLoginPage);
 
-        clickMeBtn.setOnClickListener(this);
-        //loginBtn.setOnClickListener(this);
+
+        loginBtn.setOnClickListener(this);
+        birthDate.setOnClickListener(this);
         registerHereBtn.setOnClickListener(this);
     }
 
@@ -52,14 +62,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         int id = v.getId();
         switch (id) {
-//            case R.id.clickMeButtonAtLoginPage: {
-//                new PasswordRecoverFragment().show(getSupportFragmentManager(),"");
-//                break;
-//            }
-//            case R.id.loginButton: {
-//                startActivity(new Intent(this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//                break;
-//            }
+            case R.id.birthDateAtLoginPage: {
+
+                DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.DAY_OF_MONTH);
+                datePickerDialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
+                datePickerDialog.show();
+                break;
+            }
+            case R.id.loginButtonAtLoginPage: {
+                String contactStr = phoneEt.getText().toString();
+                if (contactStr.isEmpty() || contactStr.length() == 0) {
+                    ToastMessage("Enter Contact Number");
+                    break;
+                }
+                if (contactStr.length() > 0 && contactStr.length() < 11) {
+                    ToastMessage("Contact Number Incorrect !");
+                    break;
+                }
+                String birthStr = birthDate.getText().toString();
+                if (birthStr.length() == 0 || birthStr.isEmpty()) {
+                    ToastMessage("Enter BirthDate !");
+                    break;
+                }
+                ToastMessage(contactStr + " \n" + birthStr + "\n" + loggedInCheckBox);
+
+                // Here i have to check weather the user is a admin or not.......................................
+                break;
+            }
             case R.id.registerHereButtonAtLoginPage: {
                 startActivity(new Intent(this, RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 break;
@@ -67,4 +96,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
 
     }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        birthDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+    }
+
+    private void ToastMessage(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    }
 }
+

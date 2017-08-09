@@ -26,13 +26,13 @@
 
 
         <EditText
-            android:id="@+id/contactNumberEt"
+            android:id="@+id/phoneNumberEtAtLoginPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding"
             android:background="@drawable/background_of_edittext"
             android:hint="e.g: 01784******"
-            android:inputType="number"
+            android:inputType="phone"
             android:maxLines="1"
             android:padding="@dimen/largeMargin"
             android:textSize="@dimen/normalTextSize" />
@@ -47,7 +47,7 @@
             android:textSize="@dimen/extraSmallSizeText" />
 
         <TextView
-            android:id="@+id/dateOfBirthAtBasicInfo"
+            android:id="@+id/birthDateAtLoginPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding"
@@ -73,6 +73,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/loginButtonAtLoginPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/largeMargin"
