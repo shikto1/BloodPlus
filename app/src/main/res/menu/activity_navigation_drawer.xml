@@ -12,25 +12,26 @@
             android:title="All Donor" />
         <item
             android:id="@+id/admin"
-            android:icon="@drawable/people_icon"
+            android:icon="@drawable/admin_iconn"
             android:title="Admin" />
         <item
             android:id="@+id/setting"
             android:icon="@drawable/setting_icon"
             android:title="Setting" />
+        <item
+            android:id="@+id/nav_share"
+            android:icon="@drawable/share_icon"
+            android:title="Facebook Page" />
+        <item
+            android:id="@+id/feedback"
+            android:icon="@drawable/feedback_icon"
+            android:title="Feedback" />
     </group>
 
-    <item android:title="Communicate">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="Facebook Page" />
-            <item
-                android:id="@+id/nav_send"
-                android:icon="@drawable/feedback_icon"
-                android:title="Feedback" />
-        </menu>
-    </item>
+    <!--<item android:title="Communicate">-->
+        <!--<menu>-->
+
+        <!--</menu>-->
+    <!--</item>-->
 
 </menu>

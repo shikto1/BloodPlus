@@ -109,8 +109,6 @@ public class NavigationActivity extends AppCompatActivity
             ToastMessage("Feedback");
         } else if (id == R.id.nav_share) {
             ToastMessage("Share");
-        } else if (id == R.id.nav_send) {
-            ToastMessage("Send");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
