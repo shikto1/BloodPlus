@@ -11,11 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
-
+import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Database.DonorTableManager;
 import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.Donor;
-import com.example.shishir.blood.DonorAdapter;
+
 import com.example.shishir.blood.R;
 
 import java.util.ArrayList;
