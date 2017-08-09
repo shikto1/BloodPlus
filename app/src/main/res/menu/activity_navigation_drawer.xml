@@ -3,21 +3,21 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/home"
+            android:icon="@drawable/home_iconn"
+            android:title="Home" />
+        <item
             android:id="@+id/allDonor"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@drawable/people_icon"
             android:title="All Donor" />
         <item
             android:id="@+id/admin"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@drawable/people_icon"
             android:title="Admin" />
         <item
             android:id="@+id/setting"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@drawable/setting_icon"
             android:title="Setting" />
-        <item
-            android:id="@+id/feedback"
-            android:icon="@drawable/ic_menu_send"
-            android:title="Feedback" />
     </group>
 
     <item android:title="Communicate">
@@ -28,8 +28,8 @@
                 android:title="Facebook Page" />
             <item
                 android:id="@+id/nav_send"
-                android:icon="@drawable/ic_menu_send"
-                android:title="Email" />
+                android:icon="@drawable/feedback_icon"
+                android:title="Feedback" />
         </menu>
     </item>
 
