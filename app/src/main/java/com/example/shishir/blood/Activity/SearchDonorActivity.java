@@ -1,4 +1,4 @@
-package com.example.shishir.blood;
+package com.example.shishir.blood.Activity;
 
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.example.shishir.blood.Fragment.SearchFrgment;
+import com.example.shishir.blood.R;
 
 public class SearchDonorActivity extends AppCompatActivity {
 

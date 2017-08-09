@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".FirstActivity"
+            android:name=".Activity.FirstActivity"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,18 +19,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".Activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".RegisterActivity"
-            android:parentActivityName=".FirstActivity"
+            android:name=".Activity.RegisterActivity"
+            android:parentActivityName=".Activity.FirstActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".DonorListActivity"
+            android:name=".Activity.DonorListActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SearchDonorActivity"
+            android:name=".Activity.SearchDonorActivity"
             android:screenOrientation="portrait" />
     </application>
 

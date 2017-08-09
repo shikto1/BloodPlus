@@ -1,8 +1,7 @@
-package com.example.shishir.blood;
+package com.example.shishir.blood.Activity;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shishir.blood.Fragment.PasswordRecoverFragment;
+import com.example.shishir.blood.R;
 
 import java.util.Calendar;
 

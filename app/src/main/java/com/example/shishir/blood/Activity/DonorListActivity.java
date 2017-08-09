@@ -1,4 +1,4 @@
-package com.example.shishir.blood;
+package com.example.shishir.blood.Activity;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -6,7 +6,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Database.DonorTableManager;
+import com.example.shishir.blood.R;
 
 public class DonorListActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.shishir.blood;
+package com.example.shishir.blood.Adapter;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -7,6 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.shishir.blood.Donor;
+import com.example.shishir.blood.R;
 
 import java.util.ArrayList;
 
