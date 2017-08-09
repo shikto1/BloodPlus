@@ -76,6 +76,6 @@
         <item>Tangail</item>
     </string-array>
     <string name="title_activity_after_login">AfterLoginActivity</string>
-    <string name="title_activity_navigation">NavigationActivity</string>
+    <string name="title_activity_navigation">BLOOD+</string>
 
 </resources>

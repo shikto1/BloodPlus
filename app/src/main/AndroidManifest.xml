@@ -12,18 +12,12 @@
         <activity
             android:name=".Activity.FirstActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activity.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.RegisterActivity"
-            android:parentActivityName=".Activity.FirstActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activity.AllDonorActivity"
@@ -35,7 +29,17 @@
         <activity
             android:name=".Activity.NavigationActivity"
             android:label="@string/title_activity_navigation"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Activity.SplashScreenActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
