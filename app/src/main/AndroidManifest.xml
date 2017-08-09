@@ -26,7 +26,7 @@
             android:parentActivityName=".Activity.FirstActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activity.DonorListActivity"
+            android:name=".Activity.AllDonorActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
