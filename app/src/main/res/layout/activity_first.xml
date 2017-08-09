@@ -48,11 +48,11 @@
             <Button
                 android:id="@+id/loginButtonAtFirstAc"
                 android:layout_width="0dp"
+                android:background="@drawable/background_of_button"
                 android:layout_marginRight="@dimen/smallMargin"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:text="Admin"
-                android:enabled="false"
+                android:text="Login"
                 android:textAppearance="@android:style/TextAppearance"
                 android:textSize="@dimen/normalTextSize"
                 android:textColor="@color/white"/>

@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding"
             android:layout_marginTop="@dimen/largeMargin"
             android:orientation="vertical">
@@ -23,24 +23,6 @@
                 android:layout_width="match_parent"
                 android:layout_marginBottom="@dimen/padding"
                 android:layout_height="wrap_content">
-                <TextView
-                    android:id="@+id/title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="\'Be a Donor, Be a Hero\'"
-                    android:layout_centerHorizontal="true"
-                    android:textSize="@dimen/smallTextSize"/>
-                <View
-                    android:id="@+id/singleLine"
-                    android:layout_below="@+id/title"
-                    android:layout_width="match_parent"
-                    android:layout_marginTop="@dimen/smallMargin"
-                    android:layout_marginBottom="@dimen/padding"
-                    android:layout_height="2dp"
-                    android:alpha=".3"
-                    android:background="@android:color/darker_gray"/>
-
-
 
                 <!--<RelativeLayout-->
                 <!--android:layout_width="match_parent"-->
@@ -63,7 +45,6 @@
                     android:id="@+id/genderGroupAtBasicInfo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/singleLine"
                     android:gravity="center"
                     android:layout_marginBottom="@dimen/largeMargin"
                     android:orientation="horizontal">
@@ -180,7 +161,6 @@
                 android:id="@+id/birthHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/autoCompleTextViewForLocationInBasicInfo"
                 android:layout_marginBottom="@dimen/smallMargin"
                 android:text="Date of Birth:"
                 android:textColor="@color/redColor"
@@ -212,7 +192,6 @@
                 android:id="@+id/contactHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/dateOfBirthAtBasicInfo"
                 android:layout_marginBottom="@dimen/smallMargin"
                 android:text="Contact Number:"
                 android:textColor="@color/redColor"
@@ -223,7 +202,6 @@
                 android:id="@+id/contactNumberEt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/contactHint"
                 android:layout_marginBottom="@dimen/padding"
                 android:background="@drawable/background_of_edittext"
                 android:hint="e.g: 01784******"
@@ -236,7 +214,6 @@
                 android:id="@+id/lastDonateHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/contactNumberEt"
                 android:layout_marginBottom="@dimen/smallMargin"
                 android:text="Last Donation date:"
                 android:textColor="@color/redColor"
@@ -263,7 +240,6 @@
                 android:id="@+id/submitBtnAtBasicInfo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/lastDonationDateAtBasicInfo"
                 android:layout_marginBottom="36dp"
                 android:layout_marginTop="@dimen/padding"
                 android:background="@drawable/background_of_button"

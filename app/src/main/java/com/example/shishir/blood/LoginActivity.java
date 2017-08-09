@@ -30,15 +30,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void findViewById() {
-        phoneL = (TextInputLayout) findViewById(R.id.phoneNumberInputLayoutAtLoginPage);
-        passL = (TextInputLayout) findViewById(R.id.passwordInLaoutAtLognPage);
+       // phoneL = (TextInputLayout) findViewById(R.id.phoneNumberInputLayoutAtLoginPage);
+        //passL = (TextInputLayout) findViewById(R.id.passwordInLaoutAtLognPage);
 
-        phoneEt = (EditText) findViewById(R.id.phoneNumberEtAtLoginPage);
-        passEt = (EditText) findViewById(R.id.passwordEtAtLoginPage);
+      //  phoneEt = (EditText) findViewById(R.id.phoneNumberEtAtLoginPage);
+        //passEt = (EditText) findViewById(R.id.passwordEtAtLoginPage);
 
         loggedIn = (CheckBox) findViewById(R.id.loggedInCheckBoxAtLoginPage);
 
-        clickMeBtn = (TextView) findViewById(R.id.clickMeButtonAtLoginPage);
+      //  clickMeBtn = (TextView) findViewById(R.id.clickMeButtonAtLoginPage);
       //  loginBtn = (Button) findViewById(R.id.loginButton);
         registerHereBtn = (TextView) findViewById(R.id.registerHereButtonAtLoginPage);
 
@@ -52,10 +52,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         int id = v.getId();
         switch (id) {
-            case R.id.clickMeButtonAtLoginPage: {
-                new PasswordRecoverFragment().show(getSupportFragmentManager(),"");
-                break;
-            }
+//            case R.id.clickMeButtonAtLoginPage: {
+//                new PasswordRecoverFragment().show(getSupportFragmentManager(),"");
+//                break;
+//            }
 //            case R.id.loginButton: {
 //                startActivity(new Intent(this,LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 //                break;

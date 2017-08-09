@@ -75,5 +75,6 @@
         <item>Sherpur</item>
         <item>Tangail</item>
     </string-array>
+    <string name="title_activity_after_login">AfterLoginActivity</string>
 
 </resources>
