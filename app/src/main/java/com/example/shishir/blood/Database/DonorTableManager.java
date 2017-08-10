@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.shishir.blood.Donor;
+import com.example.shishir.blood.ExtraClass.Donor;
 
 import java.util.ArrayList;
 
