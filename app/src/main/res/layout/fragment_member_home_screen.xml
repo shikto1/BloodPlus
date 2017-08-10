@@ -38,8 +38,6 @@
             android:textColor="@color/white"
             android:textSize="@dimen/normalTextSize" />
 
-
-
     </LinearLayout>
 
 
