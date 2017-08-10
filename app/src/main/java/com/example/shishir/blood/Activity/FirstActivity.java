@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.shishir.blood.Network;
 import com.example.shishir.blood.R;
 
 
@@ -38,7 +39,11 @@ public class FirstActivity extends Activity implements View.OnClickListener {
         int id = v.getId();
         switch (id) {
             case R.id.searchDonorButton: {
-                startActivity(new Intent(this, AllDonorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                if (Network.isNetAvailable(this))
+                    startActivity(new Intent(this, AllDonorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                else {
+                    Network.showInternetAlertDialog(this);
+                }
                 break;
             }
             case R.id.loginButtonAtFirstAc: {
