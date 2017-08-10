@@ -11,7 +11,7 @@ android {
         versionName "1.0"
         android {
             defaultConfig {
-                manifestPlaceholders = [onesignal_app_id               : "874f2c90-ec1e-4af4-a9c9-3beacd21e266",
+                manifestPlaceholders = [onesignal_app_id               : "a05c5a31-1e67-4bee-8ca6-437fd0e8a6e5",
                                         // Project number pulled from dashboard, local value is ignored.
                                         onesignal_google_project_number: "470879421811"]
             }
@@ -31,17 +31,12 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-
-    //OneSignal Library..........................................................
+    
     compile 'com.onesignal:OneSignal:[3.5.3,4.0.0)'
     compile 'com.google.android.gms:play-services-gcm:9.6.1'
     compile 'com.google.android.gms:play-services-location:9.6.1'
-
     compile 'com.android.support:appcompat-v7:25.3.1'
-
-    //For Support in multiple version............................
     compile 'com.android.support:customtabs:25.3.1'
-
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
