@@ -1,4 +1,4 @@
-package com.example.shishir.blood.ExtraClass;
+package com.example.shishir.blood;
 
 import java.io.Serializable;
 
@@ -14,6 +14,11 @@ public class Donor implements Serializable {
     private String birthDate;
     private String contactNumber;
     private String lastDonationDate;
+
+    public Donor(String name,String contact){
+        this.donorName=name;
+        this.contactNumber=contact;
+    }
 
     public Donor(String donorName, String gender, String bloodGroup, String location, String birthDate, String contactNumber, String lastDonationDate) {
         this.donorName = donorName;

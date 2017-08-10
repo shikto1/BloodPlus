@@ -14,6 +14,7 @@ import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.R;
+
 import java.util.ArrayList;
 
 
@@ -45,7 +46,7 @@ public class SearchListFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         if (!donorList.isEmpty()) {
-            adapter = new DonorAdapter(getActivity(), donorList);
+            adapter = new DonorAdapter(getActivity(),donorList);
             donorListView.setAdapter(adapter);
         }
         super.onActivityCreated(savedInstanceState);

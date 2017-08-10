@@ -27,7 +27,7 @@ public class MyApplication extends Application {
                 Intent intent=new Intent(getApplicationContext(),NotificationActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT | Intent.FLAG_ACTIVITY_NEW_TASK);
                 try {
-                    intent.putExtra("dataM",data.getString("H"));
+                    intent.putExtra("dataM",data.getString("dataM"));
                 }catch (JSONException e){
                     e.printStackTrace();
                 }startActivity(intent);

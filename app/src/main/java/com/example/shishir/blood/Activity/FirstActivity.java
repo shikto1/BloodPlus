@@ -38,7 +38,7 @@ public class FirstActivity extends Activity implements View.OnClickListener {
         int id = v.getId();
         switch (id) {
             case R.id.searchDonorButton: {
-                startActivity(new Intent(this, SearchDonorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(this, AllDonorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 break;
             }
             case R.id.loginButtonAtFirstAc: {
