@@ -19,11 +19,21 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.shishir.blood.Database.DonorTableManager;
 import com.example.shishir.blood.Donor;
+import com.example.shishir.blood.ExtraClass.Constants;
+import com.example.shishir.blood.ExtraClass.MySingleton;
 import com.example.shishir.blood.R;
 
+import java.lang.reflect.Method;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
@@ -40,6 +50,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     InputMethodManager inputMethodManager;
     DonorTableManager donorTableManager;
     boolean fTime;
+    String nameStr, contactStr, birthStr, donationDateStr, regSTR;
 
 
     @Override
@@ -96,19 +107,52 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String nameStr = fullNameEt.getText().toString();
-                String contactNStr = contactNumber.getText().toString();
-                String birthStr = birthDate.getText().toString();
-                String donationDateStr = lastDonationDate.getText().toString();
+                nameStr = fullNameEt.getText().toString();
+                contactStr = contactNumber.getText().toString();
+                birthStr = birthDate.getText().toString();
+                donationDateStr = lastDonationDate.getText().toString();
 
-                Donor donor = new Donor(nameStr, gender, bloodGroupStr, locationStr, birthStr, contactNStr, donationDateStr);
-                if (donorTableManager.addDonor(donor))
-                    ToastMessage("Successful");
-                else
-                    ToastMessage("Something Wrong !");
+                registerUser();
+
+                //   Donor donor = new Donor(nameStr, gender, bloodGroupStr, locationStr, birthStr, contactNStr, donationDateStr);
+//                if (donorTableManager.addDonor(donor))
+//                    ToastMessage("Successful");
+//                else
+//                    ToastMessage("Something Wrong !");
             }
         });
 
+    }
+
+    private void registerUser() {
+
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_REGISTER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("gender", gender);
+                map.put("name", nameStr);
+                map.put("blood", bloodGroupStr);
+                map.put("location", locationStr);
+                map.put("birthDate", birthStr);
+                map.put("contact", contactStr);
+                map.put("donationDate", donationDateStr);
+                map.put("registrationDate", regSTR);
+                return map;
+            }
+        };
+
+        MySingleton.getInstance(this).addToRequestQueue(stringRequest);
     }
 
     private void ToastMessage(String msg) {
