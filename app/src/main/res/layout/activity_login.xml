@@ -60,7 +60,7 @@
             android:id="@+id/loggedInCheckBoxAtLoginPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logged In"
+            android:text="Stay logged In"
             android:textSize="@dimen/normalTextSize" />
 
     </LinearLayout>

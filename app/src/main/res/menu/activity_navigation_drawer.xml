@@ -26,6 +26,11 @@
             android:id="@+id/feedback"
             android:icon="@drawable/feedback_icon"
             android:title="Feedback" />
+        <item
+            android:id="@+id/about"
+            android:icon="@drawable/info_icon"
+            android:title="About Blood+" />
+
     </group>
 
     <!--<item android:title="Communicate">-->

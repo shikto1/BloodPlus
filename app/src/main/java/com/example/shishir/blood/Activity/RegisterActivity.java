@@ -31,6 +31,7 @@ import com.example.shishir.blood.ExtraClass.MySingleton;
 import com.example.shishir.blood.R;
 
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -112,6 +113,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 contactStr = contactNumber.getText().toString();
                 birthStr = birthDate.getText().toString();
                 donationDateStr = lastDonationDate.getText().toString();
+                regSTR = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
 
                 registerUser();
 
