@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Database.DonorTableManager;
 import com.example.shishir.blood.Donor;
+import com.example.shishir.blood.ExtraClass.Constants;
 import com.example.shishir.blood.ExtraClass.MySingleton;
 import com.example.shishir.blood.R;
 
@@ -49,14 +50,12 @@ public class AllDonorActivity extends AppCompatActivity {
 
     private void useVolley() {
 
-        String url = "https://bloodpluss.000webhostapp.com/getAllDonor.php";
-
         pDialog.setMessage("Loading...");
         pDialog.setCancelable(false);
         pDialog.show();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                url, null,
+                Constants.URL_GET_ALL_DONOR, null,
                 new Response.Listener<JSONObject>() {
 
                     @Override
