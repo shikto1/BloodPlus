@@ -175,10 +175,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
 
         if (dateFlag == 1)
-            birthDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+            birthDate.setText(String.format("%02d", dayOfMonth) + "/" + String.format("%02d", (month + 1)) + "/" + year);
         else
-            lastDonationDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
-
+            lastDonationDate.setText(String.format("%02d", dayOfMonth) + "/" + String.format("%02d", (month + 1)) + "/" + year);
     }
 
     @Override
