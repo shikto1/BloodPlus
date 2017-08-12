@@ -5,6 +5,6 @@ package com.example.shishir.blood.ExtraClass;
  */
 
 public class Constants {
-    public static String URL_REGISTER="";
+    public static String URL_REGISTER="https://bloodpluss.000webhostapp.com/insertDonor.php";
     public static String URL_GET_ALL_DONOR= "https://bloodpluss.000webhostapp.com/getAllDonor.php";
 }
