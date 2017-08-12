@@ -114,56 +114,46 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!Network.isNetAvailable(RegisterActivity.this)) {
-                    alertDialog("Alert !", "No internet Connection");
+                if (Network.isNetAvailable(RegisterActivity.this)) {
+                    nameStr = fullNameEt.getText().toString();
+                    birthStr = birthDate.getText().toString();
+                    contactStr = contactNumber.getText().toString();
+
+                    if (gender==null) {
+                        ToastMessage("Select your gender");
+                    } else if (nameStr.length() == 0) {
+                        ToastMessage("Enter your name please");
+
+                    } else if (bloodGroupStr==null) {
+                        ToastMessage("Choose Your blood Group");
+
+                    } else if (locationStr==null) {
+                        ToastMessage("Select your location");
+
+                    } else if (birthStr.isEmpty()) {
+                        ToastMessage("Enter Your Date of birth");
+
+                    } else if (contactStr.length() == 0) {
+                        ToastMessage("Enter Your contact number");
+
+                    } else if (contactStr.length() < 11) {
+                        ToastMessage("Invalid Contact Number");
+
+                    } else if (contactStr.charAt(0) != '0' && contactStr.charAt(1) != 1) {
+                        ToastMessage("Invalid Contact Number");
+
+                    } else {
+                        donationDateStr = lastDonationDate.getText().toString();
+                        regSTR = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                        registerUser();
+                    }
+
 
                 } else {
-//
-//                    if (gender.isEmpty() || gender.length() == 0) {
-//                        ToastMessage("Select your gender");
-//                        return;
-//                    }
-                    nameStr = fullNameEt.getText().toString();
-//                    if (nameStr.isEmpty() || nameStr.length() == 0) {
-//                        ToastMessage("Enter your name please");
-//                        return;
-//                    }
-//                    if (bloodGroupStr.isEmpty() || bloodGroupStr.length() == 0) {
-//                        ToastMessage("Choose Your blood Group");
-//                        return;
-//                    }
-//                    if (locationStr.isEmpty() || locationStr.length() == 0) {
-//                        ToastMessage("Select your location");
-//                        return;
-//                    }
-
-                    birthStr = birthDate.getText().toString();
-//                    if (birthStr.isEmpty() || birthStr.length() == 0) {
-//                        ToastMessage("Enter Your Date of birth");
-//                        return;
-//                    }
-
-                    contactStr = contactNumber.getText().toString();
-//                    if (contactStr.isEmpty() || contactStr.length() == 0) {
-//                        ToastMessage("Enter Your contact number");
-//                        return;
-//                    }
-//                    if (contactStr.length() < 11) {
-//                        ToastMessage("Invalid Contact Number");
-//                        return;
-//                    }
-//                    if (contactStr.charAt(0) != '0' && contactStr.charAt(1) != 1) {
-//                        ToastMessage("Invalid Contact Number");
-//                        return;
-//                    }
-
-
-                    donationDateStr = lastDonationDate.getText().toString();
-                    regSTR = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-                    registerUser();
-
+                    Network.showInternetAlertDialog(RegisterActivity.this);
                 }
             }
+
         });
 
     }
@@ -279,7 +269,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     protected void onResume() {
         boolean netAvailable = Network.isNetAvailable(this);
         if (!netAvailable) {
-            alertDialog("Alert !", "No internet connection");
+            Network.showInternetAlertDialog(this);
         }
         super.onResume();
     }
