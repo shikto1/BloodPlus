@@ -32,6 +32,7 @@ import com.example.shishir.blood.R;
 
 import java.lang.reflect.Method;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -129,7 +130,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_REGISTER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                ToastMessage(response);
             }
         }, new Response.ErrorListener() {
             @Override

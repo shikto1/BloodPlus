@@ -17,7 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Database.DonorTableManager;
 import com.example.shishir.blood.Donor;
-import com.example.shishir.blood.ExtraClass.AppController;
+import com.example.shishir.blood.ExtraClass.MySingleton;
 import com.example.shishir.blood.R;
 
 import org.json.JSONArray;
@@ -88,7 +88,6 @@ public class AllDonorActivity extends AppCompatActivity {
         });
 
 // Adding request to request queue
-        // AppController.getInstance().addToRequestQueue(jsonObjReq);
-        Volley.newRequestQueue(this).add(jsonObjReq);
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjReq);
     }
 }
