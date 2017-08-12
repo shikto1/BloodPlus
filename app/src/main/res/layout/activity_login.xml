@@ -19,7 +19,8 @@
         <TextView
             android:id="@+id/contactHint"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:layout_marginBottom="@dimen/smallMargin"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/smallMargin"
             android:text="Contact Number:"
             android:textColor="@color/redColor"
             android:textSize="@dimen/extraSmallSizeText" />
@@ -60,8 +61,8 @@
             android:id="@+id/loggedInCheckBoxAtLoginPage"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Stay logged In"
-            android:textSize="@dimen/normalTextSize" />
+            android:text="Stay logged in"
+            android:textSize="@dimen/smallTextSize" />
 
     </LinearLayout>
 
@@ -79,11 +80,14 @@
             android:layout_marginBottom="@dimen/largeMargin"
             android:background="@drawable/background_of_button"
             android:text="Login"
-            android:textColor="@color/white" />
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normalTextSize" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding"
             android:gravity="center"
             android:orientation="horizontal">
 
