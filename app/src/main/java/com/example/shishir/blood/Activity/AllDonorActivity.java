@@ -7,6 +7,7 @@ import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -32,6 +33,8 @@ public class AllDonorActivity extends AppCompatActivity {
     ListView donorListView;
     ProgressDialog pDialog;
     ArrayList<Donor> donorArrayList;
+    private int arrayLength;
+    TextView totalDonorTV;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class AllDonorActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1));
 
         donorListView = (ListView) findViewById(R.id.donorListView);
+        totalDonorTV = (TextView) findViewById(R.id.totalDonor);
+
         pDialog = new ProgressDialog(this);
         donorArrayList = new ArrayList<>();
         useVolley();
@@ -62,7 +67,7 @@ public class AllDonorActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
                             JSONArray donorArray = response.getJSONArray("Donor");
-                            int arrayLength = donorArray.length();
+                            arrayLength = donorArray.length();
                             for (int i = 0; i < arrayLength; i++) {
                                 JSONObject singleDonor = donorArray.getJSONObject(i);
                                 String donorName = singleDonor.getString("Name");
@@ -70,6 +75,7 @@ public class AllDonorActivity extends AppCompatActivity {
                                 donorArrayList.add(new Donor(donorName, contact));
                             }
                             donorListView.setAdapter(new DonorAdapter(AllDonorActivity.this, donorArrayList));
+                            totalDonorTV.setText("Total (" + arrayLength + ")");
                             pDialog.hide();
                         } catch (JSONException e) {
                             e.printStackTrace();

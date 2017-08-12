@@ -4,8 +4,10 @@ package com.example.shishir.blood.Activity;
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -29,6 +31,7 @@ import com.example.shishir.blood.Database.DonorTableManager;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
 import com.example.shishir.blood.ExtraClass.MySingleton;
+import com.example.shishir.blood.Network;
 import com.example.shishir.blood.R;
 
 import java.lang.reflect.Method;
@@ -111,19 +114,55 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         submitBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                nameStr = fullNameEt.getText().toString();
-                contactStr = contactNumber.getText().toString();
-                birthStr = birthDate.getText().toString();
-                donationDateStr = lastDonationDate.getText().toString();
-                regSTR = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                if (!Network.isNetAvailable(RegisterActivity.this)) {
+                    alertDialog("Alert !", "No internet Connection");
 
-                registerUser();
+                } else {
+//
+//                    if (gender.isEmpty() || gender.length() == 0) {
+//                        ToastMessage("Select your gender");
+//                        return;
+//                    }
+                    nameStr = fullNameEt.getText().toString();
+//                    if (nameStr.isEmpty() || nameStr.length() == 0) {
+//                        ToastMessage("Enter your name please");
+//                        return;
+//                    }
+//                    if (bloodGroupStr.isEmpty() || bloodGroupStr.length() == 0) {
+//                        ToastMessage("Choose Your blood Group");
+//                        return;
+//                    }
+//                    if (locationStr.isEmpty() || locationStr.length() == 0) {
+//                        ToastMessage("Select your location");
+//                        return;
+//                    }
 
-                //   Donor donor = new Donor(nameStr, gender, bloodGroupStr, locationStr, birthStr, contactNStr, donationDateStr);
-//                if (donorTableManager.addDonor(donor))
-//                    ToastMessage("Successful");
-//                else
-//                    ToastMessage("Something Wrong !");
+                    birthStr = birthDate.getText().toString();
+//                    if (birthStr.isEmpty() || birthStr.length() == 0) {
+//                        ToastMessage("Enter Your Date of birth");
+//                        return;
+//                    }
+
+                    contactStr = contactNumber.getText().toString();
+//                    if (contactStr.isEmpty() || contactStr.length() == 0) {
+//                        ToastMessage("Enter Your contact number");
+//                        return;
+//                    }
+//                    if (contactStr.length() < 11) {
+//                        ToastMessage("Invalid Contact Number");
+//                        return;
+//                    }
+//                    if (contactStr.charAt(0) != '0' && contactStr.charAt(1) != 1) {
+//                        ToastMessage("Invalid Contact Number");
+//                        return;
+//                    }
+
+
+                    donationDateStr = lastDonationDate.getText().toString();
+                    regSTR = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                    registerUser();
+
+                }
             }
         });
 
@@ -140,7 +179,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onResponse(String response) {
                 progressDialog.dismiss();
-                ToastMessage(response);
+                if (response.equals("success")) {
+                    alertDialog("Welcome !", "Successfully Registered");
+                } else
+                    alertDialog("Sorry !", "Registration Failed, Try again");
             }
         }, new Response.ErrorListener() {
             @Override
@@ -220,6 +262,26 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
         super.onStart();
+    }
+
+    public void alertDialog(String title, String msg) {
+        new AlertDialog.Builder(this).setTitle(title).setMessage(msg)
+                .setCancelable(false)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                }).show();
+    }
+
+    @Override
+    protected void onResume() {
+        boolean netAvailable = Network.isNetAvailable(this);
+        if (!netAvailable) {
+            alertDialog("Alert !", "No internet connection");
+        }
+        super.onResume();
     }
 }
 

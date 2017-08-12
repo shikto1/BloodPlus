@@ -16,37 +16,24 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <LinearLayout
+
+            <TextView
+                android:id="@+id/totalDonor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
                 android:layout_alignParentLeft="true"
-                android:layout_marginLeft="@dimen/padding"
-                android:layout_centerVertical="true">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="All "
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/normalTextSize"/>
-                <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="(12)"
+                android:layout_centerVertical="true"
                 android:textColor="@color/white"
-                android:textSize="@dimen/normalTextSize"/>
+                android:textSize="@dimen/normalTextSize" />
 
-
-            </LinearLayout>
             <Spinner
                 android:id="@+id/bloodgroupSpinnerAtToolbar"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/padding"
-                android:layout_alignParentRight="true"
-                android:layout_height="wrap_content"
-                app:popupTheme="@style/ThemeOverlay.AppCompat.Dark"
-                ></Spinner>
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light"></Spinner>
 
         </RelativeLayout>
     </android.support.v7.widget.Toolbar>
