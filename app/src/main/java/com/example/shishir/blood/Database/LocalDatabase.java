@@ -17,16 +17,23 @@ public class LocalDatabase {
         editor = sharedPreferences.edit();
     }
 
-    public boolean isPhoneNumberMatched(String recoveryNumber) {
-        if (sharedPreferences.getString("recN", "").equals(recoveryNumber))
-            return true;
-        else
-            return false;
+
+    public String getUserName() {
+        return sharedPreferences.getString("userName", "");
     }
 
-    public String getPassword() {
-        return sharedPreferences.getString("password", "");
+    public void setUserName(String name) {
+        editor.putString("userName", name).commit();
     }
+
+    public void setUserBloodGroup(String bloodGroup) {
+        editor.putString("userBlood", bloodGroup).commit();
+    }
+
+    public String getUserBloodGroup() {
+        return sharedPreferences.getString("userBlood", "");
+    }
+
 
     public void setSelectedBloodGrop(String selectedBlood) {
         editor.putString("selectedBlood", selectedBlood);
@@ -50,7 +57,7 @@ public class LocalDatabase {
     }
 
     public boolean getLoggedIn() {
-        return sharedPreferences.getBoolean("loogedIn", false);
+        return sharedPreferences.getBoolean("loggedIn", false);
     }
 
     public void setAdmin(int admin) {

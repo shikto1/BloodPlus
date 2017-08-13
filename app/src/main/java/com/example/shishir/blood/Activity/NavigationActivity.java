@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shishir.blood.Database.LocalDatabase;
@@ -27,6 +28,9 @@ public class NavigationActivity extends AppCompatActivity
 
     FragmentManager fragmentManager;
     FragmentTransaction transaction;
+    TextView userName;
+    LocalDatabase localDatabase;
+    private boolean isAdmin;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +65,16 @@ public class NavigationActivity extends AppCompatActivity
     private void init() {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
+        userName = (TextView) findViewById(R.id.userName);
+        localDatabase = new LocalDatabase(this);
+        isAdmin = localDatabase.getAdmin();
+
+        userName.setText(localDatabase.getUserName());
+
+        if (isAdmin)
+            ToastMessage("ADMIN");
+        else
+            ToastMessage("MEMBER");
         ///If the user is a a normal member.....................................................................................
         transaction.add(R.id.navigationLayout, new MemberHomeScreen()).commit();
         //If the user is a admin then the admin HOme screen will be appeared......................................
@@ -88,9 +102,9 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.logout) {
-            new LocalDatabase(this).setLoggedIn(false);
-            startActivity(new Intent(this, FirstActivity.class));
-            finish();
+            localDatabase.setLoggedIn(false);
+            localDatabase.setAdmin(0);
+            startActivity(new Intent(this, FirstActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
         }
         return super.onOptionsItemSelected(item);
     }

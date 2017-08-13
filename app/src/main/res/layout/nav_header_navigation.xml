@@ -15,7 +15,7 @@
         android:scaleType="centerCrop"/>
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/userName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="@dimen/largeTextSize"

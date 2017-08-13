@@ -18,9 +18,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash_screen);
 
         localDatabase = new LocalDatabase(this);
-        final boolean loggedIn = localDatabase.getLoggedIn();
 
-        /// here i also have to check weather the user admin or not............................
 
         thread = new Thread() {
             @Override
@@ -30,10 +28,11 @@ public class SplashScreenActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {
-                    if (loggedIn)
+                    if (localDatabase.getLoggedIn()) {
                         startActivity(new Intent(SplashScreenActivity.this, NavigationActivity.class));
-                    else
+                    } else {
                         startActivity(new Intent(SplashScreenActivity.this, FirstActivity.class));
+                    }
                     finish();
                 }
             }

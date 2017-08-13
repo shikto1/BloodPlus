@@ -92,21 +92,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     birthStr = birthDate.getText().toString();
                     if (contactStr.length() == 0) {
                         ToastMessage("Enter Your contact number");
+                        break;
                     } else if (contactStr.length() < 11) {
                         ToastMessage("Invalid Contact Number");
+                        break;
                     } else if (contactStr.charAt(0) != '0' && contactStr.charAt(1) != 1) {
                         ToastMessage("Invalid Contact Number");
+                        break;
                     } else if (birthStr.isEmpty()) {
                         ToastMessage("Enter Your Date of birth");
+                        break;
                     } else {
-                     //   localDatabase.setLoggedIn(loggedInCheckBox);
                         login();
+                        break;
                     }
                 } else {
                     Network.showInternetAlertDialog(LoginActivity.this);
                     break;
                 }
-
 
             }
             case R.id.registerHereButtonAtLoginPage: {
@@ -133,12 +136,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         String name = jsonOb.getString("Name");
                         String blood = jsonOb.getString("Blood");
                         String admin = jsonOb.getString("Admin");
-                        ToastMessage(name + "\n" + blood + "\n" + admin+"\n"+loggedInCheckBox);
-//
-//                        if(admin.equals("1")){
-//                            new LocalDatabase(LoginActivity.this).setAdmin(1);
-//                        }
-//                        startActivity(new Intent(LoginActivity.this, NavigationActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
+                        localDatabase.setUserName(name);
+                        localDatabase.setUserBloodGroup(blood);
+                        ToastMessage(name + "\n" + blood + "\n" + admin + "\n" + loggedInCheckBox);
+
+                        if (admin.equals("1")) {
+                            localDatabase.setAdmin(1);
+                        }
+
+                        Intent intent = new Intent(LoginActivity.this, NavigationActivity.class);
+                        if (loggedInCheckBox) {
+                            localDatabase.setLoggedIn(loggedInCheckBox);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                        } else {
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        }
+                        startActivity(intent);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
