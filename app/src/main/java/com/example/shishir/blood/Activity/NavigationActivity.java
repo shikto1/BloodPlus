@@ -1,11 +1,14 @@
 package com.example.shishir.blood.Activity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -30,7 +33,8 @@ public class NavigationActivity extends AppCompatActivity
     FragmentTransaction transaction;
     TextView userName;
     LocalDatabase localDatabase;
-    private boolean isAdmin;
+    NavigationView navigationView;
+    private boolean isAdmin, loggedIn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,16 +62,21 @@ public class NavigationActivity extends AppCompatActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void init() {
         fragmentManager = getSupportFragmentManager();
         transaction = fragmentManager.beginTransaction();
-        userName = (TextView) findViewById(R.id.userName);
         localDatabase = new LocalDatabase(this);
         isAdmin = localDatabase.getAdmin();
+        loggedIn = localDatabase.getLoggedIn();
+        ToastMessage(localDatabase.getUserName());
+
+        navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View v = navigationView.getHeaderView(0);
+        TextView userName = (TextView) v.findViewById(R.id.userName);
 
         userName.setText(localDatabase.getUserName());
 
@@ -87,7 +96,21 @@ public class NavigationActivity extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            if (loggedIn) {
+                new AlertDialog.Builder(this).setMessage("Sure to exit ?").setCancelable(false)
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish();
+                    }
+                }).show();
+            } else
+                super.onBackPressed();
         }
     }
 
