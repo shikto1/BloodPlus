@@ -99,9 +99,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     } else if (birthStr.isEmpty()) {
                         ToastMessage("Enter Your Date of birth");
                     } else {
-                        localDatabase.setLoggedIn(loggedInCheckBox);
+                     //   localDatabase.setLoggedIn(loggedInCheckBox);
                         login();
-                        startActivity(new Intent(this, NavigationActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     }
                 } else {
                     Network.showInternetAlertDialog(LoginActivity.this);
@@ -119,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void login() {
-        final ProgressDialog pD=new ProgressDialog(this);
+        final ProgressDialog pD = new ProgressDialog(this);
         pD.setMessage("Logging in...");
         pD.setCancelable(false);
         pD.show();
@@ -128,22 +127,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onResponse(String response) {
                 pD.dismiss();
-                if(!response.equals("fail")){
+                if (!response.equals("fail")) {
                     try {
-                        JSONObject jsonOb=new JSONObject(response);
-                        String name=jsonOb.getString("Name");
-                        String blood=jsonOb.getString("Blood");
-                        String admin=jsonOb.getString("Admin");
+                        JSONObject jsonOb = new JSONObject(response);
+                        String name = jsonOb.getString("Name");
+                        String blood = jsonOb.getString("Blood");
+                        String admin = jsonOb.getString("Admin");
+                        ToastMessage(name + "\n" + blood + "\n" + admin+"\n"+loggedInCheckBox);
+//
+//                        if(admin.equals("1")){
+//                            new LocalDatabase(LoginActivity.this).setAdmin(1);
+//                        }
+//                        startActivity(new Intent(LoginActivity.this, NavigationActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
-                        if(admin.equals("1")){
-                            new LocalDatabase(LoginActivity.this).setAdmin(1);
-                        }
-                        startActivity(new Intent(LoginActivity.this,NavigationActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-                }
-                else {
+                } else {
 
                 }
             }

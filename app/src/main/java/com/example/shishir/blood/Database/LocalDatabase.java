@@ -54,6 +54,11 @@ public class LocalDatabase {
     }
 
     public void setAdmin(int admin) {
-        editor.putInt("admin0", admin).commit();
+        editor.putInt("admin", admin).commit();
+    }
+
+    public boolean getAdmin() {
+        int i = sharedPreferences.getInt("admin", 0);
+        return i == 1;
     }
 }
