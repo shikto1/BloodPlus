@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -43,6 +44,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import fr.ganfra.materialspinner.MaterialSpinner;
 
@@ -153,7 +156,7 @@ public class SearchFrgment extends Fragment {
             pDialog.show();
 
 
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
                     Constants.URL_GET_SEARCHED_DONOR, null,
                     new Response.Listener<JSONObject>() {
 
@@ -201,7 +204,15 @@ public class SearchFrgment extends Fragment {
 
                     pDialog.hide();
                 }
-            });
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> map = new HashMap<String, String>();
+                    map.put("location", locationStr);
+                    map.put("blood", bloodStr);
+                    return map;
+                }
+            };
 
             MySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq);
         }
