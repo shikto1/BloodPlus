@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 public class LocalDatabase {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private int admin;
 
     public LocalDatabase(Context context) {
         sharedPreferences = context.getSharedPreferences("MY_PREFER", Context.MODE_PRIVATE);
@@ -49,6 +50,10 @@ public class LocalDatabase {
     }
 
     public boolean getLoggedIn() {
-        return sharedPreferences.getBoolean("loogedIn",false);
+        return sharedPreferences.getBoolean("loogedIn", false);
+    }
+
+    public void setAdmin(int admin) {
+        editor.putInt("admin0", admin).commit();
     }
 }

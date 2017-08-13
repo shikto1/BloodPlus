@@ -131,8 +131,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if(!response.equals("fail")){
                     try {
                         JSONObject jsonOb=new JSONObject(response);
-                        String name=jsonOb.getString("name");
-                        String blood=jsonOb.getString("blood");
+                        String name=jsonOb.getString("Name");
+                        String blood=jsonOb.getString("Blood");
+                        String admin=jsonOb.getString("Admin");
+
+                        if(admin.equals("1")){
+                            new LocalDatabase(LoginActivity.this).setAdmin(1);
+                        }
+                        startActivity(new Intent(LoginActivity.this,NavigationActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
