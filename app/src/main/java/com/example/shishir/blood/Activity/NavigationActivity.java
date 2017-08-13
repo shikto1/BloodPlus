@@ -76,7 +76,7 @@ public class NavigationActivity extends AppCompatActivity
 
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         View v = navigationView.getHeaderView(0);
-        TextView userName = (TextView) v.findViewById(R.id.userName);
+        userName = (TextView) v.findViewById(R.id.userName);
 
         userName.setText(localDatabase.getUserName());
 
@@ -127,6 +127,8 @@ public class NavigationActivity extends AppCompatActivity
         if (id == R.id.logout) {
             localDatabase.setLoggedIn(false);
             localDatabase.setAdmin(0);
+            localDatabase.setUserName("");
+            localDatabase.setUserBloodGroup("");
             startActivity(new Intent(this, FirstActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
         }
         return super.onOptionsItemSelected(item);

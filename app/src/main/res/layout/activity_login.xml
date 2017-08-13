@@ -31,6 +31,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/padding"
+            android:maxLength="11"
             android:background="@drawable/background_of_edittext"
             android:hint="e.g: 01784******"
             android:inputType="phone"

@@ -21,6 +21,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.ExtraClass.Constants;
+import com.example.shishir.blood.ExtraClass.MyDialog;
 import com.example.shishir.blood.ExtraClass.MySingleton;
 import com.example.shishir.blood.Network;
 import com.example.shishir.blood.R;
@@ -159,6 +160,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 } else {
 
+                    MyDialog.alert(LoginActivity.this, "Sorry !", "This user is not registered");
                 }
             }
         }, new Response.ErrorListener() {
