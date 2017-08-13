@@ -151,7 +151,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/smallMargin"
-            android:text="Date of Birth:"
+            android:text="Date of Birth:*"
             android:textColor="@color/redColor"
             android:textSize="@dimen/extraSmallSizeText" />
 
@@ -170,7 +170,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/smallMargin"
-            android:text="Contact Number:"
+            android:text="Contact Number:*"
             android:textColor="@color/redColor"
             android:textSize="@dimen/extraSmallSizeText" />
 

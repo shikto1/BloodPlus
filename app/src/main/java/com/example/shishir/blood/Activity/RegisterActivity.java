@@ -119,15 +119,15 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     birthStr = birthDate.getText().toString();
                     contactStr = contactNumber.getText().toString();
 
-                    if (gender==null) {
+                    if (gender == null) {
                         ToastMessage("Select your gender");
                     } else if (nameStr.length() == 0) {
                         ToastMessage("Enter your name please");
 
-                    } else if (bloodGroupStr==null) {
+                    } else if (bloodGroupStr == null) {
                         ToastMessage("Choose Your blood Group");
 
-                    } else if (locationStr==null) {
+                    } else if (locationStr == null) {
                         ToastMessage("Select your location");
 
                     } else if (birthStr.isEmpty()) {
@@ -171,6 +171,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 progressDialog.dismiss();
                 if (response.equals("success")) {
                     alertDialog("Welcome !", "Successfully Registered");
+                } else if (response.equals("exists")) {
+                    alertDialog("Sorry !", "This user already exists");
                 } else
                     alertDialog("Sorry !", "Registration Failed, Try again");
             }

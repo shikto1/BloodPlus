@@ -1,6 +1,7 @@
 package com.example.shishir.blood.Activity;
 
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,10 +14,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.example.shishir.blood.Database.LocalDatabase;
+import com.example.shishir.blood.ExtraClass.Constants;
+import com.example.shishir.blood.ExtraClass.MySingleton;
+import com.example.shishir.blood.Network;
 import com.example.shishir.blood.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
@@ -27,6 +41,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     boolean loggedInCheckBox = false;
     LocalDatabase localDatabase;
     Calendar calendar = Calendar.getInstance();
+    String contactStr, birthStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,28 +87,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
             }
             case R.id.loginButtonAtLoginPage: {
-                String contactStr = phoneEt.getText().toString();
-//                if (contactStr.isEmpty() || contactStr.length() == 0) {
-//                    ToastMessage("Enter Contact Number");
-//                    break;
-//                }
-                //            if (contactStr.length() > 0 && contactStr.length() < 11) {
-//                    ToastMessage("Contact Number Incorrect !");
-//                    break;
-//                }
-                String birthStr = birthDate.getText().toString();
-//                if (birthStr.length() == 0 || birthStr.isEmpty()) {
-//                    ToastMessage("Enter BirthDate !");
-//                    break;
-//                }
-                ToastMessage(contactStr + " \n" + birthStr + "\n" + loggedInCheckBox);
-                localDatabase.setLoggedIn(loggedInCheckBox);
-                startActivity(new Intent(this, NavigationActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                if (loggedInCheckBox)
-                    finish();
+                if (Network.isNetAvailable(LoginActivity.this)) {
+                    contactStr = phoneEt.getText().toString();
+                    birthStr = birthDate.getText().toString();
+                    if (contactStr.length() == 0) {
+                        ToastMessage("Enter Your contact number");
+                    } else if (contactStr.length() < 11) {
+                        ToastMessage("Invalid Contact Number");
+                    } else if (contactStr.charAt(0) != '0' && contactStr.charAt(1) != 1) {
+                        ToastMessage("Invalid Contact Number");
+                    } else if (birthStr.isEmpty()) {
+                        ToastMessage("Enter Your Date of birth");
+                    } else {
+                        localDatabase.setLoggedIn(loggedInCheckBox);
+                        login();
+                        startActivity(new Intent(this, NavigationActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                    }
+                } else {
+                    Network.showInternetAlertDialog(LoginActivity.this);
+                    break;
+                }
 
-                // Here i have to check weather the user is a admin or not.......................................
-                break;
+
             }
             case R.id.registerHereButtonAtLoginPage: {
                 startActivity(new Intent(this, RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
@@ -103,9 +118,50 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+    private void login() {
+        final ProgressDialog pD=new ProgressDialog(this);
+        pD.setMessage("Logging in...");
+        pD.setCancelable(false);
+        pD.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_LOGIN, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                pD.dismiss();
+                if(!response.equals("fail")){
+                    try {
+                        JSONObject jsonOb=new JSONObject(response);
+                        String name=jsonOb.getString("name");
+                        String blood=jsonOb.getString("blood");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else {
+
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pD.dismiss();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("birthDate", birthStr);
+                map.put("contact", contactStr);
+                return map;
+            }
+        };
+        MySingleton.getInstance(this).addToRequestQueue(request);
+    }
+
+
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-        birthDate.setText(dayOfMonth + "/" + (month + 1) + "/" + year);
+        birthDate.setText(String.format("%02d", dayOfMonth) + "/" + String.format("%02d", (month + 1)) + "/" + year);
     }
 
     private void ToastMessage(String msg) {
