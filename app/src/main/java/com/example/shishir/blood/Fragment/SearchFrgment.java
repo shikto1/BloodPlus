@@ -4,6 +4,7 @@ package com.example.shishir.blood.Fragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -28,7 +29,10 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.shishir.blood.Activity.AllDonorActivity;
+import com.example.shishir.blood.Activity.LoginActivity;
+import com.example.shishir.blood.Activity.NavigationActivity;
 import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Database.DonorTableManager;
 import com.example.shishir.blood.Database.LocalDatabase;
@@ -98,8 +102,8 @@ public class SearchFrgment extends Fragment {
                 if (fTime) {
                     fTime = false;
                 } else {
-                    selectedBlood = parent.getItemAtPosition(position).toString();
-                    bloodSpinnerAsTextView.setText(selectedBlood);
+                    bloodStr = parent.getItemAtPosition(position).toString();
+                    bloodSpinnerAsTextView.setText(bloodStr);
                 }
             }
 
@@ -124,12 +128,13 @@ public class SearchFrgment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (Network.isNetAvailable(getActivity())) {
-                    bloodStr = bloodSpinnerAsTextView.getText().toString();
-                    if (bloodStr.length() == 0) {
+
+                    if (bloodStr == null) {
                         ToastMessage("Select Your Blood Group");
                     } else if (locationStr == null) {
                         ToastMessage("Enter Your Location");
                     } else {
+                        ToastMessage(bloodStr + "\n" + locationStr);
                         searchDonor();
                     }
                 } else {
@@ -155,68 +160,117 @@ public class SearchFrgment extends Fragment {
             pDialog.setCancelable(false);
             pDialog.show();
 
-
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
-                    Constants.URL_GET_SEARCHED_DONOR, null,
-                    new Response.Listener<JSONObject>() {
-
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            try {
-                                int res = response.getInt("success");
-                                if (res == 1) {
-                                    try {
-                                        JSONArray donorArray = response.getJSONArray("Donor");
-                                        int arrayLength = donorArray.length();
-                                        for (int i = 0; i < arrayLength; i++) {
-                                            JSONObject singleDonor = donorArray.getJSONObject(i);
-                                            String donorName = singleDonor.getString("Name");
-                                            String contact = singleDonor.getString("Contact");
-                                            donorArrayList.add(new Donor(donorName, contact));
-                                        }
-
-                                        SearchListFragment searchListFragment = new SearchListFragment();
-                                        Bundle b = new Bundle();
-                                        b.putSerializable("list", donorArrayList);
-                                        searchListFragment.setArguments(b);
-                                        transaction.replace(R.id.parentLayoutForSearchDonor, searchListFragment);
-                                        transaction.addToBackStack("h");
-                                        transaction.commit();
-                                        pDialog.hide();
-                                    } catch (JSONException e) {
-                                        e.printStackTrace();
-                                    }
-
-                                    pDialog.hide();
-                                } else {
-                                    MyDialog.alert(getActivity(), "Sorry !", "No Donor Found");
-
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+            StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_GET_SEARCHED_DONOR, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    pDialog.dismiss();
+                    try {
+                        JSONObject jsonOb = new JSONObject(response);
+                        String res = jsonOb.getString("res");
+                        if (res.equals("success")) {
+                            JSONArray donorArray = jsonOb.getJSONArray("Donor");
+                            int arrayLength = donorArray.length();
+                            for (int i = 0; i < arrayLength; i++) {
+                                JSONObject singleDonor = donorArray.getJSONObject(i);
+                                donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Contact")));
                             }
+                            SearchListFragment searchListFragment = new SearchListFragment();
+                                    Bundle b = new Bundle();
+                                    b.putSerializable("list", donorArrayList);
+                                    searchListFragment.setArguments(b);
+                                    transaction.replace(R.id.parentLayoutForSearchDonor, searchListFragment);
+                                    transaction.addToBackStack("h");
+                                    transaction.commit();
 
+                        } else {
+                            MyDialog.alert(getActivity(), "Sorry", "No Donor Found");
                         }
-                    }, new Response.ErrorListener() {
 
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-
-                    pDialog.hide();
+                    pDialog.dismiss();
                 }
             }) {
                 @Override
                 protected Map<String, String> getParams() throws AuthFailureError {
                     Map<String, String> map = new HashMap<String, String>();
-                    map.put("location", locationStr);
                     map.put("blood", bloodStr);
+                    map.put("location", locationStr);
                     return map;
                 }
             };
-
-            MySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq);
+            MySingleton.getInstance(getActivity()).addToRequestQueue(request);
         }
     }
+
+
+//        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+//                Constants.URL_GET_SEARCHED_DONOR, null,
+//                new Response.Listener<JSONObject>() {
+//
+//                    @Override
+//                    public void onResponse(JSONObject response) {
+//                        try {
+//                            String res = response.getString("res");
+//                            if (res.equals("success")) {
+//                                try {
+//                                    JSONArray donorArray = response.getJSONArray("Donor");
+//                                    int arrayLength = donorArray.length();
+//                                    for (int i = 0; i < arrayLength; i++) {
+//                                        JSONObject singleDonor = donorArray.getJSONObject(i);
+//                                        String donorName = singleDonor.getString("Name");
+//                                        String contact = singleDonor.getString("Contact");
+//                                        donorArrayList.add(new Donor(donorName, contact));
+//                                    }
+//
+//                                    SearchListFragment searchListFragment = new SearchListFragment();
+//                                    Bundle b = new Bundle();
+//                                    b.putSerializable("list", donorArrayList);
+//                                    searchListFragment.setArguments(b);
+//                                    transaction.replace(R.id.parentLayoutForSearchDonor, searchListFragment);
+//                                    transaction.addToBackStack("h");
+//                                    transaction.commit();
+//                                    pDialog.hide();
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                                pDialog.hide();
+//                            } else {
+//                                MyDialog.alert(getActivity(), "Sorry !", "No Donor Found");
+//
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                }, new Response.ErrorListener() {
+//
+//            @Override
+//            public void onErrorResponse(VolleyError error) {
+//
+//                pDialog.hide();
+//            }
+//        }) {
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String, String> map = new HashMap<String, String>();
+//                map.put("location", locationStr);
+//                map.put("blood", bloodStr);
+//                return map;
+//            }
+//        };
+
+//        MySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq);
+//    }
 
 
     private void ToastMessage(String msg) {

@@ -6,7 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.R;
@@ -43,10 +45,11 @@ public class DonorAdapter extends BaseAdapter {
 
     static class ViewHolder {
         TextView nameTv, bloodGroupTv;
+        ImageButton callBtn;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if (convertView == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -54,6 +57,7 @@ public class DonorAdapter extends BaseAdapter {
             holder = new ViewHolder();
             holder.nameTv = (TextView) convertView.findViewById(R.id.nameTvAtsingleDonor);
             holder.bloodGroupTv = (TextView) convertView.findViewById(R.id.bloodGroupAtSingleDonor);
+            holder.callBtn = (ImageButton) convertView.findViewById(R.id.callImageBtn);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
@@ -64,14 +68,16 @@ public class DonorAdapter extends BaseAdapter {
 
         // holder.circularImageView.setImageBitmap(circularBitmap);
         holder.nameTv.setText(donorList.get(position).getDonorName());
-      //  holder.bloodGroupTv.setText(donorList.get(position).getBloodGroup());
+        //  holder.bloodGroupTv.setText(donorList.get(position).getBloodGroup());
 
-//        if(imagePath!=null){
-//            Drawable d = (Drawable) Drawable.createFromPath(imagePath);
-//            holder.circularImageView.setImageDrawable(d);
-//        }
 //        String age = new DateCalculator().calculatedAge(donorList.get(position).getBirthYear());
 //        holder.ageTv.setText(age);
+        holder.callBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, donorList.get(position).getContactNumber(), Toast.LENGTH_SHORT).show();
+            }
+        });
         return convertView;
     }
 

@@ -34,6 +34,7 @@
             />
     </LinearLayout>
     <ImageButton
+        android:id="@+id/callImageBtn"
         android:src="@drawable/dialler_icon"
         android:layout_width="50dp"
         style="@style/Base.Widget.AppCompat.Button.Borderless"

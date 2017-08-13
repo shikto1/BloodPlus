@@ -45,10 +45,9 @@ public class SearchListFragment extends Fragment {
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        if (!donorList.isEmpty()) {
+
             adapter = new DonorAdapter(getActivity(),donorList);
             donorListView.setAdapter(adapter);
-        }
         super.onActivityCreated(savedInstanceState);
     }
 }
