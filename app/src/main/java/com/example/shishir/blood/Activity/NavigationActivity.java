@@ -70,7 +70,6 @@ public class NavigationActivity extends AppCompatActivity
 
     private void init() {
         fragmentManager = getSupportFragmentManager();
-        transaction = fragmentManager.beginTransaction();
         localDatabase = new LocalDatabase(this);
         isAdmin = localDatabase.getAdmin();
         loggedIn = localDatabase.getLoggedIn();
@@ -87,7 +86,7 @@ public class NavigationActivity extends AppCompatActivity
         else
             ToastMessage("MEMBER");
         ///If the user is a a normal member.....................................................................................
-        transaction.add(R.id.navigationLayout, new MemberHomeScreen()).commit();
+        fragmentManager.beginTransaction().add(R.id.navigationLayout, new MemberHomeScreen()).commit();
         //If the user is a admin then the admin HOme screen will be appeared......................................
         //transaction.add(R.id.navigationLayout, new AdminHomeScreen()).commit();
     }
@@ -141,9 +140,10 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+
         switch (id) {
             case R.id.home: {
-                transaction.replace(R.id.navigationLayout, new MemberHomeScreen()).commit();
+                fragmentManager.beginTransaction().replace(R.id.navigationLayout, new MemberHomeScreen()).commit();
                 fab.setVisibility(View.VISIBLE);
                 break;
             }
@@ -168,7 +168,7 @@ public class NavigationActivity extends AppCompatActivity
                 break;
             }
             case R.id.about: {
-                transaction.replace(R.id.navigationLayout, new AboutBloodPlus()).commit();
+                fragmentManager.beginTransaction().replace(R.id.navigationLayout, new AboutBloodPlus()).commit();
                 fab.setVisibility(View.INVISIBLE);
                 break;
             }
