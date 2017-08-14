@@ -16,5 +16,6 @@
 
     <dimen name="largeMargin">10dp</dimen>
     <dimen name="smallMargin">6dp</dimen>
+    <dimen name="extraSmallMargin">3dp</dimen>
     <dimen name="padding">16dp</dimen>
 </resources>
