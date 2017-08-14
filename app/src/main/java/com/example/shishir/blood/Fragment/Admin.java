@@ -20,6 +20,7 @@ import com.example.shishir.blood.Activity.AllDonorActivity;
 import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
+import com.example.shishir.blood.ExtraClass.MySingleton;
 import com.example.shishir.blood.R;
 
 import org.json.JSONArray;
@@ -84,6 +85,7 @@ public class Admin extends Fragment implements View.OnClickListener {
                 progressDialog.dismiss();
             }
         });
+        MySingleton.getInstance(getActivity()).addToRequestQueue(request);
 
     }
 

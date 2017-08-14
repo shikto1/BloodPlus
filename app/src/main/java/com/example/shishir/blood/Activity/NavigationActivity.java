@@ -23,8 +23,10 @@ import android.widget.Toast;
 
 import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.Fragment.AboutBloodPlus;
+import com.example.shishir.blood.Fragment.Admin;
 import com.example.shishir.blood.Fragment.AdminHomeScreen;
 import com.example.shishir.blood.Fragment.MemberHomeScreen;
+import com.example.shishir.blood.Network;
 import com.example.shishir.blood.R;
 
 public class NavigationActivity extends AppCompatActivity
@@ -148,11 +150,15 @@ public class NavigationActivity extends AppCompatActivity
                 break;
             }
             case R.id.allDonor: {
-                ToastMessage("ALl Donor");
+                startActivity(new Intent(this, AllDonorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 break;
             }
             case R.id.admin: {
-                ToastMessage("Admin");
+                if (Network.isNetAvailable(this)) {
+                    fragmentManager.beginTransaction().replace(R.id.navigationLayout, new Admin()).commit();
+                    fab.setVisibility(View.INVISIBLE);
+                } else
+                    Network.showInternetAlertDialog(this);
                 break;
             }
             case R.id.setting: {
