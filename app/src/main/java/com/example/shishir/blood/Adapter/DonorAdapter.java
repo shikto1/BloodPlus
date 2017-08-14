@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shishir.blood.Donor;
+import com.example.shishir.blood.ExtraClass.DateCalculator;
 import com.example.shishir.blood.R;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class DonorAdapter extends BaseAdapter {
     }
 
     static class ViewHolder {
-        TextView nameTv, bloodGroupTv;
+        TextView nameTv, lastDonateTv;
         ImageButton callBtn;
     }
 
@@ -56,22 +57,15 @@ public class DonorAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.single_donor, null);
             holder = new ViewHolder();
             holder.nameTv = (TextView) convertView.findViewById(R.id.nameTvAtsingleDonor);
-            holder.bloodGroupTv = (TextView) convertView.findViewById(R.id.bloodGroupAtSingleDonor);
+            holder.lastDonateTv = (TextView) convertView.findViewById(R.id.lastDonatedatListView);
             holder.callBtn = (ImageButton) convertView.findViewById(R.id.callImageBtn);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        //  Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.shikto);
-        //  Bitmap circularBitmap = ImageConverter.getRoundedCornerBitmap(bitmap, 100);
-
-
-        // holder.circularImageView.setImageBitmap(circularBitmap);
         holder.nameTv.setText(donorList.get(position).getDonorName());
-        //  holder.bloodGroupTv.setText(donorList.get(position).getBloodGroup());
+        holder.lastDonateTv.setText(DateCalculator.calculateInterval(donorList.get(position).getLastDonationDate()));
 
-//        String age = new DateCalculator().calculatedAge(donorList.get(position).getBirthYear());
-//        holder.ageTv.setText(age);
         holder.callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,5 +74,4 @@ public class DonorAdapter extends BaseAdapter {
         });
         return convertView;
     }
-
 }

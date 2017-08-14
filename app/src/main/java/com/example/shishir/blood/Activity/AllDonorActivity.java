@@ -72,7 +72,8 @@ public class AllDonorActivity extends AppCompatActivity {
                                 JSONObject singleDonor = donorArray.getJSONObject(i);
                                 String donorName = singleDonor.getString("Name");
                                 String contact = singleDonor.getString("Contact");
-                                donorArrayList.add(new Donor(donorName, contact));
+                                String lastDonate=singleDonor.getString("LastDonate");
+                                donorArrayList.add(new Donor(donorName, contact,lastDonate));
                             }
                             donorListView.setAdapter(new DonorAdapter(AllDonorActivity.this, donorArrayList));
                             totalDonorTV.setText("Total (" + arrayLength + ")");

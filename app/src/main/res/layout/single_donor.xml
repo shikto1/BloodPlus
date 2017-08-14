@@ -19,10 +19,9 @@
         android:layout_below="@+id/nameTvAtsingleDonor"
         android:orientation="horizontal">
         <TextView
-            android:id="@+id/bloodGroupAtSingleDonor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Last Donated: "
+            android:text="Donated: "
             android:textSize="@dimen/extraSmallSizeText"
             />
         <TextView

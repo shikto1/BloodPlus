@@ -9,7 +9,7 @@
 
     <dimen name="extralargeTextSize">40sp</dimen>
     <dimen name="smallTextSize">16sp</dimen>
-    <dimen name="extraSmallSizeText">14sp</dimen>
+    <dimen name="extraSmallSizeText">12sp</dimen>
     <dimen name="normalTextSize">18sp</dimen>
     <dimen name="largeTextSize">24sp</dimen>
     <dimen name="vLargeTextSize">32sp</dimen>

@@ -172,7 +172,8 @@ public class SearchFrgment extends Fragment {
                             int arrayLength = donorArray.length();
                             for (int i = 0; i < arrayLength; i++) {
                                 JSONObject singleDonor = donorArray.getJSONObject(i);
-                                donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Contact")));
+                                donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Contact"),
+                                        singleDonor.getString("LastDonate")));
                             }
                             SearchListFragment searchListFragment = new SearchListFragment();
                                     Bundle b = new Bundle();
