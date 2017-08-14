@@ -6,4 +6,6 @@
 
     <color name="white">#ffffff</color>
     <color name="redColor">#df0d0d</color>
+    <color name="greenColor">#008000</color>
+    <color name="smallTextColor"> #154360 </color>
 </resources>

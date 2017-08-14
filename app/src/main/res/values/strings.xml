@@ -49,7 +49,7 @@
         <item>Chittagong</item>
         <item>Comilla</item>
         <item>Feni</item>
-        <item>Khagrachhari</item>
+        <item>Khagrachari</item>
         <item>Lakshimipur</item>
         <item>Noakhali</item>
         <item>Rangamati</item>
@@ -63,7 +63,6 @@
         <item>Jamalpur</item>
         <item>Kishorganj</item>
         <item>Madaripur</item>
-        <item>Manikganj</item>
         <item>Coxs Bazar</item>
         <item>Munshiganj</item>
         <item>Mymensingh</item>
@@ -74,7 +73,47 @@
         <item>Shariatpur</item>
         <item>Sherpur</item>
         <item>Tangail</item>
+
+        //Rangpur Division....................
+        <item>Dinajpur</item>
+        <item>Gaibandha</item>
+        <item>Kurigram</item>
+        <item>Lalmonirhar</item>
+        <item>Nilphamari</item>
+        <item>Panchagarh</item>
+        <item>Rangpur</item>
+        <item>Thakurgaon</item>
+
+        //Rajshashi Division......................
+        <item>Bogra</item>
+        <item>Chapainababganj</item>
+        <item>Joypurhat</item>
+        <item>Pabna</item>
+        <item>Naogaon</item>
+        <item>Natore</item>
+        <item>Rajshahi</item>
+        <item>Sirajganj</item>
+
+        //Sylhet Division............................
+        <item>Habiganj</item>
+        <item>Maulavibazar</item>
+        <item>Sunamganj</item>
+        <item>Sylhet</item>
+
+        //Khulna Division.................................
+        <item>Bagerhat</item>
+        <item>Chuadanga</item>
+        <item>Jessore</item>
+        <item>Khulna</item>
+        <item>Jhenaidah</item>
+        <item>Kushtia</item>
+        <item>Magura</item>
+        <item>Meherpur</item>
+        <item>Narail</item>
+        <item>Satkhira</item>
+
     </string-array>
+
     <string name="title_activity_after_login">AfterLoginActivity</string>
     <string name="title_activity_navigation">BLOOD+</string>
 

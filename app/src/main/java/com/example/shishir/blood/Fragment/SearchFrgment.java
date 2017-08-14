@@ -134,7 +134,9 @@ public class SearchFrgment extends Fragment {
                     } else if (locationStr == null) {
                         ToastMessage("Enter Your Location");
                     } else {
-                        ToastMessage(bloodStr + "\n" + locationStr);
+                        //ToastMessage(bloodStr + "\n" + locationStr);
+                        localDatabase.setSelectedBloodGrop(bloodStr);
+                        localDatabase.setSelectedLocation(locationStr);
                         searchDonor();
                     }
                 } else {

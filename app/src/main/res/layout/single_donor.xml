@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:text="SHishir"
+        android:textColor="@color/smallTextColor"
         android:textSize="@dimen/largeTextSize"
         />
     <LinearLayout
@@ -22,23 +23,39 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Donated: "
+            android:textColor="@color/smallTextColor"
             android:textSize="@dimen/extraSmallSizeText"
             />
         <TextView
             android:id="@+id/lastDonatedatListView"
             android:layout_width="wrap_content"
+            android:textColor="@color/smallTextColor"
             android:layout_height="wrap_content"
             android:text="3 months ago"
             android:textSize="@dimen/extraSmallSizeText"
             />
     </LinearLayout>
-    <ImageButton
-        android:id="@+id/callImageBtn"
-        android:src="@drawable/dialler_icon"
-        android:layout_width="50dp"
-        style="@style/Base.Widget.AppCompat.Button.Borderless"
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:textAppearance="@android:style/TextAppearance"/>
+        android:orientation="horizontal"
+        android:layout_alignParentRight="true">
+        <ImageButton
+            android:id="@+id/msgBtn"
+            android:src="@drawable/msg_icon"
+            android:layout_width="50dp"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance"/>
+
+        <ImageButton
+            android:id="@+id/callImageBtn"
+            android:src="@drawable/dialler_icon"
+            android:layout_width="50dp"
+            style="@style/Base.Widget.AppCompat.Button.Borderless"
+            android:layout_height="wrap_content"
+            android:textAppearance="@android:style/TextAppearance"/>
+    </LinearLayout>
+
 
 </RelativeLayout>
