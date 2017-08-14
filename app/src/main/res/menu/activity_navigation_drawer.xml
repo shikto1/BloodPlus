@@ -19,7 +19,7 @@
             android:icon="@drawable/setting_icon"
             android:title="Setting" />
         <item
-            android:id="@+id/nav_share"
+            android:id="@+id/facebookPage"
             android:icon="@drawable/share_icon"
             android:title="Facebook Page" />
         <item

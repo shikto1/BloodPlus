@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AlertDialog;
@@ -58,6 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     boolean fTime;
     ProgressDialog progressDialog;
     String nameStr, contactStr, birthStr, donationDateStr, regSTR;
+    boolean regSuccess = false;
 
 
     @Override
@@ -161,7 +163,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void registerUser() {
 
         progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Loading...");
+        progressDialog.setMessage("Registering...");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -170,6 +172,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             public void onResponse(String response) {
                 progressDialog.dismiss();
                 if (response.equals("success")) {
+                    regSuccess = true;
                     alertDialog("Welcome !", "Successfully Registered");
                 } else if (response.equals("exists")) {
                     alertDialog("Sorry !", "This user already exists");
@@ -263,6 +266,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
+                        if (regSuccess) {
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                        }
+
                     }
                 }).show();
     }

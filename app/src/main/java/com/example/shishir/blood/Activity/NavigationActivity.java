@@ -22,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shishir.blood.Database.LocalDatabase;
+import com.example.shishir.blood.Fragment.AboutBloodPlus;
 import com.example.shishir.blood.Fragment.AdminHomeScreen;
 import com.example.shishir.blood.Fragment.MemberHomeScreen;
 import com.example.shishir.blood.R;
@@ -35,6 +36,7 @@ public class NavigationActivity extends AppCompatActivity
     LocalDatabase localDatabase;
     NavigationView navigationView;
     private boolean isAdmin, loggedIn;
+    FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +48,7 @@ public class NavigationActivity extends AppCompatActivity
 
         init();
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -139,19 +141,39 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-
-        if (id == R.id.allDonor) {
-            ToastMessage("ALl Donor");
-            // Handle the camera action
-        } else if (id == R.id.admin) {
-            ToastMessage("Admin");
-        } else if (id == R.id.setting) {
-            ToastMessage("Setting");
-        } else if (id == R.id.feedback) {
-            ToastMessage("Feedback");
-        } else if (id == R.id.nav_share) {
-            ToastMessage("Share");
+        switch (id) {
+            case R.id.home: {
+                transaction.replace(R.id.navigationLayout, new MemberHomeScreen()).commit();
+                fab.setVisibility(View.VISIBLE);
+                break;
+            }
+            case R.id.allDonor: {
+                ToastMessage("ALl Donor");
+                break;
+            }
+            case R.id.admin: {
+                ToastMessage("Admin");
+                break;
+            }
+            case R.id.setting: {
+                ToastMessage("Setting");
+                break;
+            }
+            case R.id.facebookPage: {
+                ToastMessage("Facebook");
+                break;
+            }
+            case R.id.feedback: {
+                ToastMessage("FeedBact");
+                break;
+            }
+            case R.id.about: {
+                transaction.replace(R.id.navigationLayout, new AboutBloodPlus()).commit();
+                fab.setVisibility(View.INVISIBLE);
+                break;
+            }
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

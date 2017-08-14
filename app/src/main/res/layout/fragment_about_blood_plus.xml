@@ -1,0 +1,50 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/largeMargin"
+    android:orientation="vertical"
+    tools:context="com.example.shishir.blood.Fragment.AboutBloodPlus">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:src="@drawable/cover_photo"
+            android:scaleType="centerCrop"
+            android:layout_alignParentTop="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/largeTextSize"
+            android:layout_marginTop="@dimen/smallMargin"
+            android:text="BLOOD+"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/normalTextSize"
+            android:text="Our goal is to save life of people. We started our journey officially in 2017 with 9 executive member. Thery are Shishir, Fahmida , Afrin, Ovi, Rifat, Mehedi hasan Zihad."/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/normalTextSize"
+            android:text="Our goal is to save life of people. We started our journey officially in 2017 with 9 executive member. Thery are Shishir, Fahmida , Afrin, Ovi, Rifat, Mehedi hasan Zihad."/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/normalTextSize"
+            android:text="Our goal is to save life of people. We started our journey officially in 2017 with 9 executive member. Thery are Shishir, Fahmida , Afrin, Ovi, Rifat, Mehedi hasan Zihad."/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/normalTextSize"
+            android:text="Our goal is to save life of people. We started our journey officially in 2017 with 9 executive member. Thery are Shishir, Fahmida , Afrin, Ovi, Rifat, Mehedi hasan Zihad."/>
+
+    </LinearLayout>
+
+</ScrollView>
