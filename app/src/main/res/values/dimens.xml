@@ -11,6 +11,7 @@
     <dimen name="smallTextSize">16sp</dimen>
     <dimen name="extraSmallSizeText">13sp</dimen>
     <dimen name="normalTextSize">18sp</dimen>
+    <dimen name="mediumTextSize">21sp</dimen>
     <dimen name="largeTextSize">24sp</dimen>
     <dimen name="vLargeTextSize">32sp</dimen>
 
