@@ -3,10 +3,6 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/home"
-            android:icon="@drawable/home_iconn"
-            android:title="Home" />
-        <item
             android:id="@+id/allDonor"
             android:icon="@drawable/people_icon"
             android:title="All Donor" />

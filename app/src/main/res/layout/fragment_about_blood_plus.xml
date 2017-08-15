@@ -8,14 +8,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <ImageView
+        android:orientation="vertical">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="180dp"
-            android:src="@drawable/cover_photo"
-            android:layout_marginLeft="@dimen/extraSmallMargin"
-            android:layout_marginRight="@dimen/extraSmallMargin"
-            android:scaleType="centerCrop"
-            android:layout_marginTop="@dimen/extraSmallMargin" />
+            android:layout_margin="@dimen/extraSmallMargin"
+            android:layout_height="200dp">
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true" />
+            <me.relex.circleindicator.CircleIndicator
+                android:id="@+id/indicator"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"

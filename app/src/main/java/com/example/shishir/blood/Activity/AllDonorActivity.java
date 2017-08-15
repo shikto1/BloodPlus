@@ -58,11 +58,9 @@ public class AllDonorActivity extends AppCompatActivity {
         donorListView = (ListView) findViewById(R.id.donorListView);
         totalDonorTV = (TextView) findViewById(R.id.totalDonor);
         localDatabase = new LocalDatabase(this);
-        if (localDatabase.getAdmin()) {
-            registerForContextMenu(donorListView);
-        }
         pDialog = new ProgressDialog(this);
         donorArrayList = new ArrayList<>();
+        registerForContextMenu(donorListView);
 
 
         useVolley();
@@ -115,15 +113,15 @@ public class AllDonorActivity extends AppCompatActivity {
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        AdapterView.AdapterContextMenuInfo info =
-                (AdapterView.AdapterContextMenuInfo) menuInfo;
-
-//        ViewGroup vg = (ViewGroup) v;
-//        View children = vg.getChildAt(info.position);
-//        TextView child = (TextView) children.findViewById(R.id.name);
+//        AdapterView.AdapterContextMenuInfo info =
+//                (AdapterView.AdapterContextMenuInfo) menuInfo;
 //
-//        name = child.getText().toString();
-//        menu.setHeaderTitle(name);
+////        ViewGroup vg = (ViewGroup) v;
+////        View children = vg.getChildAt(info.position);
+////        TextView child = (TextView) children.findViewById(R.id.name);
+////
+////        name = child.getText().toString();
+////        menu.setHeaderTitle(name);
 
         getMenuInflater().inflate(R.menu.context_menu, menu);
         super.onCreateContextMenu(menu, v, menuInfo);

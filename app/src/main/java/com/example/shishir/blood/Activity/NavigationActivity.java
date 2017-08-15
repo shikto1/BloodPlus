@@ -128,11 +128,24 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.logout) {
-            localDatabase.setLoggedIn(false);
-            localDatabase.setAdmin(0);
-            localDatabase.setUserName("");
-            localDatabase.setUserBloodGroup("");
-            startActivity(new Intent(this, FirstActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+            new AlertDialog.Builder(this).setMessage("Sure to logout ?")
+                    .setCancelable(false)
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            localDatabase.setLoggedIn(false);
+                            localDatabase.setAdmin(0);
+                            localDatabase.setUserName("");
+                            localDatabase.setUserBloodGroup("");
+                            startActivity(new Intent(NavigationActivity.this, FirstActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                        }
+                    }).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -142,42 +155,43 @@ public class NavigationActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
+        Intent intent = new Intent(this, NavigationMenuActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
         switch (id) {
-            case R.id.home: {
-                fragmentManager.beginTransaction().replace(R.id.navigationLayout, new MemberHomeScreen()).commit();
-                fab.setVisibility(View.VISIBLE);
-                break;
-            }
             case R.id.allDonor: {
                 startActivity(new Intent(this, AllDonorActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 break;
+
             }
             case R.id.admin: {
                 if (Network.isNetAvailable(this)) {
-                    fragmentManager.beginTransaction().replace(R.id.navigationLayout, new Admin()).commit();
-                    fab.setVisibility(View.INVISIBLE);
-                } else
+                    intent.putExtra("frg", 3);
+                    startActivity(intent);
+                    break;
+                } else {
                     Network.showInternetAlertDialog(this);
-                break;
+                    break;
+                }
+
             }
             case R.id.setting: {
                 ToastMessage("Setting");
-                break;
+
             }
             case R.id.facebookPage: {
                 ToastMessage("Facebook");
-                break;
+
             }
             case R.id.feedback: {
                 ToastMessage("FeedBact");
-                break;
+
             }
             case R.id.about: {
-                fragmentManager.beginTransaction().replace(R.id.navigationLayout, new AboutBloodPlus()).commit();
-                fab.setVisibility(View.INVISIBLE);
+                intent.putExtra("frg", 7);
+                startActivity(intent);
                 break;
             }
+
         }
 
 
