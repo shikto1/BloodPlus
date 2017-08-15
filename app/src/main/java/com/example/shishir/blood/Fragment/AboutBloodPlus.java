@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,13 +27,14 @@ public class AboutBloodPlus extends Fragment {
     private static int currentPage = 0;
     private final int DELAY = 3000;
     private final int INTERVAL = 3000;
-    private static final Integer[] XMEN = {R.drawable.cover_photo, R.drawable.donor};
+    private static final Integer[] XMEN = {R.drawable.cover_photo, R.drawable.shishir, R.drawable.donor};
     private ArrayList<Integer> XMENArray = new ArrayList<Integer>();
+    private ActionBar actionBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v= inflater.inflate(R.layout.fragment_about_blood_plus, container, false);
+        View v = inflater.inflate(R.layout.fragment_about_blood_plus, container, false);
         init(v);
         return v;
     }
@@ -44,6 +47,8 @@ public class AboutBloodPlus extends Fragment {
         mPager.setAdapter(new ImageAdapter(getActivity(), XMENArray));
         CircleIndicator indicator = (CircleIndicator) v.findViewById(R.id.indicator);
         indicator.setViewPager(mPager);
+        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle("About Blood+");
 
         // Auto start of viewpager
         final Handler handler = new Handler();

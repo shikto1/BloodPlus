@@ -176,14 +176,17 @@ public class NavigationActivity extends AppCompatActivity
             }
             case R.id.setting: {
                 ToastMessage("Setting");
+                break;
 
             }
             case R.id.facebookPage: {
                 ToastMessage("Facebook");
+                break;
 
             }
             case R.id.feedback: {
-                ToastMessage("FeedBact");
+                ToastMessage("FeedBack");
+                break;
 
             }
             case R.id.about: {

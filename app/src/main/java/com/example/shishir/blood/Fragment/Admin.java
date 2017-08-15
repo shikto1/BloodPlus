@@ -4,6 +4,8 @@ package com.example.shishir.blood.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.example.shishir.blood.Activity.AllDonorActivity;
+import com.example.shishir.blood.Adapter.AdminAdapter;
 import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
@@ -35,6 +38,7 @@ public class Admin extends Fragment implements View.OnClickListener {
     private Button addAdminBtn;
     ProgressDialog progressDialog;
     ArrayList<Donor> adminArrayList;
+    ActionBar actionBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -48,8 +52,10 @@ public class Admin extends Fragment implements View.OnClickListener {
         adminListView = (ListView) view.findViewById(R.id.adminListView);
         addAdminBtn = (Button) view.findViewById(R.id.addAdminBtn);
         progressDialog = new ProgressDialog(getActivity());
+        actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         adminArrayList = new ArrayList<Donor>();
         addAdminBtn.setOnClickListener(this);
+
 
         getAdminList();
     }
@@ -70,7 +76,9 @@ public class Admin extends Fragment implements View.OnClickListener {
                         String lastDonate = singleDonor.getString("LastDonate");
                         adminArrayList.add(new Donor(donorName, contact, lastDonate));
                     }
-                    adminListView.setAdapter(new DonorAdapter(getActivity(), adminArrayList));
+                    actionBar.setTitle("Admin (" + arrayLength + ")");
+                    adminListView.setAdapter(new AdminAdapter(getActivity(), adminArrayList));
+
 
                 } catch (JSONException e) {
                     e.printStackTrace();
