@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -45,14 +46,22 @@ public class AllDonorActivity extends AppCompatActivity {
     private int arrayLength;
     TextView totalDonorTV;
     LocalDatabase localDatabase;
+    Toolbar toolbar;
+    Spinner bloodSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_donor);
+        //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        // getSupportActionBar().setHomeButtonEnabled(true);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbarAtAllDonor);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        ((Spinner) findViewById(R.id.bloodgroupSpinnerAtToolbar)).setAdapter(ArrayAdapter.createFromResource(this, R.array.bloodGroup,
+        bloodSpinner=((Spinner) findViewById(R.id.bloodgroupSpinnerAtToolbar));
+        bloodSpinner.setAdapter(ArrayAdapter.createFromResource(this, R.array.bloodGroup,
                 android.R.layout.simple_list_item_1));
 
         donorListView = (ListView) findViewById(R.id.donorListView);
@@ -60,7 +69,7 @@ public class AllDonorActivity extends AppCompatActivity {
         localDatabase = new LocalDatabase(this);
         pDialog = new ProgressDialog(this);
         donorArrayList = new ArrayList<>();
-        registerForContextMenu(donorListView);
+        //registerForContextMenu(donorListView);
 
 
         useVolley();
@@ -169,4 +178,12 @@ public class AllDonorActivity extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        } else
+            return super.onOptionsItemSelected(item);
+    }
 }

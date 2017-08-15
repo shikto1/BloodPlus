@@ -3,6 +3,7 @@ package com.example.shishir.blood.Activity;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.example.shishir.blood.Fragment.AboutBloodPlus;
 import com.example.shishir.blood.Fragment.Admin;
@@ -18,7 +19,9 @@ public class NavigationMenuActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation_menu);
-
+        //  getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
         fragmentManager = getSupportFragmentManager();
         fragment = getIntent().getIntExtra("frg", 0);
         openFragment(fragment);
@@ -37,5 +40,14 @@ public class NavigationMenuActivity extends AppCompatActivity {
                 break;
             }
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        } else
+            return super.onOptionsItemSelected(item);
     }
 }

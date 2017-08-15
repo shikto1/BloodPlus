@@ -76,7 +76,7 @@ public class Admin extends Fragment implements View.OnClickListener {
                         String lastDonate = singleDonor.getString("LastDonate");
                         adminArrayList.add(new Donor(donorName, contact, lastDonate));
                     }
-                    actionBar.setTitle("Admin (" + arrayLength + ")");
+                    actionBar.setTitle("Admin (" + arrayLength + ") ");
                     adminListView.setAdapter(new AdminAdapter(getActivity(), adminArrayList));
 
 

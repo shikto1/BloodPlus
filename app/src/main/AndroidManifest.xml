@@ -46,13 +46,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.NotificationActivity" />
 
         <meta-data
             android:name="com.onesignal.NotificationOpened.DEFAULT"
             android:value="DISABLE" />
 
-        <activity android:name=".Activity.NavigationMenuActivity"></activity>
+        <activity android:name=".Activity.NavigationMenuActivity"
+            android:parentActivityName=".Activity.NavigationActivity"></activity>
     </application>
 
 </manifest>

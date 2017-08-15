@@ -79,7 +79,7 @@ public class AdminAdapter extends BaseAdapter {
         holder.settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(context, holder.settingBtn);
+                PopupMenu popupMenu = new PopupMenu(context,v);
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
