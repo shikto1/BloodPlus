@@ -11,16 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.example.shishir.blood.Activity.AllDonorActivity;
 import com.example.shishir.blood.Adapter.AdminAdapter;
-import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
 import com.example.shishir.blood.ExtraClass.MySingleton;
@@ -50,7 +46,7 @@ public class Admin extends Fragment implements View.OnClickListener {
 
     private void doWork(View view) {
         adminListView = (ListView) view.findViewById(R.id.adminListView);
-        addAdminBtn = (Button) view.findViewById(R.id.addAdminBtn);
+        addAdminBtn = (Button) view.findViewById(R.id.addAdminBtnAtAllAdim);
         progressDialog = new ProgressDialog(getActivity());
         actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         adminArrayList = new ArrayList<Donor>();
@@ -99,7 +95,9 @@ public class Admin extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(getActivity(), "I will add admin", Toast.LENGTH_SHORT).show();
-
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.parentLayoutForNavigationMenu, new AddAdminFragment())
+                .addToBackStack("aa")
+                .commit();
     }
 }

@@ -24,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.shishir.blood.Adapter.AllDonorAdapter;
 import com.example.shishir.blood.Adapter.DonorAdapter;
 import com.example.shishir.blood.Database.DonorTableManager;
 import com.example.shishir.blood.Database.LocalDatabase;
@@ -97,7 +98,7 @@ public class AllDonorActivity extends AppCompatActivity {
                                 String lastDonate = singleDonor.getString("LastDonate");
                                 donorArrayList.add(new Donor(donorName, contact, lastDonate));
                             }
-                            donorListView.setAdapter(new DonorAdapter(AllDonorActivity.this, donorArrayList));
+                            donorListView.setAdapter(new AllDonorAdapter(AllDonorActivity.this, donorArrayList));
                             totalDonorTV.setText("Total (" + arrayLength + ")");
                             pDialog.hide();
                         } catch (JSONException e) {
