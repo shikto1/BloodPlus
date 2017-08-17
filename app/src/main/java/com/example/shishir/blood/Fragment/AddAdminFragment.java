@@ -21,10 +21,9 @@ import com.example.shishir.blood.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AddAdminFragment extends Fragment implements View.OnClickListener {
+public class AddAdminFragment extends Fragment {
 
     private ListView adminListView;
-    private Button addAdminBtn;
 
     String[] donorName = {"Shikto", "Shishir", "Fahmida", "Nipa", "Afrin", "Silvia", "Ashraful"};
 
@@ -46,25 +45,23 @@ public class AddAdminFragment extends Fragment implements View.OnClickListener {
 
     private void findViewById(View view) {
         adminListView = (ListView) view.findViewById(R.id.addAdminListView);
-        addAdminBtn = (Button) view.findViewById(R.id.addAdminBtn);
-        addAdminBtn.setOnClickListener(this);
 
         ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.single_for_ad_admin_list, donorName);
         adminListView.setAdapter(adapter);
     }
 
-    @Override
-    public void onClick(View v) {
-
-        String selected = "";
-        SparseBooleanArray checkArray = adminListView.getCheckedItemPositions();
-        int size = checkArray.size();
-        for (int i = 0; i < size; i++) {
-            int position = checkArray.keyAt(i);
-            selected += donorName[position] + "\n";
-        }
-        Toast.makeText(getActivity(), selected, Toast.LENGTH_SHORT).show();
-    }
+//    @Override
+//    public void onClick(View v) {
+//
+//        String selected = "";
+//        SparseBooleanArray checkArray = adminListView.getCheckedItemPositions();
+//        int size = checkArray.size();
+//        for (int i = 0; i < size; i++) {
+//            int position = checkArray.keyAt(i);
+//            selected += donorName[position] + "\n";
+//        }
+//        Toast.makeText(getActivity(), selected, Toast.LENGTH_SHORT).show();
+//    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {

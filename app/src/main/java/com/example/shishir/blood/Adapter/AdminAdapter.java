@@ -1,6 +1,8 @@
 package com.example.shishir.blood.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shishir.blood.Donor;
+import com.example.shishir.blood.ExtraClass.Constants;
 import com.example.shishir.blood.ExtraClass.DateCalculator;
 import com.example.shishir.blood.R;
 
@@ -74,13 +77,19 @@ public class AdminAdapter extends BaseAdapter {
         holder.settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                final Intent clickIntent = new Intent(Constants.POPUP_MENU_CLICKED_ACTION);
+                final Bundle bundle = new Bundle();
                 PopupMenu popupMenu = new PopupMenu(context, v);
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu_for_admin, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
-                        Toast.makeText(context, "" + item.getTitle(), Toast.LENGTH_SHORT).show();
+                        bundle.putInt("itemID", item.getItemId());
+                        bundle.putInt("position", position);
+                        clickIntent.putExtra("event", bundle);
+                        context.sendBroadcast(clickIntent);
                         return true;
                     }
                 });

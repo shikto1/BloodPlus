@@ -45,10 +45,10 @@ public class AllDonorActivity extends AppCompatActivity {
     ProgressDialog pDialog;
     ArrayList<Donor> donorArrayList;
     private int arrayLength;
-    TextView totalDonorTV;
+ //   TextView totalDonorTV;
     LocalDatabase localDatabase;
-    Toolbar toolbar;
-    Spinner bloodSpinner;
+  //  Toolbar toolbar;
+   // Spinner bloodSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,16 +57,16 @@ public class AllDonorActivity extends AppCompatActivity {
         //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // getSupportActionBar().setHomeButtonEnabled(true);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbarAtAllDonor);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        bloodSpinner=((Spinner) findViewById(R.id.bloodgroupSpinnerAtToolbar));
-        bloodSpinner.setAdapter(ArrayAdapter.createFromResource(this, R.array.bloodGroup,
-                android.R.layout.simple_list_item_1));
+//        toolbar = (Toolbar) findViewById(R.id.toolbarAtAllDonor);
+//        setSupportActionBar(toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        bloodSpinner = ((Spinner) findViewById(R.id.bloodgroupSpinnerAtToolbar));
+//        bloodSpinner.setAdapter(ArrayAdapter.createFromResource(this, R.array.bloodGroup,
+//                android.R.layout.simple_list_item_1));
 
         donorListView = (ListView) findViewById(R.id.donorListView);
-        totalDonorTV = (TextView) findViewById(R.id.totalDonor);
+//        totalDonorTV = (TextView) findViewById(R.id.totalDonor);
         localDatabase = new LocalDatabase(this);
         pDialog = new ProgressDialog(this);
         donorArrayList = new ArrayList<>();
@@ -101,7 +101,7 @@ public class AllDonorActivity extends AppCompatActivity {
                                 donorArrayList.add(new Donor(donorName, bloodG, locationStr, contact, "birthDate", lastDonate));
                             }
                             donorListView.setAdapter(new AllDonorAdapter(AllDonorActivity.this, donorArrayList));
-                            totalDonorTV.setText("Total (" + arrayLength + ")");
+                            getSupportActionBar().setTitle("Total (" + arrayLength + ")");
                             pDialog.hide();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -121,61 +121,7 @@ public class AllDonorActivity extends AppCompatActivity {
 // Adding request to request queue
         MySingleton.getInstance(this).addToRequestQueue(jsonObjReq);
     }
-//
-//
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-////        AdapterView.AdapterContextMenuInfo info =
-////                (AdapterView.AdapterContextMenuInfo) menuInfo;
-////
-//////        ViewGroup vg = (ViewGroup) v;
-//////        View children = vg.getChildAt(info.position);
-//////        TextView child = (TextView) children.findViewById(R.id.name);
-//////
-//////        name = child.getText().toString();
-//////        menu.setHeaderTitle(name);
-//
-//        getMenuInflater().inflate(R.menu.context_menu, menu);
-//        super.onCreateContextMenu(menu, v, menuInfo);
-//    }
-//
-//    @Override
-//    public boolean onContextItemSelected(MenuItem item) {
-//
-//        switch (item.getItemId()) {
-//            case R.id.detail: {
-//                ToastMessage("Details");
-//                //             localDatabase.addCurrentProfile(name);
-////                startActivity(new Intent(NavigationDrawerActivity.this, ProfileDetailsActivity.class)
-////                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-//                break;
-//            }
-//            case R.id.edit:
-//                ToastMessage("Edit");
-//                break;
-//            case R.id.delete: {
-//                new AlertDialog.Builder(this).setMessage("Are You Sure to Delete it ??")
-//                        .setCancelable(false)
-//                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
-//                            }
-//                        })
-//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                            @Override
-//                            public void onClick(DialogInterface dialog, int which) {
-//                                dialog.dismiss();
-//                                // new MyDeleteHelperThread().execute(name);
-//                            }
-//                        })
-//                        .show();
-//                break;
-//            }
-//
-//        }
-//        return super.onContextItemSelected(item);
-//    }
+
 
     private void ToastMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

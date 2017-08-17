@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 <item
+    android:id="@+id/removeAsAdmin"
     android:title="Remove as Admin"/>
     <item
+        android:id="@+id/removeFromBloodPlus"
         android:title="Remove from Blood+"/>
 </menu>
