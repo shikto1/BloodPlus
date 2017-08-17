@@ -1,12 +1,6 @@
 package com.example.shishir.blood.Adapter;
 
-import android.Manifest;
 import android.content.Context;
-import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
-import android.net.Uri;
-import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.PopupMenu;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -17,7 +11,6 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.DateCalculator;
 import com.example.shishir.blood.R;
@@ -80,7 +73,7 @@ public class AdminAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 PopupMenu popupMenu = new PopupMenu(context,v);
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu, popupMenu.getMenu());
+                popupMenu.getMenuInflater().inflate(R.menu.popup_menu_for_admin, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override

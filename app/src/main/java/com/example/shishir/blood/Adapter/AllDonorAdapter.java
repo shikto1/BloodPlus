@@ -74,12 +74,12 @@ public class AllDonorAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.nameTv.setText(donorList.get(position).getDonorName());
-        holder.lastDonateTv.setText(DateCalculator.calculateInterval(donorList.get(position).getLastDonationDate()));
+        holder.lastDonateTv.setText("Last Donated:" + DateCalculator.calculateInterval(donorList.get(position).getLastDonationDate()));
 
         holder.settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(context,v);
+                PopupMenu popupMenu = new PopupMenu(context, v);
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu_for_all_donor, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

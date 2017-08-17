@@ -27,7 +27,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
-                    android:text="Fahmida Nipa"
+                    android:text="Fahmida Nipa (B+)"
                     android:textColor="@color/smallTextColor"
                     android:textSize="@dimen/mediumTextSize" />
 
@@ -37,7 +37,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/adminName"
-                    android:text="Founder at Blood+"
+                    android:text="Contact: 01784888919"
                     android:textColor="#000"
                     android:textSize="@dimen/extraSmallSizeText" />
                 <TextView
@@ -46,7 +46,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@+id/designation"
-                    android:text="Joined"
+                    android:text="Location: Manikganj"
                     android:textSize="@dimen/extraSmallSizeText" />
 
             </LinearLayout>

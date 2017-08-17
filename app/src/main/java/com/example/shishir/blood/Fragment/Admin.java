@@ -3,14 +3,19 @@ package com.example.shishir.blood.Fragment;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -35,6 +40,13 @@ public class Admin extends Fragment implements View.OnClickListener {
     ProgressDialog progressDialog;
     ArrayList<Donor> adminArrayList;
     ActionBar actionBar;
+
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -99,5 +111,17 @@ public class Admin extends Fragment implements View.OnClickListener {
                 .replace(R.id.parentLayoutForNavigationMenu, new AddAdminFragment())
                 .addToBackStack("aa")
                 .commit();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.over_flow_menu_for_add_admin, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(getActivity(),"Plus Icon",Toast.LENGTH_SHORT).show();
+        return super.onOptionsItemSelected(item);
     }
 }

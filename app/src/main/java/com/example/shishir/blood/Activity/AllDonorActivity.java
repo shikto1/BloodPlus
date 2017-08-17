@@ -119,61 +119,61 @@ public class AllDonorActivity extends AppCompatActivity {
 // Adding request to request queue
         MySingleton.getInstance(this).addToRequestQueue(jsonObjReq);
     }
-
-
-    @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//        AdapterView.AdapterContextMenuInfo info =
-//                (AdapterView.AdapterContextMenuInfo) menuInfo;
 //
-////        ViewGroup vg = (ViewGroup) v;
-////        View children = vg.getChildAt(info.position);
-////        TextView child = (TextView) children.findViewById(R.id.name);
+//
+//    @Override
+//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+////        AdapterView.AdapterContextMenuInfo info =
+////                (AdapterView.AdapterContextMenuInfo) menuInfo;
 ////
-////        name = child.getText().toString();
-////        menu.setHeaderTitle(name);
-
-        getMenuInflater().inflate(R.menu.context_menu, menu);
-        super.onCreateContextMenu(menu, v, menuInfo);
-    }
-
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-
-        switch (item.getItemId()) {
-            case R.id.detail: {
-                ToastMessage("Details");
-                //             localDatabase.addCurrentProfile(name);
-//                startActivity(new Intent(NavigationDrawerActivity.this, ProfileDetailsActivity.class)
-//                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
-                break;
-            }
-            case R.id.edit:
-                ToastMessage("Edit");
-                break;
-            case R.id.delete: {
-                new AlertDialog.Builder(this).setMessage("Are You Sure to Delete it ??")
-                        .setCancelable(false)
-                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        })
-                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                                // new MyDeleteHelperThread().execute(name);
-                            }
-                        })
-                        .show();
-                break;
-            }
-
-        }
-        return super.onContextItemSelected(item);
-    }
+//////        ViewGroup vg = (ViewGroup) v;
+//////        View children = vg.getChildAt(info.position);
+//////        TextView child = (TextView) children.findViewById(R.id.name);
+//////
+//////        name = child.getText().toString();
+//////        menu.setHeaderTitle(name);
+//
+//        getMenuInflater().inflate(R.menu.context_menu, menu);
+//        super.onCreateContextMenu(menu, v, menuInfo);
+//    }
+//
+//    @Override
+//    public boolean onContextItemSelected(MenuItem item) {
+//
+//        switch (item.getItemId()) {
+//            case R.id.detail: {
+//                ToastMessage("Details");
+//                //             localDatabase.addCurrentProfile(name);
+////                startActivity(new Intent(NavigationDrawerActivity.this, ProfileDetailsActivity.class)
+////                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+//                break;
+//            }
+//            case R.id.edit:
+//                ToastMessage("Edit");
+//                break;
+//            case R.id.delete: {
+//                new AlertDialog.Builder(this).setMessage("Are You Sure to Delete it ??")
+//                        .setCancelable(false)
+//                        .setNegativeButton("NO", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                            }
+//                        })
+//                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+//                            @Override
+//                            public void onClick(DialogInterface dialog, int which) {
+//                                dialog.dismiss();
+//                                // new MyDeleteHelperThread().execute(name);
+//                            }
+//                        })
+//                        .show();
+//                break;
+//            }
+//
+//        }
+//        return super.onContextItemSelected(item);
+//    }
 
     private void ToastMessage(String msg) {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

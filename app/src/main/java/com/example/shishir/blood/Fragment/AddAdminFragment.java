@@ -2,9 +2,13 @@ package com.example.shishir.blood.Fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -26,6 +30,12 @@ public class AddAdminFragment extends Fragment implements View.OnClickListener {
 
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
@@ -39,7 +49,7 @@ public class AddAdminFragment extends Fragment implements View.OnClickListener {
         addAdminBtn = (Button) view.findViewById(R.id.addAdminBtn);
         addAdminBtn.setOnClickListener(this);
 
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(),R.layout.single_for_ad_admin_list, donorName);
+        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.single_for_ad_admin_list, donorName);
         adminListView.setAdapter(adapter);
     }
 
@@ -54,5 +64,17 @@ public class AddAdminFragment extends Fragment implements View.OnClickListener {
             selected += donorName[position] + "\n";
         }
         Toast.makeText(getActivity(), selected, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.add_admin_second_fragment, menu);
+        super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Toast.makeText(getActivity(), "Check Icon", Toast.LENGTH_SHORT).show();
+        return super.onOptionsItemSelected(item);
     }
 }
