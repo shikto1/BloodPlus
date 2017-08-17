@@ -34,9 +34,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class Admin extends Fragment implements View.OnClickListener {
+public class Admin extends Fragment {
     private ListView adminListView;
-    private Button addAdminBtn;
     ProgressDialog progressDialog;
     ArrayList<Donor> adminArrayList;
     ActionBar actionBar;
@@ -58,13 +57,9 @@ public class Admin extends Fragment implements View.OnClickListener {
 
     private void doWork(View view) {
         adminListView = (ListView) view.findViewById(R.id.adminListView);
-        addAdminBtn = (Button) view.findViewById(R.id.addAdminBtnAtAllAdim);
         progressDialog = new ProgressDialog(getActivity());
         actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         adminArrayList = new ArrayList<Donor>();
-        addAdminBtn.setOnClickListener(this);
-
-
         getAdminList();
     }
 
@@ -79,10 +74,12 @@ public class Admin extends Fragment implements View.OnClickListener {
                     int arrayLength = donorArray.length();
                     for (int i = 0; i < arrayLength; i++) {
                         JSONObject singleDonor = donorArray.getJSONObject(i);
+                        String bloodG = singleDonor.getString("Blood");
                         String donorName = singleDonor.getString("Name");
                         String contact = singleDonor.getString("Contact");
+                        String locationStr = singleDonor.getString("Location");
                         String lastDonate = singleDonor.getString("LastDonate");
-                        adminArrayList.add(new Donor(donorName, contact, lastDonate));
+                        adminArrayList.add(new Donor(donorName, bloodG, locationStr, contact, "birthDate", lastDonate));
                     }
                     actionBar.setTitle("Admin (" + arrayLength + ") ");
                     adminListView.setAdapter(new AdminAdapter(getActivity(), adminArrayList));
@@ -105,13 +102,6 @@ public class Admin extends Fragment implements View.OnClickListener {
 
     }
 
-    @Override
-    public void onClick(View v) {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.parentLayoutForNavigationMenu, new AddAdminFragment())
-                .addToBackStack("aa")
-                .commit();
-    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
@@ -121,7 +111,10 @@ public class Admin extends Fragment implements View.OnClickListener {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Toast.makeText(getActivity(),"Plus Icon",Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.parentLayoutForNavigationMenu, new AddAdminFragment())
+                .addToBackStack("aa")
+                .commit();
         return super.onOptionsItemSelected(item);
     }
 }

@@ -93,10 +93,12 @@ public class AllDonorActivity extends AppCompatActivity {
                             arrayLength = donorArray.length();
                             for (int i = 0; i < arrayLength; i++) {
                                 JSONObject singleDonor = donorArray.getJSONObject(i);
+                                String bloodG = singleDonor.getString("Blood");
                                 String donorName = singleDonor.getString("Name");
                                 String contact = singleDonor.getString("Contact");
+                                String locationStr = singleDonor.getString("Location");
                                 String lastDonate = singleDonor.getString("LastDonate");
-                                donorArrayList.add(new Donor(donorName, contact, lastDonate));
+                                donorArrayList.add(new Donor(donorName, bloodG, locationStr, contact, "birthDate", lastDonate));
                             }
                             donorListView.setAdapter(new AllDonorAdapter(AllDonorActivity.this, donorArrayList));
                             totalDonorTV.setText("Total (" + arrayLength + ")");

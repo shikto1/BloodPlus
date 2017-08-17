@@ -73,7 +73,7 @@ public class AllDonorAdapter extends BaseAdapter {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.nameTv.setText(donorList.get(position).getDonorName());
+        holder.nameTv.setText(donorList.get(position).getDonorName() + " (" + donorList.get(position).getBloodGroup() + ")");
         holder.lastDonateTv.setText("Last Donated:" + DateCalculator.calculateInterval(donorList.get(position).getLastDonationDate()));
 
         holder.settingBtn.setOnClickListener(new View.OnClickListener() {

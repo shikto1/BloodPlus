@@ -48,7 +48,7 @@ public class AdminAdapter extends BaseAdapter {
 
 
     static class ViewHolder {
-        TextView nameTv, designationTV;
+        TextView nameTv, contactTv, locationTv;
         ImageButton settingBtn;
     }
 
@@ -60,19 +60,21 @@ public class AdminAdapter extends BaseAdapter {
             convertView = inflater.inflate(R.layout.single_admin, null);
             holder = new ViewHolder();
             holder.nameTv = (TextView) convertView.findViewById(R.id.adminName);
-            holder.designationTV = (TextView) convertView.findViewById(R.id.designation);
+            holder.contactTv = (TextView) convertView.findViewById(R.id.contactAtAdmin);
+            holder.locationTv = (TextView) convertView.findViewById(R.id.locationTvAtAdmin);
             holder.settingBtn = (ImageButton) convertView.findViewById(R.id.settingBtn);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.nameTv.setText(adminList.get(position).getDonorName());
-        holder.designationTV.setText(DateCalculator.calculateInterval(adminList.get(position).getLastDonationDate()));
+        holder.nameTv.setText(adminList.get(position).getDonorName() + " (" + adminList.get(position).getBloodGroup() + ")");
+        holder.contactTv.setText("Contact: " + adminList.get(position).getContactNumber());
+        holder.locationTv.setText("Location: " + adminList.get(position).getLocation());
 
         holder.settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popupMenu = new PopupMenu(context,v);
+                PopupMenu popupMenu = new PopupMenu(context, v);
                 popupMenu.getMenuInflater().inflate(R.menu.popup_menu_for_admin, popupMenu.getMenu());
 
                 popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

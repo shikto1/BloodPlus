@@ -11,13 +11,4 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"></ListView>
 
-    <Button
-        android:id="@+id/addAdminBtnAtAllAdim"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/back_button_two"
-        android:text="+ Add"
-        android:textColor="@color/white"
-        android:textSize="@dimen/normalTextSize" />
 </RelativeLayout>
