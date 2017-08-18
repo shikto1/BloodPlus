@@ -45,15 +45,22 @@ public class AllDonorActivity extends AppCompatActivity {
     ProgressDialog pDialog;
     ArrayList<Donor> donorArrayList;
     private int arrayLength;
- //   TextView totalDonorTV;
+    //   TextView totalDonorTV;
     LocalDatabase localDatabase;
-  //  Toolbar toolbar;
-   // Spinner bloodSpinner;
+    private AllDonorAdapter allDonorAdapter;
+    //  Toolbar toolbar;
+    // Spinner bloodSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_donor);
+        donorListView = (ListView) findViewById(R.id.donorListView);
+        localDatabase = new LocalDatabase(this);
+        pDialog = new ProgressDialog(this);
+        donorArrayList = new ArrayList<Donor>();
+        useVolley();
+
         //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         // getSupportActionBar().setHomeButtonEnabled(true);
 
@@ -65,20 +72,15 @@ public class AllDonorActivity extends AppCompatActivity {
 //        bloodSpinner.setAdapter(ArrayAdapter.createFromResource(this, R.array.bloodGroup,
 //                android.R.layout.simple_list_item_1));
 
-        donorListView = (ListView) findViewById(R.id.donorListView);
+
 //        totalDonorTV = (TextView) findViewById(R.id.totalDonor);
-        localDatabase = new LocalDatabase(this);
-        pDialog = new ProgressDialog(this);
-        donorArrayList = new ArrayList<>();
+
         //registerForContextMenu(donorListView);
-
-
-        useVolley();
     }
 
     private void useVolley() {
 
-        pDialog.setMessage("Loading...");
+        pDialog.setMessage("Fetching data...");
         pDialog.setCancelable(false);
         pDialog.show();
 
@@ -91,17 +93,14 @@ public class AllDonorActivity extends AppCompatActivity {
                         try {
                             JSONArray donorArray = response.getJSONArray("Donor");
                             arrayLength = donorArray.length();
+                            getSupportActionBar().setTitle("Total (" + arrayLength + ")");
                             for (int i = 0; i < arrayLength; i++) {
                                 JSONObject singleDonor = donorArray.getJSONObject(i);
-                                String bloodG = singleDonor.getString("Blood");
-                                String donorName = singleDonor.getString("Name");
-                                String contact = singleDonor.getString("Contact");
-                                String locationStr = singleDonor.getString("Location");
-                                String lastDonate = singleDonor.getString("LastDonate");
-                                donorArrayList.add(new Donor(donorName, bloodG, locationStr, contact, "birthDate", lastDonate));
+                                donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Blood"), singleDonor.getString("Location"),
+                                        singleDonor.getString("Contact"), "", singleDonor.getString("LastDonate")));
                             }
-                            donorListView.setAdapter(new AllDonorAdapter(AllDonorActivity.this, donorArrayList));
-                            getSupportActionBar().setTitle("Total (" + arrayLength + ")");
+                            allDonorAdapter = new AllDonorAdapter(AllDonorActivity.this, donorArrayList);
+                            donorListView.setAdapter(allDonorAdapter);
                             pDialog.hide();
                         } catch (JSONException e) {
                             e.printStackTrace();

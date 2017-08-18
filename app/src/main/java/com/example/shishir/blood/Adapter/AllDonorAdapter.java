@@ -55,7 +55,7 @@ public class AllDonorAdapter extends BaseAdapter {
 
 
     static class ViewHolder {
-        TextView nameTv, lastDonateTv;
+        TextView nameTv, lastDonateTv, locationTV;
         ImageButton settingBtn;
     }
 
@@ -66,8 +66,9 @@ public class AllDonorAdapter extends BaseAdapter {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.single_donor_for_all_donor, null);
             holder = new ViewHolder();
-            holder.nameTv = (TextView) convertView.findViewById(R.id.donameNameAtAllDonor);
+            holder.nameTv = (TextView) convertView.findViewById(R.id.donorNameAtAllDonor);
             holder.lastDonateTv = (TextView) convertView.findViewById(R.id.lastDonateAtAllDonor);
+            holder.locationTV = (TextView) convertView.findViewById(R.id.locationAtAllDonor);
             holder.settingBtn = (ImageButton) convertView.findViewById(R.id.menuImageBtnAtAllDonor);
             convertView.setTag(holder);
         } else {
@@ -75,7 +76,7 @@ public class AllDonorAdapter extends BaseAdapter {
         }
         holder.nameTv.setText(donorList.get(position).getDonorName() + " (" + donorList.get(position).getBloodGroup() + ")");
         holder.lastDonateTv.setText("Last Donated:" + DateCalculator.calculateInterval(donorList.get(position).getLastDonationDate()));
-
+        holder.locationTV.setText("Location: " + donorList.get(position).getLocation());
         holder.settingBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

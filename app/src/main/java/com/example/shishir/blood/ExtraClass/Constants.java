@@ -5,10 +5,17 @@ package com.example.shishir.blood.ExtraClass;
  */
 
 public class Constants {
-    public static String URL_REGISTER="https://bloodpluss.000webhostapp.com/insertDonor.php";
-    public static String URL_GET_ALL_DONOR= "https://bloodpluss.000webhostapp.com/getAllDonor.php";
-    public static String URL_LOGIN= "https://bloodpluss.000webhostapp.com/loginDonor.php";
-    public static String URL_GET_SEARCHED_DONOR= "https://bloodpluss.000webhostapp.com/getSearchedDonor.php";
-    public static String URL_GET_ADMIN="https://bloodpluss.000webhostapp.com/getAllAdmin.php";
+    public static final String URL_REGISTER="http://spacedesign.com.bd/insertDonor.php";
+    public static final String URL_GET_ALL_DONOR= "http://spacedesign.com.bd/getAllDonor.php";
+    public static final String URL_LOGIN= "http://spacedesign.com.bd/loginDonor.php";
+    public static final String URL_GET_SEARCHED_DONOR= "http://spacedesign.com.bd/getSearchedDonor.php";
+
+    // Admin URL...............................................................................................................
+    public static final String URL_GET_ADMIN="http://spacedesign.com.bd/getAllAdmin.php";
+    public static final String URL_MAKE_AS_ADMIN="http://spacedesign.com.bd/makeAsAdmin.php";
+    public static final String URL_REMOVE_AS_ADMIN="http://spacedesign.com.bd/removeAsAdmin.php";
+
+    public static final String URL_REMOVE_FROM_BLOOD_PLUS="http://spacedesign.com.bd/removeFromBloodPlus.php";
+
     public static final String POPUP_MENU_CLICKED_ACTION = "com.example.shishir.blood.cleckeddd";
 }

@@ -158,7 +158,7 @@ public class SearchFrgment extends Fragment {
         {
 
             pDialog = new ProgressDialog(getActivity());
-            pDialog.setMessage("Loading...");
+            pDialog.setMessage("Searching...");
             pDialog.setCancelable(false);
             pDialog.show();
 
