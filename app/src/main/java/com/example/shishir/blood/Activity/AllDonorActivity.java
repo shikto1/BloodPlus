@@ -112,14 +112,15 @@ public class AllDonorActivity extends AppCompatActivity {
                         break;
                     }
                     case R.id.removeFromBlood: {
-                        new AlertDialog.Builder(AllDonorActivity.this).setTitle("Remove from BLOOD+").setMessage("Sure to Remove ?")
+                        new AlertDialog.Builder(AllDonorActivity.this).setTitle("Remove from BLOOD+ ?")
+                                .setMessage("Once you remove, the user will permanently delete from database and it can not be undone.")
                                 .setCancelable(false)
-                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         dialog.dismiss();
                                     }
-                                }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                }).setPositiveButton("Remove", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 removeFromBloodPlus(pos);

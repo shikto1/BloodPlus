@@ -75,7 +75,7 @@ public class UpdateDonationDateFragment extends DialogFragment implements View.O
                     Toast.makeText(getActivity(), "Enter Donation Date ", Toast.LENGTH_SHORT).show();
                 } else {
                     updateDonationDate(donationDateStr);
-                    dismiss();
+                    getDialog().hide();
                 }
 
             }
@@ -103,19 +103,20 @@ public class UpdateDonationDateFragment extends DialogFragment implements View.O
     }
 
     public void updateDonationDate(final String donationDate) {
-        progressDialog.setMessage("Updating donation date...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        final ProgressDialog pDialog=new ProgressDialog(getActivity());
+        pDialog.setMessage("Updating donation date...");
+        pDialog.setCancelable(false);
+        pDialog.show();
         StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_UPDATE_DONATION_DATE, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                progressDialog.dismiss();
+                pDialog.dismiss();
                 Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                progressDialog.dismiss();
+                pDialog.dismiss();
             }
         }) {
             @Override
