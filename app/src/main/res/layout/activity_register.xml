@@ -37,37 +37,36 @@
             <!--</android.support.design.widget.TextInputLayout>-->
 
 
-            <RadioGroup
-                android:id="@+id/genderGroupAtBasicInfo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/largeMargin"
-                android:gravity="center"
-                android:orientation="horizontal">
+            <!--<RadioGroup-->
+                <!--android:id="@+id/genderGroupAtBasicInfo"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginBottom="@dimen/largeMargin"-->
+                <!--android:gravity="center"-->
+                <!--android:orientation="horizontal">-->
 
-                <RadioButton
-                    android:id="@+id/maleRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/padding"
-                    android:text="Male"
-                    android:textSize="@dimen/normalTextSize" />
+                <!--<RadioButton-->
+                    <!--android:id="@+id/maleRadioBtn"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginRight="@dimen/padding"-->
+                    <!--android:text="Male"-->
+                    <!--android:textSize="@dimen/normalTextSize" />-->
 
-                <RadioButton
-                    android:id="@+id/femaleRadioBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/padding"
-                    android:text="Female"
-                    android:textSize="@dimen/normalTextSize" />
+                <!--<RadioButton-->
+                    <!--android:id="@+id/femaleRadioBtn"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_marginLeft="@dimen/padding"-->
+                    <!--android:text="Female"-->
+                    <!--android:textSize="@dimen/normalTextSize" />-->
 
-            </RadioGroup>
+            <!--</RadioGroup>-->
 
             <TextView
                 android:id="@+id/nameHint"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/genderGroupAtBasicInfo"
                 android:layout_marginBottom="@dimen/smallMargin"
                 android:text="Full Name:"
                 android:textColor="@color/redColor"
@@ -94,7 +93,7 @@
                 android:layout_marginBottom="@dimen/smallMargin"
                 android:text="Blood Group:"
                 android:textColor="@color/redColor"
-                android:textSize="15sp" />
+                android:textSize="@dimen/extraSmallSizeText" />
 
             <TextView
                 android:id="@+id/asBloodSpinnerInBasicInfo"
@@ -130,7 +129,7 @@
                 android:layout_below="@+id/asBloodSpinnerInBasicInfo"
                 android:layout_marginBottom="@dimen/smallMargin"
                 android:layout_marginTop="@dimen/padding"
-                android:text="Location:"
+                android:text="Locality:"
                 android:textColor="@color/redColor"
                 android:textSize="15sp" />
 

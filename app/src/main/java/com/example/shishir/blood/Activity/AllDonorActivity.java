@@ -50,6 +50,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -167,6 +169,13 @@ public class AllDonorActivity extends AppCompatActivity implements SearchView.On
                                 donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Blood"), singleDonor.getString("Location"),
                                         singleDonor.getString("Contact"), "", singleDonor.getString("LastDonate")));
                             }
+
+                            Collections.sort(donorArrayList, new Comparator<Donor>() {
+                                @Override
+                                public int compare(Donor obj1, Donor obj2) {
+                                    return obj1.getDonorName().compareTo(obj2.getDonorName());
+                                }
+                            });
                             allDonorAdapter = new AllDonorAdapter(AllDonorActivity.this, donorArrayList);
                             donorListView.setAdapter(allDonorAdapter);
                             pDialog.hide();
@@ -315,6 +324,14 @@ public class AllDonorActivity extends AppCompatActivity implements SearchView.On
                                 donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Blood"), singleDonor.getString("Location"),
                                         singleDonor.getString("Contact"), "", singleDonor.getString("LastDonate")));
                             }
+
+                            // For sorting arrayList....................................................
+                            Collections.sort(donorArrayList, new Comparator<Donor>() {
+                                @Override
+                                public int compare(Donor obj1, Donor obj2) {
+                                    return obj1.getDonorName().compareTo(obj2.getDonorName());
+                                }
+                            });
                             allDonorAdapter = new AllDonorAdapter(AllDonorActivity.this, donorArrayList);
                             donorListView.setAdapter(allDonorAdapter);
                             pd.hide();

@@ -33,6 +33,7 @@ import com.example.shishir.blood.Adapter.AdminAdapter;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
 import com.example.shishir.blood.ExtraClass.MySingleton;
+import com.example.shishir.blood.Network;
 import com.example.shishir.blood.R;
 
 import org.json.JSONArray;
@@ -127,15 +128,21 @@ public class Admin extends Fragment {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.plusIconAtOverFlowMenu) {
-            actionBar.setTitle("");
-            getActivity().getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.parentLayoutForNavigationMenu, new AddAdminFragment())
-                    .addToBackStack("aa")
-                    .commit();
+            if (Network.isNetAvailable(getActivity())) {
+                actionBar.setTitle("");
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.parentLayoutForNavigationMenu, new AddAdminFragment())
+                        .addToBackStack("aa")
+                        .commit();
+            } else
+                Network.showInternetAlertDialog(getActivity());
         }
-        if(id==R.id.refreshAdminList){
-            adminArrayList.clear();
-            getAdminList();
+        if (id == R.id.refreshAdminList) {
+            if (Network.isNetAvailable(getActivity())) {
+                adminArrayList.clear();
+                getAdminList();
+            } else
+                Network.showInternetAlertDialog(getActivity());
         }
         return super.onOptionsItemSelected(item);
     }
@@ -232,7 +239,7 @@ public class Admin extends Fragment {
         StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_REMOVE_FROM_BLOOD_PLUS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getActivity(),"Removed Successfully", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Removed Successfully", Toast.LENGTH_SHORT).show();
                 adminArrayList.remove(position);
                 adminAdapter.notifyDataSetChanged();
                 actionBar.setTitle("Admin (" + adminArrayList.size() + ") ");

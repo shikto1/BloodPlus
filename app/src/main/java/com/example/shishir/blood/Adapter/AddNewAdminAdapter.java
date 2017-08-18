@@ -48,12 +48,12 @@ import java.util.Map;
 public class AddNewAdminAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Donor> donorList;
-    int selected = 0;
+    private static int selected = 0;
 
     public AddNewAdminAdapter(Context context, ArrayList<Donor> donorList) {
         this.context = context;
         this.donorList = donorList;
-        ((AppCompatActivity)context).getSupportActionBar().setTitle("Selected ("+selected+")");
+        ((AppCompatActivity)context).getSupportActionBar().setTitle("Add New Admin");
     }
 
     @Override
@@ -101,11 +101,11 @@ public class AddNewAdminAdapter extends BaseAdapter {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     makeAdmin(donorList.get(position).getContactNumber());
-                    ((AppCompatActivity)context).getSupportActionBar().setTitle("Selected ("+(selected+1)+")");
+                   // ((AppCompatActivity)context).getSupportActionBar().setTitle("Selected ("+(selected+1)+")");
 
                 } else {
                     makeNonAdmin(donorList.get(position).getContactNumber());
-                    ((AppCompatActivity)context).getSupportActionBar().setTitle("Selected ("+(selected-1)+")");
+                   // ((AppCompatActivity)context).getSupportActionBar().setTitle("Selected ("+(selected-1)+")");
                 }
             }
         });

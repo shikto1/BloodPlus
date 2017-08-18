@@ -73,23 +73,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         intentStr=getIntent().getStringExtra("rr");
         findViewById();
 
-        genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                if (checkedId == R.id.maleRadioBtn)
-                    gender = "Male";
-                if (checkedId == R.id.femaleRadioBtn)
-                    gender = "Female";
-            }
-        });
-
     }
 
     private void findViewById() {
         fullNameEt = (EditText) findViewById(R.id.fullNameEtAtBasicInfo);
         contactNumber = (EditText) findViewById(R.id.contactNumberEt);
-
-        genderGroup = (RadioGroup) findViewById(R.id.genderGroupAtBasicInfo);
 
         birthDate = (TextView) findViewById(R.id.dateOfBirthAtBasicInfo);
         lastDonationDate = (TextView) findViewById(R.id.lastDonationDateAtBasicInfo);
@@ -124,9 +112,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     birthStr = birthDate.getText().toString();
                     contactStr = contactNumber.getText().toString();
 
-                    if (gender == null) {
-                        ToastMessage("Select your gender");
-                    } else if (nameStr.length() == 0) {
+                    if (nameStr.length() == 0) {
                         ToastMessage("Enter your name please");
 
                     } else if (bloodGroupStr == null) {
@@ -192,7 +178,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
-                map.put("gender", gender);
+                map.put("gender", "");
                 map.put("name", nameStr);
                 map.put("blood", bloodGroupStr);
                 map.put("location", locationStr);
@@ -222,8 +208,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.dateOfBirthAtBasicInfo)
+        if (v.getId() == R.id.dateOfBirthAtBasicInfo) {
+            inputMethodManager.hideSoftInputFromWindow(location.getWindowToken(), 0);
             dateFlag = 1;
+        }
         else
             dateFlag = 2;
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.DAY_OF_MONTH);
@@ -238,12 +226,12 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                if (fTime) {
-                    fTime = false;
-                } else {
+//                if (fTime) {
+//                    fTime = false;
+//                } else {
                     bloodGroupStr = parent.getItemAtPosition(position).toString();
                     asBloodSpinner.setText(bloodGroupStr);
-                }
+                //}
 
             }
 
