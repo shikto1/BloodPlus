@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shishir.blood.Activity.AllDonorActivity;
 import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
@@ -90,6 +91,7 @@ public class AllDonorAdapter extends BaseAdapter implements Filterable {
 
     }
     public void notifyDataSetChanged(){
+        ((AllDonorActivity)context).getSupportActionBar().setTitle("Total ("+donorList.size()+")");
         super.notifyDataSetChanged();
     }
 

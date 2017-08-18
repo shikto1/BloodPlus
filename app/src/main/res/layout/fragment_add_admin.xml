@@ -5,24 +5,10 @@
     android:orientation="vertical"
     tools:context="com.example.shishir.blood.Fragment.AddAdminFragment">
 
-    <!--<android.support.v7.widget.SearchView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:background="@color/redColor"></android.support.v7.widget.SearchView>-->
-
     <ListView
         android:id="@+id/addAdminListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:choiceMode="multipleChoice"></ListView>
 
-    <!--<Button-->
-    <!--android:id="@+id/addAdminBtn"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="55dp"-->
-    <!--android:layout_alignParentBottom="true"-->
-    <!--android:background="@drawable/back_button_two"-->
-    <!--android:text="Add"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="@dimen/normalTextSize" />-->
 </LinearLayout>

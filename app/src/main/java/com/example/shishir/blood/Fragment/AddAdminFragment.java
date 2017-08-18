@@ -1,6 +1,7 @@
 package com.example.shishir.blood.Fragment;
 
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,17 +17,34 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.shishir.blood.Activity.AllDonorActivity;
+import com.example.shishir.blood.Adapter.AddNewAdminAdapter;
+import com.example.shishir.blood.Adapter.AllDonorAdapter;
+import com.example.shishir.blood.Donor;
+import com.example.shishir.blood.ExtraClass.Constants;
+import com.example.shishir.blood.ExtraClass.MySingleton;
 import com.example.shishir.blood.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class AddAdminFragment extends Fragment {
 
-    private ListView adminListView;
-
-    String[] donorName = {"Shikto", "Shishir", "Fahmida", "Nipa", "Afrin", "Silvia", "Ashraful"};
-
+    private ListView donorListView;
+    ProgressDialog pDialog;
+    AddNewAdminAdapter addNewAdminAdapter;
+    ArrayList<Donor> donorArrayList;
+    int arrayLength;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,11 +62,53 @@ public class AddAdminFragment extends Fragment {
     }
 
     private void findViewById(View view) {
-        adminListView = (ListView) view.findViewById(R.id.addAdminListView);
-
-        ArrayAdapter adapter = new ArrayAdapter(getActivity(), R.layout.single_for_ad_admin_list, donorName);
-        adminListView.setAdapter(adapter);
+        donorListView = (ListView) view.findViewById(R.id.addAdminListView);
+        donorArrayList=new ArrayList<Donor>();
+        getAllDonor();
     }
+
+    private void getAllDonor() {
+        pDialog = new ProgressDialog(getActivity());
+        pDialog.setMessage("Fetching data...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                Constants.URL_GET_ALL_DONOR, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray donorArray = response.getJSONArray("Donor");
+                            arrayLength = donorArray.length();
+                            for (int i = 0; i < arrayLength; i++) {
+                                JSONObject singleDonor = donorArray.getJSONObject(i);
+                                 donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Blood"), singleDonor.getString("Location"),
+                                        singleDonor.getString("Contact"), "", singleDonor.getString("LastDonate")));
+                            }
+                            addNewAdminAdapter = new AddNewAdminAdapter(getActivity(), donorArrayList);
+                            donorListView.setAdapter(addNewAdminAdapter);
+                            pDialog.hide();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        pDialog.hide();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                pDialog.hide();
+            }
+        });
+
+// Adding request to request queue
+        MySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq);
+    }
+
 
 //    @Override
 //    public void onClick(View v) {

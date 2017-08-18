@@ -60,6 +60,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     ProgressDialog progressDialog;
     String nameStr, contactStr, birthStr, donationDateStr, regSTR;
     boolean regSuccess = false;
+    String intentStr="";
 
 
     @Override
@@ -68,6 +69,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         setContentView(R.layout.activity_register);
 
         fTime = true;
+
+        intentStr=getIntent().getStringExtra("rr");
         findViewById();
 
         genderGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -267,7 +270,14 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         if (regSuccess) {
-                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                            if(intentStr.equals("reg")){
+                                startActivity(new Intent(RegisterActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+
+                            }
+                            if(intentStr.equals("fab")){
+                                finish();
+                                startActivity(getIntent());
+                            }
                         }
 
                     }

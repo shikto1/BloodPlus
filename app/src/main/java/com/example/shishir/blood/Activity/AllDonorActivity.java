@@ -119,7 +119,7 @@ public class AllDonorActivity extends AppCompatActivity implements SearchView.On
                     }
                     case R.id.removeFromBlood: {
                         new AlertDialog.Builder(AllDonorActivity.this).setTitle("Remove from BLOOD+ ?")
-                                .setMessage("Once you remove, the user will permanently delete from database and it can not be undone.")
+                                .setMessage("Once you remove, the user will be permanently deleted from database and it can not be undone.")
                                 .setCancelable(false)
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override

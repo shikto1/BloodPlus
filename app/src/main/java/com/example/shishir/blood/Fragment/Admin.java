@@ -163,7 +163,7 @@ public class Admin extends Fragment {
                     }
                     case R.id.removeFromBloodPlus: {
                         new AlertDialog.Builder(getActivity()).setTitle("Remove from BLOOD+ ?")
-                                .setMessage("Once you remove, the user will permanently delete from database and it can not be undone.")
+                                .setMessage("Once you remove, the user will be permanently deleted from database and it can not be undone.")
                                 .setCancelable(false)
                                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                                     @Override

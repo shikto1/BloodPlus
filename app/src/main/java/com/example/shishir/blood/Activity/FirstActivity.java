@@ -51,7 +51,10 @@ public class FirstActivity extends Activity implements View.OnClickListener {
                 break;
             }
             case R.id.registerButton: {
-                startActivity(new Intent(this, RegisterActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                Intent intent = new Intent(this, RegisterActivity.class);
+                intent.putExtra("rr", "reg");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
 
             }
