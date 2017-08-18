@@ -13,6 +13,7 @@ public class Constants {
 
     // Admin URL...............................................................................................................
     public static final String URL_GET_ADMIN="http://spacedesign.com.bd/bloodplus/getAllAdmin.php";
+    public static final String URL_GET_ALL_NON_ADMIN="http://spacedesign.com.bd/bloodplus/getAllNonAdmin.php";
     public static final String URL_MAKE_AS_ADMIN="http://spacedesign.com.bd/bloodplus/makeAsAdmin.php";
     public static final String URL_REMOVE_AS_ADMIN="http://spacedesign.com.bd/bloodplus/removeAsAdmin.php";
 

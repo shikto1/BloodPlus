@@ -42,6 +42,7 @@ import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
 import com.example.shishir.blood.ExtraClass.MySingleton;
 import com.example.shishir.blood.Fragment.UpdateDonationDateFragment;
+import com.example.shishir.blood.Network;
 import com.example.shishir.blood.R;
 
 import org.json.JSONArray;
@@ -194,7 +195,6 @@ public class AllDonorActivity extends AppCompatActivity implements SearchView.On
     }
 
 
-
     public void removeFromBloodPlus(final int position) {
         pDialog.setMessage("Removing from Blood+...");
         pDialog.setCancelable(false);
@@ -278,19 +278,24 @@ public class AllDonorActivity extends AppCompatActivity implements SearchView.On
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id=item.getItemId();
+        int id = item.getItemId();
         if (id == android.R.id.home) {
             this.finish();
             return true;
         }
-        if(id==R.id.refreshDonorList){
-            refreshDonorInfo();
+        if (id == R.id.refreshDonorList) {
+            if (Network.isNetAvailable(this)) {
+                refreshDonorInfo();
+            } else {
+                Network.showInternetAlertDialog(this);
+            }
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void refreshDonorInfo() {
         donorArrayList.clear();
-        final ProgressDialog pd=new ProgressDialog(this);
+        final ProgressDialog pd = new ProgressDialog(this);
         pd.setMessage("Refreshing...");
         pd.setCancelable(false);
         pd.show();

@@ -125,10 +125,18 @@ public class Admin extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.parentLayoutForNavigationMenu, new AddAdminFragment())
-                .addToBackStack("aa")
-                .commit();
+        int id = item.getItemId();
+        if (id == R.id.plusIconAtOverFlowMenu) {
+            actionBar.setTitle("");
+            getActivity().getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.parentLayoutForNavigationMenu, new AddAdminFragment())
+                    .addToBackStack("aa")
+                    .commit();
+        }
+        if(id==R.id.refreshAdminList){
+            adminArrayList.clear();
+            getAdminList();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -192,7 +200,7 @@ public class Admin extends Fragment {
         StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_REMOVE_AS_ADMIN, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Removed Successfully", Toast.LENGTH_SHORT).show();
                 adminArrayList.remove(position);
                 adminAdapter.notifyDataSetChanged();
                 actionBar.setTitle("Admin (" + adminArrayList.size() + ") ");
@@ -224,7 +232,7 @@ public class Admin extends Fragment {
         StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_REMOVE_FROM_BLOOD_PLUS, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(),"Removed Successfully", Toast.LENGTH_SHORT).show();
                 adminArrayList.remove(position);
                 adminAdapter.notifyDataSetChanged();
                 actionBar.setTitle("Admin (" + adminArrayList.size() + ") ");

@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<item
+    <item
+        android:id="@+id/refreshAdminList"
+        android:title="Refresh AdminList"
+        android:icon="@drawable/refresh_icon"
+        app:showAsAction="always"/>
+
+    <item
     android:id="@+id/plusIconAtOverFlowMenu"
     android:title="Add New Admin"
     android:icon="@drawable/plus_icon"

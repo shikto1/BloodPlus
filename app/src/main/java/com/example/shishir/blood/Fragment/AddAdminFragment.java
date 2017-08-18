@@ -63,18 +63,18 @@ public class AddAdminFragment extends Fragment {
 
     private void findViewById(View view) {
         donorListView = (ListView) view.findViewById(R.id.addAdminListView);
-        donorArrayList=new ArrayList<Donor>();
-        getAllDonor();
+        donorArrayList = new ArrayList<Donor>();
+        getAllNonAdmin();
     }
 
-    private void getAllDonor() {
+    private void getAllNonAdmin() {
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Fetching data...");
         pDialog.setCancelable(false);
         pDialog.show();
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                Constants.URL_GET_ALL_DONOR, null,
+                Constants.URL_GET_ALL_NON_ADMIN, null,
                 new Response.Listener<JSONObject>() {
 
                     @Override
@@ -84,7 +84,7 @@ public class AddAdminFragment extends Fragment {
                             arrayLength = donorArray.length();
                             for (int i = 0; i < arrayLength; i++) {
                                 JSONObject singleDonor = donorArray.getJSONObject(i);
-                                 donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Blood"), singleDonor.getString("Location"),
+                                donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Blood"), singleDonor.getString("Location"),
                                         singleDonor.getString("Contact"), "", singleDonor.getString("LastDonate")));
                             }
                             addNewAdminAdapter = new AddNewAdminAdapter(getActivity(), donorArrayList);
@@ -131,7 +131,7 @@ public class AddAdminFragment extends Fragment {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Toast.makeText(getActivity(), "Check Icon", Toast.LENGTH_SHORT).show();
+        getActivity().getSupportFragmentManager().popBackStack();
         return super.onOptionsItemSelected(item);
     }
 }

@@ -25,7 +25,10 @@ public class DateCalculator {
             int day = period.getDays();
             int month = period.getMonths();
             int year = period.getYears();
-            return month + " months " + day + " days ago";
+            if (year > 0) {
+                return year + " year " + month + " months " + day + " days ago";
+            } else
+                return month + " months " + day + " days ago";
         }
     }
 }
