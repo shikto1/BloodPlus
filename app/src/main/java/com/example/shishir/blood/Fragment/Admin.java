@@ -23,10 +23,12 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.example.shishir.blood.Adapter.AdminAdapter;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
@@ -38,6 +40,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class Admin extends Fragment {
@@ -147,11 +151,9 @@ public class Admin extends Fragment {
                                         dialog.dismiss();
                                     }
                                 }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                             @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                adminArrayList.remove(pos);
-                                adminAdapter.notifyDataSetChanged();
-                                Toast.makeText(getActivity(), "Removed", Toast.LENGTH_SHORT).show();
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                removeAsAdmin(pos);
 
                             }
                         }).show();
@@ -169,10 +171,7 @@ public class Admin extends Fragment {
                                 }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                adminArrayList.remove(pos);
-                                adminAdapter.notifyDataSetChanged();
-                                Toast.makeText(getActivity(), "Removed", Toast.LENGTH_SHORT).show();
-
+                                removeFromBloodPlus(pos);
                             }
                         }).show();
 
@@ -182,6 +181,70 @@ public class Admin extends Fragment {
             }
         };
         super.onActivityCreated(savedInstanceState);
+    }
+
+    public void removeAsAdmin(final int position) {
+        progressDialog.setMessage("Removing as Admin...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_REMOVE_AS_ADMIN, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
+                adminArrayList.remove(position);
+                adminAdapter.notifyDataSetChanged();
+                actionBar.setTitle("Admin (" + adminArrayList.size() + ") ");
+                progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("name", adminArrayList.get(position).getDonorName());
+                map.put("blood", adminArrayList.get(position).getBloodGroup());
+                map.put("contact", adminArrayList.get(position).getContactNumber());
+                return map;
+            }
+        };
+        MySingleton.getInstance(getActivity()).addToRequestQueue(request);
+
+    }
+
+    public void removeFromBloodPlus(final int position) {
+        progressDialog.setMessage("Removing from Blood+...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_REMOVE_FROM_BLOOD_PLUS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getActivity(), response, Toast.LENGTH_SHORT).show();
+                adminArrayList.remove(position);
+                adminAdapter.notifyDataSetChanged();
+                actionBar.setTitle("Admin (" + adminArrayList.size() + ") ");
+                progressDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("name", adminArrayList.get(position).getDonorName());
+                map.put("blood", adminArrayList.get(position).getBloodGroup());
+                map.put("contact", adminArrayList.get(position).getContactNumber());
+                return map;
+            }
+        };
+        MySingleton.getInstance(getActivity()).addToRequestQueue(request);
+
     }
 
     @Override

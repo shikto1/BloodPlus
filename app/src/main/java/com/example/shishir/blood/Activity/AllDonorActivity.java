@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -22,11 +23,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.shishir.blood.Adapter.AllDonorAdapter;
 import com.example.shishir.blood.Adapter.DonorAdapter;
@@ -42,6 +45,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AllDonorActivity extends AppCompatActivity {
 
@@ -54,6 +59,7 @@ public class AllDonorActivity extends AppCompatActivity {
     private AllDonorAdapter allDonorAdapter;
     BroadcastReceiver popUp_Menu_Click_Receiver;
     boolean popUp_Menu_Receiver_Register = false;
+    ActionBar actionBar;
     //  Toolbar toolbar;
     // Spinner bloodSpinner;
 
@@ -65,6 +71,7 @@ public class AllDonorActivity extends AppCompatActivity {
         localDatabase = new LocalDatabase(this);
         pDialog = new ProgressDialog(this);
         donorArrayList = new ArrayList<Donor>();
+        actionBar = getSupportActionBar();
         setUpReceiver();
         useVolley();
 
@@ -94,22 +101,6 @@ public class AllDonorActivity extends AppCompatActivity {
                 final int pos = bundle.getInt("position");
                 switch (itemID) {
                     case R.id.updateDonationDate: {
-                        new AlertDialog.Builder(AllDonorActivity.this).setTitle("Remove as Admin ?").setMessage("Sure to Remove ?")
-                                .setCancelable(false)
-                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        dialog.dismiss();
-                                    }
-                                }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                //adminArrayList.remove(pos);
-                                //adminAdapter.notifyDataSetChanged();
-                                ToastMessage("Update donation Date");
-                            }
-                        }).show();
-
                         break;
                     }
                     case R.id.removeFromBlood: {
@@ -123,16 +114,13 @@ public class AllDonorActivity extends AppCompatActivity {
                                 }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                //adminArrayList.remove(pos);
-                                //adminAdapter.notifyDataSetChanged();
-                                ToastMessage("Removed");
-
+                                removeFromBloodPlus(pos);
                             }
                         }).show();
 
                         break;
                     }
-                    case R.id.detailsAtALlDonor:{
+                    case R.id.detailsAtALlDonor: {
                         ToastMessage("Here I will show details");
                         break;
                     }
@@ -157,7 +145,7 @@ public class AllDonorActivity extends AppCompatActivity {
                         try {
                             JSONArray donorArray = response.getJSONArray("Donor");
                             arrayLength = donorArray.length();
-                            getSupportActionBar().setTitle("Total (" + arrayLength + ")");
+                            actionBar.setTitle("Total (" + arrayLength + ")");
                             for (int i = 0; i < arrayLength; i++) {
                                 JSONObject singleDonor = donorArray.getJSONObject(i);
                                 donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Blood"), singleDonor.getString("Location"),
@@ -198,6 +186,39 @@ public class AllDonorActivity extends AppCompatActivity {
         } else
             return super.onOptionsItemSelected(item);
     }
+
+    public void removeFromBloodPlus(final int position) {
+        pDialog.setMessage("Removing from Blood+...");
+        pDialog.setCancelable(false);
+        pDialog.show();
+        StringRequest request = new StringRequest(Request.Method.POST, Constants.URL_REMOVE_FROM_BLOOD_PLUS, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(AllDonorActivity.this, response, Toast.LENGTH_SHORT).show();
+                donorArrayList.remove(position);
+                allDonorAdapter.notifyDataSetChanged();
+                actionBar.setTitle("Total (" + donorArrayList.size() + ") ");
+                pDialog.dismiss();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                pDialog.dismiss();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("name", donorArrayList.get(position).getDonorName());
+                map.put("blood", donorArrayList.get(position).getBloodGroup());
+                map.put("contact", donorArrayList.get(position).getContactNumber());
+                return map;
+            }
+        };
+        MySingleton.getInstance(this).addToRequestQueue(request);
+
+    }
+
 
     @Override
     protected void onStart() {
