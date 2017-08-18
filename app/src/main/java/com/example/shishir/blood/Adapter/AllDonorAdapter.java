@@ -14,6 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,12 +32,14 @@ import java.util.ArrayList;
  * Created by Shishir on 7/15/2017.
  */
 
-public class AllDonorAdapter extends BaseAdapter {
+public class AllDonorAdapter extends BaseAdapter implements Filterable {
     private Context context;
     private ArrayList<Donor> donorList;
+    private ArrayList<Donor> orig;
     PopupMenu popupMenu;
 
     public AllDonorAdapter(Context context, ArrayList<Donor> donorList) {
+        super();
         this.context = context;
         this.donorList = donorList;
     }
@@ -53,6 +57,40 @@ public class AllDonorAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                final FilterResults oReturn = new FilterResults();
+                final ArrayList<Donor> results = new ArrayList<Donor>();
+                if (orig == null)
+                    orig = donorList;
+                if (constraint != null) {
+                    if (orig != null && orig.size() > 0) {
+                        for (final Donor g : orig) {
+                            if (g.getDonorName().toLowerCase()
+                                    .contains(constraint.toString()))
+                                results.add(g);
+                        }
+                    }
+                    oReturn.values = results;
+                }
+                return oReturn;
+            }
+
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                donorList = (ArrayList<Donor>) results.values;
+                notifyDataSetChanged();
+            }
+        };
+
+    }
+    public void notifyDataSetChanged(){
+        super.notifyDataSetChanged();
     }
 
 

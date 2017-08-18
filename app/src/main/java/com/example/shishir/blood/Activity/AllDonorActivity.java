@@ -10,9 +10,12 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.ContextMenu;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,7 +52,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AllDonorActivity extends AppCompatActivity {
+public class AllDonorActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     ListView donorListView;
     ProgressDialog pDialog;
@@ -61,6 +64,7 @@ public class AllDonorActivity extends AppCompatActivity {
     BroadcastReceiver popUp_Menu_Click_Receiver;
     boolean popUp_Menu_Receiver_Register = false;
     ActionBar actionBar;
+    private SearchView searchView;
     //  Toolbar toolbar;
     // Spinner bloodSpinner;
 
@@ -69,6 +73,8 @@ public class AllDonorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_all_donor);
         donorListView = (ListView) findViewById(R.id.donorListView);
+        searchView = (SearchView) findViewById(R.id.donorSearchView);
+        donorListView.setTextFilterEnabled(true);
         localDatabase = new LocalDatabase(this);
         pDialog = new ProgressDialog(this);
         donorArrayList = new ArrayList<Donor>();
@@ -187,14 +193,7 @@ public class AllDonorActivity extends AppCompatActivity {
         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            this.finish();
-            return true;
-        } else
-            return super.onOptionsItemSelected(item);
-    }
+
 
     public void removeFromBloodPlus(final int position) {
         pDialog.setMessage("Removing from Blood+...");
@@ -231,12 +230,14 @@ public class AllDonorActivity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
+        setUpSearchView();
         if (!popUp_Menu_Receiver_Register) {
             registerReceiver(popUp_Menu_Click_Receiver, new IntentFilter(Constants.POPUP_MENU_CLICKED_ACTION));
             popUp_Menu_Receiver_Register = true;
         }
         super.onStart();
     }
+
 
     @Override
     protected void onStop() {
@@ -246,4 +247,90 @@ public class AllDonorActivity extends AppCompatActivity {
         }
         super.onStop();
     }
+
+    private void setUpSearchView() {
+        searchView.setIconifiedByDefault(false);
+        searchView.setOnQueryTextListener(this);
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setQueryHint("Search Here");
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        if (TextUtils.isEmpty(newText)) {
+            donorListView.clearTextFilter();
+        } else {
+            donorListView.setFilterText(newText.toLowerCase());
+        }
+        return true;
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_for_refresh, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id=item.getItemId();
+        if (id == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        if(id==R.id.refreshDonorList){
+            refreshDonorInfo();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+    private void refreshDonorInfo() {
+        donorArrayList.clear();
+        final ProgressDialog pd=new ProgressDialog(this);
+        pd.setMessage("Refreshing...");
+        pd.setCancelable(false);
+        pd.show();
+
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                Constants.URL_GET_ALL_DONOR, null,
+                new Response.Listener<JSONObject>() {
+
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONArray donorArray = response.getJSONArray("Donor");
+                            arrayLength = donorArray.length();
+                            actionBar.setTitle("Total (" + arrayLength + ")");
+                            for (int i = 0; i < arrayLength; i++) {
+                                JSONObject singleDonor = donorArray.getJSONObject(i);
+                                donorArrayList.add(new Donor(singleDonor.getString("Name"), singleDonor.getString("Blood"), singleDonor.getString("Location"),
+                                        singleDonor.getString("Contact"), "", singleDonor.getString("LastDonate")));
+                            }
+                            allDonorAdapter = new AllDonorAdapter(AllDonorActivity.this, donorArrayList);
+                            donorListView.setAdapter(allDonorAdapter);
+                            pd.hide();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                        pDialog.hide();
+                    }
+                }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                pd.hide();
+            }
+        });
+
+// Adding request to request queue
+        MySingleton.getInstance(this).addToRequestQueue(jsonObjReq);
+    }
+
+
 }
