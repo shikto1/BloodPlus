@@ -38,6 +38,7 @@ import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
 import com.example.shishir.blood.ExtraClass.MySingleton;
+import com.example.shishir.blood.Fragment.UpdateDonationDateFragment;
 import com.example.shishir.blood.R;
 
 import org.json.JSONArray;
@@ -101,6 +102,13 @@ public class AllDonorActivity extends AppCompatActivity {
                 final int pos = bundle.getInt("position");
                 switch (itemID) {
                     case R.id.updateDonationDate: {
+                        Bundle b = new Bundle();
+                        b.putString("name", donorArrayList.get(pos).getDonorName());
+                        b.putString("blood", donorArrayList.get(pos).getBloodGroup());
+                        b.putString("contact", donorArrayList.get(pos).getContactNumber());
+                        UpdateDonationDateFragment fragment = new UpdateDonationDateFragment();
+                        fragment.setArguments(b);
+                        fragment.show(getSupportFragmentManager(), "SS");
                         break;
                     }
                     case R.id.removeFromBlood: {

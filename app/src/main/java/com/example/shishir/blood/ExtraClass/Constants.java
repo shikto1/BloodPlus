@@ -9,6 +9,7 @@ public class Constants {
     public static final String URL_GET_ALL_DONOR= "http://spacedesign.com.bd/getAllDonor.php";
     public static final String URL_LOGIN= "http://spacedesign.com.bd/loginDonor.php";
     public static final String URL_GET_SEARCHED_DONOR= "http://spacedesign.com.bd/getSearchedDonor.php";
+    public static final String URL_UPDATE_DONATION_DATE="http://spacedesign.com.bd/updateDonationDate.php";
 
     // Admin URL...............................................................................................................
     public static final String URL_GET_ADMIN="http://spacedesign.com.bd/getAllAdmin.php";
