@@ -1,7 +1,11 @@
 package com.example.shishir.blood.Activity;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -48,6 +52,8 @@ public class AllDonorActivity extends AppCompatActivity {
     //   TextView totalDonorTV;
     LocalDatabase localDatabase;
     private AllDonorAdapter allDonorAdapter;
+    BroadcastReceiver popUp_Menu_Click_Receiver;
+    boolean popUp_Menu_Receiver_Register = false;
     //  Toolbar toolbar;
     // Spinner bloodSpinner;
 
@@ -59,6 +65,7 @@ public class AllDonorActivity extends AppCompatActivity {
         localDatabase = new LocalDatabase(this);
         pDialog = new ProgressDialog(this);
         donorArrayList = new ArrayList<Donor>();
+        setUpReceiver();
         useVolley();
 
         //  getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -76,6 +83,63 @@ public class AllDonorActivity extends AppCompatActivity {
 //        totalDonorTV = (TextView) findViewById(R.id.totalDonor);
 
         //registerForContextMenu(donorListView);
+    }
+
+    private void setUpReceiver() {
+        popUp_Menu_Click_Receiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                Bundle bundle = intent.getBundleExtra("event");
+                final int itemID = bundle.getInt("itemID");
+                final int pos = bundle.getInt("position");
+                switch (itemID) {
+                    case R.id.updateDonationDate: {
+                        new AlertDialog.Builder(AllDonorActivity.this).setTitle("Remove as Admin ?").setMessage("Sure to Remove ?")
+                                .setCancelable(false)
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //adminArrayList.remove(pos);
+                                //adminAdapter.notifyDataSetChanged();
+                                ToastMessage("Update donation Date");
+                            }
+                        }).show();
+
+                        break;
+                    }
+                    case R.id.removeFromBlood: {
+                        new AlertDialog.Builder(AllDonorActivity.this).setTitle("Remove from BLOOD+").setMessage("Sure to Remove ?")
+                                .setCancelable(false)
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                }).setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                //adminArrayList.remove(pos);
+                                //adminAdapter.notifyDataSetChanged();
+                                ToastMessage("Removed");
+
+                            }
+                        }).show();
+
+                        break;
+                    }
+                    case R.id.detailsAtALlDonor:{
+                        ToastMessage("Here I will show details");
+                        break;
+                    }
+                }
+            }
+        };
+
     }
 
     private void useVolley() {
@@ -133,5 +197,23 @@ public class AllDonorActivity extends AppCompatActivity {
             return true;
         } else
             return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onStart() {
+        if (!popUp_Menu_Receiver_Register) {
+            registerReceiver(popUp_Menu_Click_Receiver, new IntentFilter(Constants.POPUP_MENU_CLICKED_ACTION));
+            popUp_Menu_Receiver_Register = true;
+        }
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        if (popUp_Menu_Receiver_Register) {
+            unregisterReceiver(popUp_Menu_Click_Receiver);
+            popUp_Menu_Receiver_Register = false;
+        }
+        super.onStop();
     }
 }

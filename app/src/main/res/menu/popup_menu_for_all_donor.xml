@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Update donation date"/>
-    <item android:title="Remove from Blood+" />
-    <item android:title="Details" />
+    <item
+        android:id="@+id/updateDonationDate"
+        android:title="Update donation date" />
+    <item
+        android:id="@+id/removeFromBlood"
+        android:title="Remove from Blood+" />
+    <item
+        android:id="@+id/detailsAtALlDonor"
+        android:title="Details" />
 </menu>
