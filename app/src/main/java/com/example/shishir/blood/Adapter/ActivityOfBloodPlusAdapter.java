@@ -24,10 +24,6 @@ import com.example.shishir.blood.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Shishir on 7/15/2017.
- */
-
 public class ActivityOfBloodPlusAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<BloodPlusActivity> activityList;
