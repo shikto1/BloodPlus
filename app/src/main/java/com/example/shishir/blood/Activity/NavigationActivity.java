@@ -54,8 +54,8 @@ public class NavigationActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent(NavigationActivity.this,RegisterActivity.class);
-                intent.putExtra("rr","fab");
+                Intent intent = new Intent(NavigationActivity.this, RegisterActivity.class);
+                intent.putExtra("rr", "fab");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
                 //                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
@@ -178,7 +178,8 @@ public class NavigationActivity extends AppCompatActivity
 
             }
             case R.id.activityOfBloodPlus: {
-                ToastMessage("Activity of BloodPlus");
+                intent.putExtra("frg", 4);
+                startActivity(intent);
                 break;
 
             }

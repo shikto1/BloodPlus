@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.example.shishir.blood.Fragment.AboutBloodPlus;
+import com.example.shishir.blood.Fragment.ActivityOfBloodPlus;
 import com.example.shishir.blood.Fragment.Admin;
 import com.example.shishir.blood.R;
 
@@ -37,6 +38,11 @@ public class NavigationMenuActivity extends AppCompatActivity {
             case 7: {
                 fragmentManager.beginTransaction().add(R.id.parentLayoutForNavigationMenu, new AboutBloodPlus()).commit();
                 getSupportActionBar().setTitle("About BLOOD+");
+                break;
+            }
+            case 4:{
+                fragmentManager.beginTransaction().add(R.id.parentLayoutForNavigationMenu,new ActivityOfBloodPlus()).commit();
+                getSupportActionBar().setTitle("BLOOD+ Activities");
                 break;
             }
         }

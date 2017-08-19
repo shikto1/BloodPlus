@@ -6,6 +6,9 @@ import org.joda.time.PeriodType;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -30,5 +33,18 @@ public class DateCalculator {
             } else
                 return month + " months " + day + " days ago";
         }
+    }
+
+    public static String formatDate(String date) {
+        DateFormat ff = new SimpleDateFormat("dd/MM/yyyy");  //MM =month number but MMM=month name.............
+        Date dd = null;
+        try {
+            dd = ff.parse(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        DateFormat fff = new SimpleDateFormat("MMM dd, yyyy");
+        String fDate = fff.format(dd);
+        return fDate;
     }
 }
