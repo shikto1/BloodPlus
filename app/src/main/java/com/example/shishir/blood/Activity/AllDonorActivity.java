@@ -170,12 +170,12 @@ public class AllDonorActivity extends AppCompatActivity implements SearchView.On
                                         singleDonor.getString("Contact"), "", singleDonor.getString("LastDonate")));
                             }
 
-                            Collections.sort(donorArrayList, new Comparator<Donor>() {
-                                @Override
-                                public int compare(Donor obj1, Donor obj2) {
-                                    return obj1.getDonorName().compareTo(obj2.getDonorName());
-                                }
-                            });
+//                            Collections.sort(donorArrayList, new Comparator<Donor>() {
+//                                @Override
+//                                public int compare(Donor obj1, Donor obj2) {
+//                                    return obj1.getDonorName().compareTo(obj2.getDonorName());
+//                                }
+//                            });
                             allDonorAdapter = new AllDonorAdapter(AllDonorActivity.this, donorArrayList);
                             donorListView.setAdapter(allDonorAdapter);
                             pDialog.hide();
