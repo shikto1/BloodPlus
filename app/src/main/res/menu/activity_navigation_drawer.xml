@@ -11,9 +11,9 @@
             android:icon="@drawable/admin_iconn"
             android:title="Admin" />
         <item
-            android:id="@+id/setting"
+            android:id="@+id/activityOfBloodPlus"
             android:icon="@drawable/setting_icon"
-            android:title="Setting" />
+            android:title="BLOOD+ Activity" />
         <item
             android:id="@+id/facebookPage"
             android:icon="@drawable/share_icon"
@@ -25,7 +25,7 @@
         <item
             android:id="@+id/about"
             android:icon="@drawable/info_icon"
-            android:title="About Blood+" />
+            android:title="About BLOOD+" />
 
     </group>
 

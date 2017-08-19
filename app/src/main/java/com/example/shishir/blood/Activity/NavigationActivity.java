@@ -177,8 +177,8 @@ public class NavigationActivity extends AppCompatActivity
                 }
 
             }
-            case R.id.setting: {
-                ToastMessage("Setting");
+            case R.id.activityOfBloodPlus: {
+                ToastMessage("Activity of BloodPlus");
                 break;
 
             }
