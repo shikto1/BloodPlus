@@ -20,6 +20,7 @@ public class Constants {
     public static final String URL_REMOVE_FROM_BLOOD_PLUS="http://spacedesign.com.bd/bloodplus/removeFromBloodPlus.php";
 
     public static final String URL_GET_INFO_FROM_ACTIVITY_TABLE="http://spacedesign.com.bd/bloodplus/getInfoFromActivityTable.php";
+    public static final String URL_INSERT_INFO_FROM_ACTIVITY_TABLE="http://spacedesign.com.bd/bloodplus/updateToActivityTable.php";
 
     public static final String POPUP_MENU_CLICKED_ACTION = "com.example.shishir.blood.cleckeddd";
 }

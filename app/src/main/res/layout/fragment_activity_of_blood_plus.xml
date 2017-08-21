@@ -6,8 +6,9 @@
     tools:context="com.example.shishir.blood.Fragment.ActivityOfBloodPlus">
     <RelativeLayout
         android:id="@+id/ll"
-        android:layout_margin="@dimen/extraSmallMargin"
+        android:layout_margin="@dimen/largeMargin"
         android:layout_width="match_parent"
+        android:background="@android:color/darker_gray"
         android:layout_height="100dp"></RelativeLayout>
 
     <ListView

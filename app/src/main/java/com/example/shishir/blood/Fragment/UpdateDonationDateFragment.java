@@ -4,6 +4,7 @@ package com.example.shishir.blood.Fragment;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
@@ -13,6 +14,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -27,6 +32,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.ExtraClass.Constants;
 import com.example.shishir.blood.ExtraClass.MySingleton;
+import com.example.shishir.blood.Network;
 import com.example.shishir.blood.R;
 
 import java.util.Calendar;
@@ -40,6 +46,7 @@ public class UpdateDonationDateFragment extends DialogFragment implements View.O
 
     Button cancelBtn, saveBtn;
     TextView donationDate;
+    AutoCompleteTextView hospitalName;
     Calendar calendar = Calendar.getInstance();
     ProgressDialog progressDialog;
     String nameStr, bloodStr, contactStr;
@@ -52,6 +59,7 @@ public class UpdateDonationDateFragment extends DialogFragment implements View.O
         cancelBtn = (Button) view.findViewById(R.id.cancelBtnToUpdateDD);
         saveBtn = (Button) view.findViewById(R.id.saveBtnToUpdateDD);
         donationDate = (TextView) view.findViewById(R.id.newDonationDate);
+        hospitalName = (AutoCompleteTextView) view.findViewById(R.id.autoTXTViewAtUpdatedD);
         progressDialog = new ProgressDialog(getActivity());
         donationDate.setOnClickListener(this);
 
@@ -71,11 +79,19 @@ public class UpdateDonationDateFragment extends DialogFragment implements View.O
             @Override
             public void onClick(View v) {
                 String donationDateStr = donationDate.getText().toString();
+                String hospitalStr = hospitalName.getText().toString();
                 if (donationDateStr.length() < 3) {
-                    Toast.makeText(getActivity(), "Enter Donation Date ", Toast.LENGTH_SHORT).show();
+                    ToastMessage("Enter donation date");
+                } else if (hospitalStr.length() == 0) {
+                    ToastMessage("Enter hospital name");
                 } else {
-                    updateDonationDate(donationDateStr);
-                    getDialog().hide();
+                    if (Network.isNetAvailable(getActivity())) {
+                        updateDDateAtDonorTable(donationDateStr);
+                        insertInfoAtActivitiesTable(donationDateStr,hospitalStr);
+                        getDialog().hide();
+                    } else {
+                        Network.showInternetAlertDialog(getActivity());
+                    }
                 }
 
             }
@@ -83,10 +99,36 @@ public class UpdateDonationDateFragment extends DialogFragment implements View.O
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setCancelable(false).setView(view);
         Dialog dialog = builder.create();
-        dialog.setTitle("Enter Donation Date");
-      //  dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setTitle("Update Donation Date");
+        //  dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
         return dialog;
+    }
+
+    private void insertInfoAtActivitiesTable(final String donationDate, final String hospital) {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Constants.URL_INSERT_INFO_FROM_ACTIVITY_TABLE, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> map = new HashMap<String, String>();
+                map.put("name", nameStr);
+                map.put("blood", bloodStr);
+                map.put("contact", contactStr);
+                map.put("donationDate", donationDate);
+                map.put("hospital", hospital);
+                return map;
+            }
+        };
+
+        MySingleton.getInstance(getActivity()).addToRequestQueue(stringRequest);
     }
 
     @Override
@@ -102,8 +144,8 @@ public class UpdateDonationDateFragment extends DialogFragment implements View.O
 
     }
 
-    public void updateDonationDate(final String donationDate) {
-        final ProgressDialog pDialog=new ProgressDialog(getActivity());
+    public void updateDDateAtDonorTable(final String donationDate) {
+        final ProgressDialog pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Updating donation date...");
         pDialog.setCancelable(false);
         pDialog.show();
@@ -123,12 +165,30 @@ public class UpdateDonationDateFragment extends DialogFragment implements View.O
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> map = new HashMap<String, String>();
                 map.put("lastDonate", donationDate);
-                map.put("name", nameStr);
-                map.put("blood", bloodStr);
+               // map.put("name", nameStr);
+                //map.put("blood", bloodStr);
                 map.put("contact", contactStr);
                 return map;
             }
         };
         MySingleton.getInstance(getActivity()).addToRequestQueue(request);
+    }
+
+    @Override
+    public void onStart() {
+        hospitalName.setAdapter(ArrayAdapter.createFromResource(getActivity(), R.array.hospitalAray, android.R.layout.simple_list_item_1));
+
+        hospitalName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                InputMethodManager inputMethodManager= (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(hospitalName.getWindowToken(), 0);
+            }
+        });
+        super.onStart();
+    }
+
+    public void ToastMessage(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 }

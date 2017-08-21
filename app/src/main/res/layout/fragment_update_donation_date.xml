@@ -1,60 +1,73 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context="com.example.shishir.blood.Fragment.UpdateDonationDateFragment"
-    android:padding="@dimen/largeMargin">
+    android:padding="@dimen/largeMargin"
+    tools:context="com.example.shishir.blood.Fragment.UpdateDonationDateFragment">
 
 
-        <!--<TextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_marginBottom="@dimen/smallMargin"-->
-            <!--android:gravity="center"-->
-            <!--android:text="Enter Blood Donation Date"-->
-            <!--android:textSize="@dimen/normalTextSize" />-->
+    <!--<TextView-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginBottom="@dimen/smallMargin"-->
+    <!--android:gravity="center"-->
+    <!--android:text="Enter Blood Donation Date"-->
+    <!--android:textSize="@dimen/normalTextSize" />-->
 
-        <TextView
-            android:id="@+id/newDonationDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_of_edittext"
-            android:hint="e.g: 12/12/2017"
+    <TextView
+        android:id="@+id/newDonationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_of_edittext"
+        android:hint="Enter donation date"
+        android:padding="@dimen/largeMargin"
+        android:textSize="@dimen/normalTextSize" />
+
+    <AutoCompleteTextView
+        android:id="@+id/autoTXTViewAtUpdatedD"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/locationHint"
+        android:background="@drawable/background_of_edittext"
+        android:hint="Enter hospital name"
+        android:maxLines="1"
+        android:layout_marginTop="@dimen/largeMargin"
+        android:padding="@dimen/largeMargin"
+        android:textSize="@dimen/normalTextSize" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/largeMargin"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/cancelBtnToUpdateDD"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:background="@color/flagColor"
+            android:text="Cancel"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/white"
             android:textSize="@dimen/normalTextSize"
-            android:padding="@dimen/largeMargin" />
+            android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/largeMargin"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/cancelBtnToUpdateDD"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_weight="1"
-                android:background="@color/flagColor"
-                android:text="Cancel"
-                android:textAppearance="@android:style/TextAppearance"
-                android:textColor="@color/white"
-                android:textSize="@dimen/normalTextSize"
-                android:textStyle="bold" />
-
-            <Button
-                android:id="@+id/saveBtnToUpdateDD"
-                android:layout_width="0dp"
-                android:layout_height="55dp"
-                android:layout_marginLeft="@dimen/smallMargin"
-                android:textAppearance="@android:style/TextAppearance"
-                android:layout_weight="1"
-                android:background="@color/flagColor"
-                android:text="Save"
-                android:textColor="@color/white"
-                android:textSize="@dimen/normalTextSize"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/saveBtnToUpdateDD"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginLeft="@dimen/smallMargin"
+            android:layout_weight="1"
+            android:background="@color/flagColor"
+            android:text="Save"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normalTextSize"
+            android:textStyle="bold" />
 
     </LinearLayout>
+
+</LinearLayout>

@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     ProgressDialog progressDialog;
     String nameStr, contactStr, birthStr, donationDateStr, regSTR;
     boolean regSuccess = false;
-    String intentStr="";
+    String intentStr = "";
 
 
     @Override
@@ -70,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         fTime = true;
 
-        intentStr=getIntent().getStringExtra("rr");
+        intentStr = getIntent().getStringExtra("rr");
         findViewById();
 
     }
@@ -111,6 +111,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     nameStr = fullNameEt.getText().toString();
                     birthStr = birthDate.getText().toString();
                     contactStr = contactNumber.getText().toString();
+                    locationStr = location.getText().toString();
 
                     if (nameStr.length() == 0) {
                         ToastMessage("Enter your name please");
@@ -118,7 +119,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     } else if (bloodGroupStr == null) {
                         ToastMessage("Choose Your blood Group");
 
-                    } else if (locationStr == null) {
+                    } else if (locationStr.length() == 0) {
                         ToastMessage("Select your location");
 
                     } else if (birthStr.isEmpty()) {
@@ -211,8 +212,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         if (v.getId() == R.id.dateOfBirthAtBasicInfo) {
             inputMethodManager.hideSoftInputFromWindow(location.getWindowToken(), 0);
             dateFlag = 1;
-        }
-        else
+        } else
             dateFlag = 2;
         DatePickerDialog datePickerDialog = new DatePickerDialog(this, this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.DAY_OF_MONTH);
         datePickerDialog.getDatePicker().setMaxDate(Calendar.getInstance().getTimeInMillis());
@@ -229,8 +229,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 //                if (fTime) {
 //                    fTime = false;
 //                } else {
-                    bloodGroupStr = parent.getItemAtPosition(position).toString();
-                    asBloodSpinner.setText(bloodGroupStr);
+                inputMethodManager.hideSoftInputFromWindow(location.getWindowToken(), 0);
+                bloodGroupStr = parent.getItemAtPosition(position).toString();
+                asBloodSpinner.setText(bloodGroupStr);
                 //}
 
             }
@@ -243,7 +244,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         location.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                locationStr = parent.getItemAtPosition(position).toString();
+                //locationStr = parent.getItemAtPosition(position).toString();
                 inputMethodManager.hideSoftInputFromWindow(location.getWindowToken(), 0);
             }
         });
@@ -258,11 +259,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
                         if (regSuccess) {
-                            if(intentStr.equals("reg")){
+                            if (intentStr.equals("reg")) {
                                 startActivity(new Intent(RegisterActivity.this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
 
                             }
-                            if(intentStr.equals("fab")){
+                            if (intentStr.equals("fab")) {
                                 finish();
                                 startActivity(getIntent());
                             }

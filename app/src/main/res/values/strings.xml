@@ -117,4 +117,11 @@
     <string name="title_activity_after_login">AfterLoginActivity</string>
     <string name="title_activity_navigation">BLOOD+</string>
 
+    <string-array name="hospitalAray">
+        <item>Savar Enam Medical</item>
+        <item>Savar Central Hospital</item>
+        <item>Ganashastho Medical</item>
+        <item>Savar Popular Hospital</item>
+    </string-array>
+
 </resources>

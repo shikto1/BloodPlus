@@ -22,7 +22,6 @@ public class DateCalculator {
         } else {
             DateTimeFormatter formatter = DateTimeFormat.forPattern("dd/MM/yyyy");
             LocalDate lastDonationDate = LocalDate.parse(dateStr, formatter);
-
             LocalDate currentDate = new LocalDate();
             Period period = new Period(lastDonationDate, currentDate, PeriodType.yearMonthDay());
             int day = period.getDays();
