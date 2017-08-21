@@ -27,7 +27,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
 public class ActivityOfBloodPlus extends Fragment {
 
@@ -54,9 +59,12 @@ public class ActivityOfBloodPlus extends Fragment {
 
     private void setUpListView() {
 
+        final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         pDialog.setMessage("Loading...");
         pDialog.setCancelable(false);
         pDialog.show();
+        final Date[] date1 = new Date[1];
+        final Date date2;
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 Constants.URL_GET_INFO_FROM_ACTIVITY_TABLE, null,
@@ -71,6 +79,21 @@ public class ActivityOfBloodPlus extends Fragment {
                                 JSONObject singleDonor = donorArray.getJSONObject(i);
                                 activitiesList.add(new BloodPlusActivity(singleDonor.getString("Name"),singleDonor.getString("Blood"),
                                         singleDonor.getString("Hospital"),"",singleDonor.getString("dDate")));
+
+                                Collections.sort(activitiesList, new Comparator<BloodPlusActivity>() {
+                                    @Override
+                                    public int compare(BloodPlusActivity obj1, BloodPlusActivity obj2) {
+                                        int i=0;
+                                        try {
+                                            Date d1 =dateFormat.parse(obj1.getDonationDate());
+                                            Date d2=dateFormat.parse(obj2.getDonationDate());
+                                            i=d2.compareTo(d1);
+                                        } catch (ParseException e) {
+                                            e.printStackTrace();
+                                        }
+                                        return i;
+                                    }
+                                });
                             }
 
 
@@ -94,6 +117,7 @@ public class ActivityOfBloodPlus extends Fragment {
 // Adding request to request queue
         MySingleton.getInstance(getActivity()).addToRequestQueue(jsonObjReq);
     }
+
 
 
 }
