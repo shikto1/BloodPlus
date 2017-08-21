@@ -1,20 +1,52 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.shishir.blood.Fragment.ActivityOfBloodPlus">
-    <RelativeLayout
+
+    <LinearLayout
         android:id="@+id/ll"
-        android:layout_margin="@dimen/largeMargin"
         android:layout_width="match_parent"
-        android:background="@android:color/darker_gray"
-        android:layout_height="100dp"></RelativeLayout>
+        android:layout_height="110dp"
+        android:layout_margin="@dimen/largeMargin"
+        android:orientation="vertical"
+        android:padding="1dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#e5e5e5"
+            android:orientation="horizontal"
+            android:padding="@dimen/largeMargin">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="(Total Donation of BLOOD+)"
+                android:layout_centerHorizontal="true"
+                android:textSize="@dimen/extraSmallSizeText" />
+
+            <TextView
+                android:id="@+id/totalDonationTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:alpha=".4"
+                android:textColor="@color/redColor"
+                android:textSize="60sp"
+                android:textStyle="bold" />
+
+
+        </RelativeLayout>
+
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/activityListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/ll"/>
+        android:layout_below="@+id/ll" />
 
 </LinearLayout>

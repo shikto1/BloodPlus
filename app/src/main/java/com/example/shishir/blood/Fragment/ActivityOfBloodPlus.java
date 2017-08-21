@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -37,6 +38,7 @@ import java.util.Date;
 public class ActivityOfBloodPlus extends Fragment {
 
     ListView listView;
+    TextView totalDonationTv;
     ProgressDialog pDialog;
     ArrayList<BloodPlusActivity> activitiesList;
 
@@ -51,6 +53,7 @@ public class ActivityOfBloodPlus extends Fragment {
 
     private void findViewById(View view) {
         listView = (ListView) view.findViewById(R.id.activityListView);
+        totalDonationTv= (TextView) view.findViewById(R.id.totalDonationTv);
         pDialog=new ProgressDialog(getActivity());
         activitiesList=new ArrayList<BloodPlusActivity>();
 
@@ -79,7 +82,7 @@ public class ActivityOfBloodPlus extends Fragment {
                                 JSONObject singleDonor = donorArray.getJSONObject(i);
                                 activitiesList.add(new BloodPlusActivity(singleDonor.getString("Name"),singleDonor.getString("Blood"),
                                         singleDonor.getString("Hospital"),"",singleDonor.getString("dDate")));
-
+                                totalDonationTv.setText(""+String.format("%03d",activitiesList.size()));
                                 Collections.sort(activitiesList, new Comparator<BloodPlusActivity>() {
                                     @Override
                                     public int compare(BloodPlusActivity obj1, BloodPlusActivity obj2) {
