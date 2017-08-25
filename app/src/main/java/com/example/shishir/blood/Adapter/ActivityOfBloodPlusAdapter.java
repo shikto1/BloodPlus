@@ -76,9 +76,9 @@ public class ActivityOfBloodPlusAdapter extends BaseAdapter {
         String dDate = activityList.get(position).getDonationDate();
         String blood = activityList.get(position).getBlood();
 
-        String txt = name + " donated blood at " + hospitalName + " on " + DateCalculator.formatDate(dDate);
+        String txt = name +" ("+blood+ ") donated blood at " + hospitalName + " on " + DateCalculator.formatDate(dDate);
         Spannable spannable = new SpannableString(txt);
-        spannable.setSpan(new ForegroundColorSpan(Color.RED), 0, name.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannable.setSpan(new ForegroundColorSpan(Color.RED), 0, name.length()+5, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         holder.detailsTv.setText(spannable);
 
         return convertView;

@@ -183,8 +183,8 @@ public class NavigationActivity extends AppCompatActivity
                 break;
 
             }
-            case R.id.facebookPage: {
-                ToastMessage("Facebook");
+            case R.id.bloodDonorRanking: {
+                ToastMessage("BLOOD+ Donor Ranking");
                 break;
 
             }

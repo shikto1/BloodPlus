@@ -8,37 +8,36 @@
     <LinearLayout
         android:id="@+id/ll"
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="wrap_content"
         android:layout_margin="@dimen/largeMargin"
         android:orientation="vertical"
         android:padding="1dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#e5e5e5"
-            android:orientation="horizontal"
-            android:padding="@dimen/largeMargin">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="(Total Donation of BLOOD+)"
-                android:layout_centerHorizontal="true"
-                android:textSize="@dimen/extraSmallSizeText" />
-
-            <TextView
-                android:id="@+id/totalDonationTv"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="#e5e5e5"
+                android:padding="@dimen/largeMargin"
                 android:layout_centerInParent="true"
-                android:alpha=".4"
-                android:textColor="@color/redColor"
-                android:textSize="60sp"
-                android:textStyle="bold" />
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(Total Donation of BLOOD+)"
+                    android:textSize="@dimen/extraSmallSizeText" />
 
-
-        </RelativeLayout>
+                <TextView
+                    android:id="@+id/totalDonationTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha=".4"
+                    android:text="004"
+                    android:textColor="@color/redColor"
+                    android:textSize="60sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
 
     </LinearLayout>
