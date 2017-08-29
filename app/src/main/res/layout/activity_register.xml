@@ -131,7 +131,7 @@
                 android:layout_marginTop="@dimen/padding"
                 android:text="Locality:"
                 android:textColor="@color/redColor"
-                android:textSize="15sp" />
+                android:textSize="@dimen/extraSmallSizeText" />
 
             <AutoCompleteTextView
                 android:id="@+id/autoCompleTextViewForLocationInBasicInfo"
@@ -143,6 +143,28 @@
                 android:maxLines="1"
                 android:padding="@dimen/largeMargin"
                 android:textSize="@dimen/normalTextSize" />
+            <TextView
+                android:id="@+id/subLocalityHint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/autoCompleTextViewForLocationInBasicInfo"
+                android:layout_marginBottom="@dimen/smallMargin"
+                android:layout_marginTop="@dimen/padding"
+                android:text="Sub Locality:"
+                android:textColor="@color/redColor"
+                android:textSize="@dimen/extraSmallSizeText" />
+
+            <AutoCompleteTextView
+                android:id="@+id/subLocality"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/subLocalityHint"
+                android:background="@drawable/background_of_edittext"
+                android:hint="e.g: Dhanmondi 32"
+                android:maxLines="1"
+                android:padding="@dimen/largeMargin"
+                android:textSize="@dimen/normalTextSize" />
+
         </RelativeLayout>
 
 
@@ -189,11 +211,32 @@
             android:textSize="@dimen/normalTextSize" />
         <!--</android.support.design.widget.TextInputLayout>-->
         <TextView
+            android:id="@+id/emailETHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/smallMargin"
+            android:text="Email:"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/extraSmallSizeText" />
+
+        <EditText
+            android:id="@+id/emailEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/padding"
+            android:background="@drawable/background_of_edittext"
+            android:hint="e.g: shiktohishir15@gmail.com"
+            android:inputType="textEmailAddress"
+            android:maxLines="1"
+            android:padding="@dimen/largeMargin"
+            android:textSize="@dimen/normalTextSize" />
+
+        <TextView
             android:id="@+id/lastDonateHint"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/smallMargin"
-            android:text="Last Donation date (If Donated):"
+            android:text="Last donation date (If donated):"
             android:textColor="@color/redColor"
             android:textSize="@dimen/extraSmallSizeText" />
 
@@ -213,7 +256,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="36dp"
             android:layout_marginTop="@dimen/padding"
-            android:background="@drawable/background_of_button"
+            android:background="@drawable/back_button_two"
             android:text="Submit"
             android:textColor="@color/white"
             android:textSize="@dimen/normalTextSize" />
