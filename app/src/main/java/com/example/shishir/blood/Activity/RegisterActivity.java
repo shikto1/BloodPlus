@@ -46,13 +46,12 @@ import java.util.Map;
 
 public class RegisterActivity extends AppCompatActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
-    EditText fullNameEt, contactNumber;
-    RadioGroup genderGroup;
+    EditText fullNameEt, contactNumber, emailEt;
     TextView birthDate, lastDonationDate;
     Spinner bloodGroup;
     TextView asBloodSpinner;
-    AutoCompleteTextView location;
-    String gender, bloodGroupStr, locationStr;
+    AutoCompleteTextView location, subLocality;
+    String bloodGroupStr, locationStr;
     Button submitBtn;
     Calendar calendar;
     int dateFlag;
@@ -60,7 +59,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     DonorTableManager donorTableManager;
     boolean fTime;
     ProgressDialog progressDialog;
-    String nameStr, contactStr, birthStr, donationDateStr, regSTR;
+    String nameStr, contactStr, birthStr, donationDateStr, regSTR, emailStr, subLocalityStr;
     boolean regSuccess = false;
     String intentStr = "";
 
@@ -80,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
     private void findViewById() {
         fullNameEt = (EditText) findViewById(R.id.fullNameEtAtBasicInfo);
         contactNumber = (EditText) findViewById(R.id.contactNumberEt);
+        emailEt = (EditText) findViewById(R.id.emailEt);
 
         birthDate = (TextView) findViewById(R.id.dateOfBirthAtBasicInfo);
         lastDonationDate = (TextView) findViewById(R.id.lastDonationDateAtBasicInfo);
@@ -88,8 +88,10 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         bloodGroup = (Spinner) findViewById(R.id.bloodS);
         location = (AutoCompleteTextView) findViewById(R.id.autoCompleTextViewForLocationInBasicInfo);
+        subLocality = (AutoCompleteTextView) findViewById(R.id.subLocality);
+
         location.setThreshold(2);
-        submitBtn = (Button) findViewById(R.id.submitBtnAtBasicInfo);
+        //    submitBtn = (Button) findViewById(R.id.submitBtnAtBasicInfo);
         calendar = Calendar.getInstance();
         donorTableManager = new DonorTableManager(this);
         inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -106,50 +108,62 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             }
         });
 
-        submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (Network.isNetAvailable(RegisterActivity.this)) {
-                    nameStr = fullNameEt.getText().toString();
-                    birthStr = birthDate.getText().toString();
-                    contactStr = contactNumber.getText().toString();
-                    locationStr = location.getText().toString();
+//        submitBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                submit();
+//
+//            }
+//
+//        });
 
-                    if (nameStr.length() == 0) {
-                        ToastMessage("Enter your name please");
+    }
 
-                    } else if (bloodGroupStr == null) {
-                        ToastMessage("Choose Your blood Group");
+    private void submit() {
+        if (Network.isNetAvailable(RegisterActivity.this)) {
+            nameStr = fullNameEt.getText().toString();
+            birthStr = birthDate.getText().toString();
+            contactStr = contactNumber.getText().toString();
+            locationStr = location.getText().toString();
+            emailStr = emailEt.getText().toString();
+            subLocalityStr = subLocality.getText().toString();
 
-                    } else if (locationStr.length() == 0) {
-                        ToastMessage("Select your location");
+            if (nameStr.length() == 0) {
+                ToastMessage("Enter your name please");
 
-                    } else if (birthStr.isEmpty()) {
-                        ToastMessage("Enter Your Date of birth");
+            } else if (bloodGroupStr == null) {
+                ToastMessage("Choose Your blood Group");
 
-                    } else if (contactStr.length() == 0) {
-                        ToastMessage("Enter Your contact number");
+            } else if (locationStr.length() == 0) {
+                ToastMessage("Select your location");
 
-                    } else if (contactStr.length() < 11) {
-                        ToastMessage("Invalid Contact Number");
+            } else if (subLocalityStr.length() == 0) {
+                ToastMessage("Enter your sublocality");
 
-                    } else if (contactStr.charAt(0) != '0' && contactStr.charAt(1) != 1) {
-                        ToastMessage("Invalid Contact Number");
+            } else if (birthStr.isEmpty()) {
+                ToastMessage("Enter Your Date of birth");
 
-                    } else {
-                        donationDateStr = lastDonationDate.getText().toString();
-                        regSTR = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
-                        registerUser();
-                    }
+            } else if (contactStr.length() == 0) {
+                ToastMessage("Enter Your contact number");
 
+            } else if (contactStr.length() < 11) {
+                ToastMessage("Invalid Contact Number");
 
-                } else {
-                    Network.showInternetAlertDialog(RegisterActivity.this);
-                }
+            } else if (contactStr.charAt(0) != '0' && contactStr.charAt(1) != 1) {
+                ToastMessage("Invalid Contact Number");
+
+            } else if (emailStr.length() == 0) {
+                ToastMessage("Enter your email address");
+            } else {
+                donationDateStr = lastDonationDate.getText().toString();
+                regSTR = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
+                registerUser();
             }
 
-        });
 
+        } else {
+            Network.showInternetAlertDialog(RegisterActivity.this);
+        }
     }
 
     private void registerUser() {
@@ -286,13 +300,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.add_admin_second_fragment,menu);
+        getMenuInflater().inflate(R.menu.add_admin_second_fragment, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        ToastMessage("I am Clicked");
+        submit();
         return super.onOptionsItemSelected(item);
     }
 }

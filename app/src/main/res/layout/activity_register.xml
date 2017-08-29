@@ -248,18 +248,19 @@
             android:background="@drawable/background_of_edittext"
             android:hint="e.g: 12/4/2017"
             android:padding="@dimen/largeMargin"
+            android:layout_marginBottom="@dimen/padding"
             android:textSize="@dimen/normalTextSize" />
 
-        <Button
-            android:id="@+id/submitBtnAtBasicInfo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="36dp"
-            android:layout_marginTop="@dimen/padding"
-            android:background="@drawable/back_button_two"
-            android:text="Submit"
-            android:textColor="@color/white"
-            android:textSize="@dimen/normalTextSize" />
+        <!--<Button-->
+            <!--android:id="@+id/submitBtnAtBasicInfo"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="36dp"-->
+            <!--android:layout_marginTop="@dimen/padding"-->
+            <!--android:background="@drawable/back_button_two"-->
+            <!--android:text="Submit"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="@dimen/normalTextSize" />-->
     </LinearLayout>
 </ScrollView>
 
