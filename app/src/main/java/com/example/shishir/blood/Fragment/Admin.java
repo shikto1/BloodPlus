@@ -93,7 +93,8 @@ public class Admin extends Fragment {
                         String contact = singleDonor.getString("Contact");
                         String locationStr = singleDonor.getString("Location");
                         String lastDonate = singleDonor.getString("LastDonate");
-                        adminArrayList.add(new Donor(donorName, bloodG, locationStr, contact, "birthDate", lastDonate));
+                        String subLocality = singleDonor.getString("SubLocality");
+                        adminArrayList.add(new Donor(donorName, bloodG, subLocality + ", " + locationStr, contact, "birthDate", lastDonate));
                     }
                     actionBar.setTitle("Admin (" + arrayLength + ") ");
                     adminAdapter = new AdminAdapter(getActivity(), adminArrayList);
