@@ -6,21 +6,28 @@
     android:padding="@dimen/largeMargin">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/donorRank"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:text="Rank"
             android:textSize="@dimen/normalTextSize"/>
 
         <TextView
+            android:id="@+id/donorNameAtDonorRanking"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="4"
             android:gravity="center"
             android:layout_height="wrap_content"
             android:text="Donor Name"
             android:textSize="@dimen/normalTextSize" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:id="@+id/donationAtDonorRanking"
+            android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
             android:layout_height="wrap_content"
             android:text="Donation"
             android:textSize="@dimen/normalTextSize" />
