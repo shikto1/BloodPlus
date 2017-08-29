@@ -154,6 +154,11 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
             } else if (emailStr.length() == 0) {
                 ToastMessage("Enter your email address");
+            } else if (emailStr.length() > 0) {
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                if (!emailStr.matches(emailPattern)) {
+                    ToastMessage("Email is not valid");
+                }
             } else {
                 donationDateStr = lastDonationDate.getText().toString();
                 regSTR = new SimpleDateFormat("dd/MM/yyyy").format(new Date());
@@ -203,6 +208,8 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                 map.put("contact", contactStr);
                 map.put("donationDate", donationDateStr);
                 map.put("registrationDate", regSTR);
+                map.put("sLocality", subLocalityStr);
+                map.put("email", emailStr);
                 return map;
             }
         };
