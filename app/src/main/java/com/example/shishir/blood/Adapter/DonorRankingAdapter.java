@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
+import com.example.shishir.blood.ExtraClass.DonorRanking;
 import com.example.shishir.blood.R;
 
 import java.util.ArrayList;
@@ -24,11 +25,11 @@ import java.util.ArrayList;
 
 public class DonorRankingAdapter extends BaseAdapter {
     private Context context;
-    private ArrayList<Donor> donorList;
+    private ArrayList<DonorRanking> donorList;
     PopupMenu popupMenu;
     static int donorRankNumber;
 
-    public DonorRankingAdapter(Context context, ArrayList<Donor> donorList) {
+    public DonorRankingAdapter(Context context, ArrayList<DonorRanking> donorList) {
         this.context = context;
         this.donorList = donorList;
     }
@@ -69,8 +70,8 @@ public class DonorRankingAdapter extends BaseAdapter {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.donorRank.setText("" + (donorRankNumber++));
-        holder.nameTv.setText(donorList.get(position).getDonorName() + " (" + donorList.get(position).getBloodGroup() + ")");
-        holder.nDonation.setText("Contact: " + donorList.get(position).getContactNumber());
+        holder.nameTv.setText(donorList.get(position).getDonorName() + " (" + donorList.get(position).getBloodG() + ")");
+        holder.nDonation.setText("Contact: " + donorList.get(position).getNumberOfDonation());
 
         return convertView;
     }

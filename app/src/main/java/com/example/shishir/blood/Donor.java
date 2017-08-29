@@ -14,6 +14,7 @@ public class Donor implements Serializable {
     private String birthDate;
     private String contactNumber;
     private String lastDonationDate;
+    private String numberOfDonation;
 
     public Donor(String name,String contact){
         this.donorName=name;
