@@ -247,15 +247,9 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         bloodGroup.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
-//                if (fTime) {
-//                    fTime = false;
-//                } else {
                 inputMethodManager.hideSoftInputFromWindow(location.getWindowToken(), 0);
                 bloodGroupStr = parent.getItemAtPosition(position).toString();
                 asBloodSpinner.setText(bloodGroupStr);
-                //}
-
             }
 
             @Override
