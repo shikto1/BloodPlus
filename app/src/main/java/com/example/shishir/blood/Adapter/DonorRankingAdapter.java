@@ -64,14 +64,14 @@ public class DonorRankingAdapter extends BaseAdapter {
 
             holder.donorRank = (TextView) convertView.findViewById(R.id.donorRank);
             holder.nDonation = (TextView) convertView.findViewById(R.id.donationAtDonorRanking);
-            holder.nDonation = (TextView) convertView.findViewById(R.id.donorNameAtDonorRanking);
+            holder.nameTv = (TextView) convertView.findViewById(R.id.donorNameAtDonorRanking);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         holder.donorRank.setText("" + (donorRankNumber++));
         holder.nameTv.setText(donorList.get(position).getDonorName() + " (" + donorList.get(position).getBloodG() + ")");
-        holder.nDonation.setText("Contact: " + donorList.get(position).getNumberOfDonation());
+        holder.nDonation.setText("" + donorList.get(position).getNumberOfDonation());
 
         return convertView;
     }

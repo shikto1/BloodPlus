@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import com.example.shishir.blood.Fragment.AboutBloodPlus;
 import com.example.shishir.blood.Fragment.ActivityOfBloodPlus;
 import com.example.shishir.blood.Fragment.Admin;
+import com.example.shishir.blood.Fragment.DonorRankingFragment;
 import com.example.shishir.blood.R;
 
 public class NavigationMenuActivity extends AppCompatActivity {
@@ -43,6 +44,11 @@ public class NavigationMenuActivity extends AppCompatActivity {
             case 4:{
                 fragmentManager.beginTransaction().add(R.id.parentLayoutForNavigationMenu,new ActivityOfBloodPlus()).commit();
                 getSupportActionBar().setTitle("BLOOD+ Activities");
+                break;
+            }
+            case 5:{
+                fragmentManager.beginTransaction().add(R.id.parentLayoutForNavigationMenu,new DonorRankingFragment()).commit();
+                getSupportActionBar().setTitle("BLOOD+ Donor Ranking");
                 break;
             }
         }

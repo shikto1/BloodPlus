@@ -184,8 +184,14 @@ public class NavigationActivity extends AppCompatActivity
 
             }
             case R.id.bloodDonorRanking: {
-                ToastMessage("BLOOD+ Donor Ranking");
-                break;
+                if (Network.isNetAvailable(this)) {
+                    intent.putExtra("frg", 5);
+                    startActivity(intent);
+                    break;
+                } else {
+                    Network.showInternetAlertDialog(this);
+                    break;
+                }
 
             }
             case R.id.feedback: {
