@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -280,6 +282,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
             Network.showInternetAlertDialog(this);
         }
         super.onResume();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.add_admin_second_fragment,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        ToastMessage("I am Clicked");
+        return super.onOptionsItemSelected(item);
     }
 }
 
