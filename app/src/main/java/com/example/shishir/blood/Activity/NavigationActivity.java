@@ -2,6 +2,7 @@ package com.example.shishir.blood.Activity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -194,10 +195,11 @@ public class NavigationActivity extends AppCompatActivity
                 }
 
             }
-            case R.id.feedback: {
-                ToastMessage("FeedBack");
+            case R.id.facebook: {
+                Uri uri = Uri.parse("https://web.facebook.com/groups/bloodplusbd/?ref=bookmarks");
+                Intent in = new Intent(Intent.ACTION_VIEW, uri);
+                startActivity(in);
                 break;
-
             }
             case R.id.about: {
                 intent.putExtra("frg", 7);

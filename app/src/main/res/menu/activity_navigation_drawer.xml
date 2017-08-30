@@ -19,9 +19,9 @@
             android:icon="@drawable/share_icon"
             android:title="BLOOD+ Donor Ranking" />
         <item
-            android:id="@+id/feedback"
+            android:id="@+id/facebook"
             android:icon="@drawable/feedback_icon"
-            android:title="Feedback" />
+            android:title="Join with Facebook" />
         <item
             android:id="@+id/about"
             android:icon="@drawable/info_icon"
