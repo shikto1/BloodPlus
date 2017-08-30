@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:alpha=".8"
             android:text="Rank"
-            android:textSize="@dimen/smallTextSize" />
+            android:textSize="@dimen/extraSmallSizeText" />
 
 
         <TextView
@@ -29,7 +29,7 @@
             android:background="@color/colorAccent"
             android:alpha=".6"
             android:textColor="@color/white"
-            android:textSize="@dimen/smallTextSize" />
+            android:textSize="@dimen/extraSmallSizeText" />
 
         <TextView
             android:id="@+id/donationAtDonorRanking"
@@ -43,6 +43,6 @@
             android:layout_marginLeft="1dp"
             android:layout_height="wrap_content"
             android:text="Donation"
-            android:textSize="@dimen/smallTextSize" />
+            android:textSize="@dimen/extraSmallSizeText" />
 
 </LinearLayout>
