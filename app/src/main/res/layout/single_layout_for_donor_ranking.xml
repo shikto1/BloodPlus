@@ -2,17 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    android:padding="@dimen/largeMargin">
-
+    android:orientation="horizontal">
         <TextView
             android:id="@+id/donorRank"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:layout_height="wrap_content"
             android:gravity="center"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:padding="@dimen/smallMargin"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"
+            android:layout_marginRight="1dp"
+            android:layout_height="wrap_content"
+            android:alpha=".8"
             android:text="Rank"
-            android:textSize="@dimen/normalTextSize"/>
+            android:textSize="@dimen/smallTextSize" />
+
 
         <TextView
             android:id="@+id/donorNameAtDonorRanking"
@@ -21,15 +25,24 @@
             android:gravity="center"
             android:layout_height="wrap_content"
             android:text="Donor Name"
-            android:textSize="@dimen/normalTextSize" />
+            android:padding="@dimen/smallMargin"
+            android:background="@color/colorAccent"
+            android:alpha=".6"
+            android:textColor="@color/white"
+            android:textSize="@dimen/smallTextSize" />
 
         <TextView
             android:id="@+id/donationAtDonorRanking"
             android:gravity="center"
             android:layout_width="0dp"
             android:layout_weight="2"
+            android:alpha=".8"
+            android:padding="@dimen/smallMargin"
+            android:textColor="@color/white"
+            android:background="@color/colorAccent"
+            android:layout_marginLeft="1dp"
             android:layout_height="wrap_content"
             android:text="Donation"
-            android:textSize="@dimen/normalTextSize" />
+            android:textSize="@dimen/smallTextSize" />
 
 </LinearLayout>

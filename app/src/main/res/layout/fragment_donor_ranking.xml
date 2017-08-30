@@ -4,10 +4,10 @@
     android:layout_height="match_parent"
     tools:context="com.example.shishir.blood.Fragment.DonorRankingFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <ListView
         android:id="@+id/donorRankingListView"
         android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/extraSmallMargin"
         android:layout_height="match_parent" />
 
 </RelativeLayout>

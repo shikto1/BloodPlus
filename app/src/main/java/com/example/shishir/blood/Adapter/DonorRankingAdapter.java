@@ -27,7 +27,7 @@ public class DonorRankingAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<DonorRanking> donorList;
     PopupMenu popupMenu;
-    static int donorRankNumber;
+    int donorRankNumber;
 
     public DonorRankingAdapter(Context context, ArrayList<DonorRanking> donorList) {
         this.context = context;
@@ -63,13 +63,13 @@ public class DonorRankingAdapter extends BaseAdapter {
             holder = new ViewHolder();
 
             holder.donorRank = (TextView) convertView.findViewById(R.id.donorRank);
-            holder.nDonation = (TextView) convertView.findViewById(R.id.donationAtDonorRanking);
             holder.nameTv = (TextView) convertView.findViewById(R.id.donorNameAtDonorRanking);
+            holder.nDonation = (TextView) convertView.findViewById(R.id.donationAtDonorRanking);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        holder.donorRank.setText("" + (donorRankNumber++));
+        holder.donorRank.setText("" + (++donorRankNumber));
         holder.nameTv.setText(donorList.get(position).getDonorName() + " (" + donorList.get(position).getBloodG() + ")");
         holder.nDonation.setText("" + donorList.get(position).getNumberOfDonation());
 

@@ -26,12 +26,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class DonorRankingFragment extends Fragment {
 
 
     ListView donorRankingListView;
-    ProgressDialog progressDialog = new ProgressDialog(getActivity());
+    ProgressDialog progressDialog;
     ArrayList<DonorRanking> donorRankingList = new ArrayList<DonorRanking>();
     DonorRankingAdapter donorRankingAdapter;
 
@@ -47,12 +49,17 @@ public class DonorRankingFragment extends Fragment {
 
     private void findViewById(View view) {
         donorRankingListView = (ListView) view.findViewById(R.id.donorRankingListView);
+        LayoutInflater myInflater = getActivity().getLayoutInflater();
+        ViewGroup myHeader = (ViewGroup) myInflater.inflate(R.layout.single_layout_for_donor_ranking, donorRankingListView, false);
+        donorRankingListView.addHeaderView(myHeader, null, false);
 
         setUpListView();
     }
 
     private void setUpListView() {
+        progressDialog = new ProgressDialog(getActivity());
         progressDialog.setMessage("Loading...");
+        progressDialog.setCancelable(false);
         progressDialog.show();
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, Constants.URL_GET_DONOR_RANKING_LIST, null, new Response.Listener<JSONObject>() {
             @Override
@@ -62,21 +69,25 @@ public class DonorRankingFragment extends Fragment {
                     int arrayLength = donorArray.length();
                     for (int i = 0; i < arrayLength; i++) {
                         JSONObject singleDonor = donorArray.getJSONObject(i);
-                        String bloodG = singleDonor.getString("Blood");
-                        String donorName = singleDonor.getString("Name");
-                        String nDonation = singleDonor.getString("nDonation");
-                        donorRankingList.add(new DonorRanking(donorName, bloodG, nDonation));
+                        donorRankingList.add(new DonorRanking(singleDonor.getString("Name"), singleDonor.getString("Blood"),
+                                singleDonor.getString("nDonation")));
                     }
+//                    Collections.sort(donorRankingList, new Comparator<DonorRanking>() {
+//                        @Override
+//                        public int compare(DonorRanking donor1, DonorRanking donor2) {
+//                            return donor2.getNumberOfDonation().compareTo(donor1.getNumberOfDonation());
+//                        }
+//                    });
+
                     donorRankingAdapter = new DonorRankingAdapter(getActivity(), donorRankingList);
                     donorRankingListView.setAdapter(donorRankingAdapter);
-
+                    progressDialog.dismiss();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
 
                 progressDialog.dismiss();
-
             }
         }, new Response.ErrorListener() {
             @Override
