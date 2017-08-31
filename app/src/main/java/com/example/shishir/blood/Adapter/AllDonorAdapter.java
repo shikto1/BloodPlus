@@ -38,11 +38,15 @@ public class AllDonorAdapter extends BaseAdapter implements Filterable {
     private ArrayList<Donor> donorList;
     private ArrayList<Donor> orig;
     PopupMenu popupMenu;
+    LocalDatabase localDatabase;
+    boolean isAdmin;
 
     public AllDonorAdapter(Context context, ArrayList<Donor> donorList) {
         super();
         this.context = context;
         this.donorList = donorList;
+        localDatabase = new LocalDatabase(context);
+        isAdmin = localDatabase.getAdmin();
     }
 
     @Override
@@ -90,8 +94,9 @@ public class AllDonorAdapter extends BaseAdapter implements Filterable {
         };
 
     }
-    public void notifyDataSetChanged(){
-        ((AllDonorActivity)context).getSupportActionBar().setTitle("Total ("+donorList.size()+")");
+
+    public void notifyDataSetChanged() {
+        ((AllDonorActivity) context).getSupportActionBar().setTitle("Total (" + donorList.size() + ")");
         super.notifyDataSetChanged();
     }
 
@@ -119,28 +124,32 @@ public class AllDonorAdapter extends BaseAdapter implements Filterable {
         holder.nameTv.setText(donorList.get(position).getDonorName() + " (" + donorList.get(position).getBloodGroup() + ")");
         holder.lastDonateTv.setText("Last Donated:" + DateCalculator.calculateInterval(donorList.get(position).getLastDonationDate()));
         holder.locationTV.setText("Location: " + donorList.get(position).getLocation());
-        holder.settingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                final Intent clickIntent = new Intent(Constants.POPUP_MENU_CLICKED_ACTION);
-                final Bundle bundle = new Bundle();
-                PopupMenu popupMenu = new PopupMenu(context, v);
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu_for_all_donor, popupMenu.getMenu());
+        if (isAdmin) {
+            holder.settingBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    final Intent clickIntent = new Intent(Constants.POPUP_MENU_CLICKED_ACTION);
+                    final Bundle bundle = new Bundle();
+                    PopupMenu popupMenu = new PopupMenu(context, v);
+                    popupMenu.getMenuInflater().inflate(R.menu.popup_menu_for_all_donor, popupMenu.getMenu());
 
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        bundle.putInt("itemID", item.getItemId());
-                        bundle.putInt("position", position);
-                        clickIntent.putExtra("event", bundle);
-                        context.sendBroadcast(clickIntent);
-                        return true;
-                    }
-                });
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            bundle.putInt("itemID", item.getItemId());
+                            bundle.putInt("position", position);
+                            clickIntent.putExtra("event", bundle);
+                            context.sendBroadcast(clickIntent);
+                            return true;
+                        }
+                    });
 
-                popupMenu.show();
-            }
-        });
+                    popupMenu.show();
+                }
+            });
+        } else {
+            holder.settingBtn.setVisibility(View.INVISIBLE);
+        }
         return convertView;
     }
 

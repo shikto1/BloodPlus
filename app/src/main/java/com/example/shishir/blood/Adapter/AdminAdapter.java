@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shishir.blood.Database.LocalDatabase;
 import com.example.shishir.blood.Donor;
 import com.example.shishir.blood.ExtraClass.Constants;
 import com.example.shishir.blood.ExtraClass.DateCalculator;
@@ -28,10 +29,14 @@ public class AdminAdapter extends BaseAdapter {
     private Context context;
     private ArrayList<Donor> adminList;
     PopupMenu popupMenu;
+    LocalDatabase localDatabase;
+    boolean isAdmin;
 
     public AdminAdapter(Context context, ArrayList<Donor> adminList) {
         this.context = context;
         this.adminList = adminList;
+        localDatabase = new LocalDatabase(context);
+        isAdmin = localDatabase.getAdmin();
     }
 
     @Override
@@ -73,30 +78,33 @@ public class AdminAdapter extends BaseAdapter {
         holder.nameTv.setText(adminList.get(position).getDonorName() + " (" + adminList.get(position).getBloodGroup() + ")");
         holder.contactTv.setText("Contact: " + adminList.get(position).getContactNumber());
         holder.locationTv.setText("Location: " + adminList.get(position).getLocation());
+        if (isAdmin) {
+            holder.settingBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-        holder.settingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+                    final Intent clickIntent = new Intent(Constants.POPUP_MENU_CLICKED_ACTION);
+                    final Bundle bundle = new Bundle();
+                    PopupMenu popupMenu = new PopupMenu(context, v);
+                    popupMenu.getMenuInflater().inflate(R.menu.popup_menu_for_admin, popupMenu.getMenu());
 
-                final Intent clickIntent = new Intent(Constants.POPUP_MENU_CLICKED_ACTION);
-                final Bundle bundle = new Bundle();
-                PopupMenu popupMenu = new PopupMenu(context, v);
-                popupMenu.getMenuInflater().inflate(R.menu.popup_menu_for_admin, popupMenu.getMenu());
+                    popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                        @Override
+                        public boolean onMenuItemClick(MenuItem item) {
+                            bundle.putInt("itemID", item.getItemId());
+                            bundle.putInt("position", position);
+                            clickIntent.putExtra("event", bundle);
+                            context.sendBroadcast(clickIntent);
+                            return true;
+                        }
+                    });
 
-                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        bundle.putInt("itemID", item.getItemId());
-                        bundle.putInt("position", position);
-                        clickIntent.putExtra("event", bundle);
-                        context.sendBroadcast(clickIntent);
-                        return true;
-                    }
-                });
-
-                popupMenu.show();
-            }
-        });
+                    popupMenu.show();
+                }
+            });
+        } else {
+            holder.settingBtn.setVisibility(View.INVISIBLE);
+        }
         return convertView;
     }
 
