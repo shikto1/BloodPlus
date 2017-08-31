@@ -1,0 +1,68 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding"
+    tools:context="com.example.shishir.blood.Fragment.PushNotificationFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="1">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginTop="@dimen/padding"
+            android:layout_height="wrap_content"
+            android:text="Message title:"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/smallTextSize" />
+
+        <EditText
+            android:id="@+id/messageTitleEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="e.g: Need B+ Blood"
+            android:layout_marginTop="@dimen/extraSmallMargin"
+            android:background="@drawable/background_of_edittext"
+            android:padding="@dimen/largeMargin"
+            android:maxLines="1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Message details: ( Max 5 lines )"
+            android:layout_marginTop="@dimen/padding"
+            android:textColor="@color/redColor"
+            android:textSize="@dimen/smallTextSize" />
+
+        <EditText
+            android:id="@+id/messageDetailsEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/extraSmallMargin"
+            android:background="@drawable/background_of_edittext"
+            android:padding="@dimen/largeMargin"
+            android:hint="e.g: Need B+ blood at Savar Enam Hospital today at 5:00 pm for a patient having stone in stomacak very urgently. So please help. contact: 017********"
+            android:maxLines="5" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_weight="1">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Send"
+            android:background="@drawable/back_button_two"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normalTextSize"
+            android:layout_marginTop="@dimen/padding"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -23,6 +23,9 @@
             android:icon="@drawable/feedback_icon"
             android:title="Join with Facebook" />
         <item
+            android:id="@+id/sendMsg"
+            android:title="Send message to All"/>
+        <item
             android:id="@+id/about"
             android:icon="@drawable/info_icon"
             android:title="About BLOOD+" />

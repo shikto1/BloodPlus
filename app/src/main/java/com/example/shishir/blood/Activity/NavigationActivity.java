@@ -201,6 +201,16 @@ public class NavigationActivity extends AppCompatActivity
                 startActivity(in);
                 break;
             }
+            case R.id.sendMsg: {
+                if (Network.isNetAvailable(this)) {
+                    intent.putExtra("frg", 6);
+                    startActivity(intent);
+                    break;
+                } else {
+                    Network.showInternetAlertDialog(this);
+                    break;
+                }
+            }
             case R.id.about: {
                 intent.putExtra("frg", 7);
                 startActivity(intent);
