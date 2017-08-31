@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_weight="1">
+        android:layout_weight="1.5">
         <TextView
             android:layout_width="wrap_content"
             android:layout_marginTop="@dimen/padding"
@@ -43,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/extraSmallMargin"
             android:background="@drawable/background_of_edittext"
+            android:inputType="textMultiLine"
             android:padding="@dimen/largeMargin"
             android:hint="e.g: Need B+ blood at Savar Enam Hospital today at 5:00 pm for a patient having stone in stomacak very urgently. So please help. contact: 017********"
             android:maxLines="5" />
@@ -62,7 +63,6 @@
             android:background="@drawable/back_button_two"
             android:textColor="@color/white"
             android:textSize="@dimen/normalTextSize"
-            android:layout_marginTop="@dimen/padding"
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
