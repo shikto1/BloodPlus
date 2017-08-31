@@ -24,4 +24,6 @@ public class Constants {
     public static final String URL_GET_DONOR_RANKING_LIST="http://spacedesign.com.bd/bloodplus/getRankingInfo.php";
 
     public static final String POPUP_MENU_CLICKED_ACTION = "com.example.shishir.blood.cleckeddd";
+
+    public static final String URL_PUSH_NOTIFICATION="http://spacedesign.com.bd/bloodplus/sendPushNot.php";
 }
