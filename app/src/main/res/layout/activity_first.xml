@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/smallTextColor"
             android:text="Donate Blood and Give a New Life !"
-            android:textSize="@dimen/smallTextSize"/>
+            android:textSize="@dimen/extraSmallSizeText"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
