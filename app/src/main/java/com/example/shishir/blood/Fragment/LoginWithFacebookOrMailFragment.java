@@ -1,5 +1,4 @@
-package com.example.shishir.blood;
-
+package com.example.shishir.blood.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shishir.blood.Fragment.LoginWithFacebookOrMailFragment;
+import com.example.shishir.blood.CreateAccountUsingGmail;
+import com.example.shishir.blood.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -25,46 +25,32 @@ import com.facebook.login.widget.LoginButton;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
-public class CreateAccountUsingGmail extends Fragment implements View.OnClickListener {
-
-    FragmentManager fragmentManager;
-    Button registerWIthEmail, loginHereBtnAtFBG;
-
-    TextView loginStatus;
-
-    //For Facebook Login...................
-    LoginButton registerWithFb;
+public class LoginWithFacebookOrMailFragment extends Fragment implements View.OnClickListener {
+    // faceobook Login........
+    LoginButton loginWithFacebookBtn;
     CallbackManager callbackManager;
+
+
+    Button loginWithEmailBtn, registerHBtn, forgotPassBtn;
+    TextView loginResult;
+    FragmentManager fragmentManager;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_create_accouot_using_gmail, container, false);
+        View view = inflater.inflate(R.layout.login_with_facebook_gmail, container, false);
+        callbackManager = CallbackManager.Factory.create();
         findViewById(view);
         return view;
     }
 
     private void findViewById(View view) {
-
-        registerWIthEmail = (Button) view.findViewById(R.id.registerWithEmailBtn);
-        loginHereBtnAtFBG = (Button) view.findViewById(R.id.loginHereFbEmail);
-        loginStatus= (TextView) view.findViewById(R.id.loginStatus);
-        fragmentManager = getActivity().getSupportFragmentManager();
-
-
-        registerWIthEmail.setOnClickListener(this);
-        loginHereBtnAtFBG.setOnClickListener(this);
-
-
-        //Facebook Login SetUP..........................
-        callbackManager = CallbackManager.Factory.create();
-        registerWithFb = (LoginButton) view.findViewById(R.id.registerUsingFbBtn);
-        registerWithFb.setFragment(this);
-        registerWithFb.setReadPermissions("email", "public_profile");
-
-        registerWithFb.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        loginWithFacebookBtn = (LoginButton) view.findViewById(R.id.loginWithFacebookBtn);
+        loginWithFacebookBtn.setFragment(this);
+        loginWithFacebookBtn.setReadPermissions("email", "public_profile");
+        loginWithFacebookBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
 
@@ -74,7 +60,7 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
 
             @Override
             public void onCancel() {
-                loginStatus.setText("Cancelled");
+                loginResult.setText("Cancelled");
 
             }
 
@@ -85,6 +71,17 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
         });
 
 
+        loginWithEmailBtn = (Button) view.findViewById(R.id.loginWithEmailBtn);
+        registerHBtn = (Button) view.findViewById(R.id.registerHereBtnAtFacebookGmail);
+        forgotPassBtn = (Button) view.findViewById(R.id.forgotPasswordBtnAtFG);
+        loginResult = (TextView) view.findViewById(R.id.loginResult);
+        fragmentManager = getActivity().getSupportFragmentManager();
+
+
+        loginWithFacebookBtn.setOnClickListener(this);
+        loginWithEmailBtn.setOnClickListener(this);
+        registerHBtn.setOnClickListener(this);
+        forgotPassBtn.setOnClickListener(this);
     }
 
     private void handleFacebookAccessToken(AccessToken accessToken) {
@@ -116,33 +113,32 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        loginStatus.setText("Name: " + first_name + " " + last_name + "\nGender: " + gender
-             + "\nEmail: " + email + "\n" + "id: " + id);
+        loginResult.setText("Name: " + first_name + " " + last_name + "\nGender: " + gender
+                + "\nEmail: " + email + "\n" + "id: " + id);
 
     }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        callbackManager.onActivityResult(requestCode, resultCode, data);
-    }
-
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         switch (id) {
-            case R.id.registerWithEmailBtn: {
-                ToastMessage("I will do this later !");
+            case R.id.loginWithEmailBtn: {
                 break;
             }
-            case R.id.loginHereFbEmail: {
-                fragmentManager.beginTransaction().replace(R.id.parentLayoutRegisterLogin, new LoginWithFacebookOrMailFragment())
+            case R.id.registerHereBtnAtFacebookGmail: {
+                fragmentManager.beginTransaction().replace(R.id.parentLayoutRegisterLogin, new CreateAccountUsingGmail())
+                        .addToBackStack("ss")
                         .commit();
                 break;
             }
+            case R.id.forgotPasswordBtnAtFG: {
+
+            }
         }
     }
-    private void ToastMessage(String ss){
-        Toast.makeText(getActivity(),ss,Toast.LENGTH_SHORT).show();
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 }

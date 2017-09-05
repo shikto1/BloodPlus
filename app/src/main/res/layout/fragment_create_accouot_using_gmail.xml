@@ -16,6 +16,11 @@
         <!--android:textAppearance="@android:style/TextAppearance"-->
         <!--android:textColor="@color/white"-->
         <!--android:textSize="@dimen/extraSmallSizeText" />-->
+
+    <TextView
+        android:id="@+id/loginStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
     <com.facebook.login.widget.LoginButton
         android:id="@+id/registerUsingFbBtn"
         android:layout_width="match_parent"
