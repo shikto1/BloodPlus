@@ -7,15 +7,19 @@
     android:padding="@dimen/padding"
     tools:context="com.example.shishir.blood.Fragment.LoginWithFacebookOrMailFragment">
 
-    <Button
-        android:id="@+id/registerWithFacebookBtn"
+    <!--<Button-->
+        <!--android:id="@+id/registerWithFacebookBtn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/smallBtnHeight"-->
+        <!--android:background="@drawable/back_of_facebook_button"-->
+        <!--android:text="Continue with Facebook"-->
+        <!--android:textAppearance="@android:style/TextAppearance"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="@dimen/extraSmallSizeText" />-->
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/registerUsingFbBtn"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/smallBtnHeight"
-        android:background="@drawable/back_of_facebook_button"
-        android:text="Continue with Facebook"
-        android:textAppearance="@android:style/TextAppearance"
-        android:textColor="@color/white"
-        android:textSize="@dimen/extraSmallSizeText" />
+        android:layout_height="40dp" />
 
     <TextView
         android:id="@+id/textView2"
@@ -28,7 +32,7 @@
         android:textSize="@dimen/normalTextSize" />
 
     <Button
-        android:id="@+id/registerWithGmailBtn"
+        android:id="@+id/registerWithEmailBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smallBtnHeight"
         android:layout_marginBottom="@dimen/padding"
@@ -53,7 +57,7 @@
         android:textSize="@dimen/smallTextSize" />
 
     <Button
-        android:id="@+id/loginHereFragmentBtn"
+        android:id="@+id/loginHereFbEmail"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

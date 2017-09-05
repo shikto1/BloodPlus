@@ -51,9 +51,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import fr.ganfra.materialspinner.MaterialSpinner;
-
-
 public class SearchFrgment extends Fragment {
 
     Spinner bloodGroup;

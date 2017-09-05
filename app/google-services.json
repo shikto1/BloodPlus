@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1046066608230-q0t429inmg1vqccp28p5pab6nf0o0btt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.shishir.blood",
+            "certificate_hash": "fadc82d8e4ea6f9baf483808117ebab26590435f"
+          }
+        },
+        {
           "client_id": "1046066608230-cn4d21vnh0veepa8ml6tkeft4n2ic752.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1046066608230-cn4d21vnh0veepa8ml6tkeft4n2ic752.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
