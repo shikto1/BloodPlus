@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1046066608230",
+    "firebase_url": "https://bloodplus-eeccc.firebaseio.com",
+    "project_id": "bloodplus-eeccc",
+    "storage_bucket": "bloodplus-eeccc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046066608230:android:1a7c9f8d450d0111",
+        "android_client_info": {
+          "package_name": "com.example.shishir.blood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1046066608230-cn4d21vnh0veepa8ml6tkeft4n2ic752.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTvbh9l0tO6F2Z94VadS7OFs0d-iVWxoA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
