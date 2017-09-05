@@ -5,9 +5,10 @@
     android:gravity="center"
     android:orientation="vertical"
     android:padding="@dimen/padding"
-    tools:context="com.example.shishir.blood.CreateAccountUsingGmail">
+    tools:context="com.example.shishir.blood.Fragment.LoginWithFacebookOrMailFragment">
 
     <Button
+        android:id="@+id/registerWithFacebookBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smallBtnHeight"
         android:background="@drawable/back_of_facebook_button"
@@ -17,70 +18,47 @@
         android:textSize="@dimen/extraSmallSizeText" />
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginBottom="@dimen/padding"
         android:layout_marginTop="@dimen/padding"
         android:text="or"
-        android:textSize="@dimen/smallTextSize" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/background_of_edittext"
-        android:ems="10"
-        android:hint="Email"
-        android:inputType="textEmailAddress"
-        android:padding="@dimen/largeMargin"
-        android:textSize="@dimen/smallTextSize" />
-
-    <EditText
-        android:id="@+id/passwordETForLoginWithGmail"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/largeMargin"
-        android:layout_marginTop="@dimen/padding"
-        android:background="@drawable/background_of_edittext"
-        android:ems="10"
-        android:hint="Password"
-        android:inputType="textPassword"
-        android:padding="@dimen/largeMargin"
-        android:textSize="@dimen/smallTextSize" />
+        android:textSize="@dimen/normalTextSize" />
 
     <Button
-        android:id="@+id/lognWithGmailBtn"
+        android:id="@+id/registerWithGmailBtn"
         android:layout_width="match_parent"
         android:layout_height="@dimen/smallBtnHeight"
-        android:layout_marginTop="@dimen/padding"
+        android:layout_marginBottom="@dimen/padding"
         android:background="@drawable/background_of_button"
-        android:text="Login"
+        android:text="Register using Email"
+        android:textAppearance="@android:style/TextAppearance"
         android:textColor="@color/white"
-        android:textSize="@dimen/smallTextSize" />
-
-    <TextView
-        android:id="@+id/forgotPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/largeMargin"
-        android:layout_marginTop="@dimen/padding"
-        android:text="Forgot Password ?"
-        android:textColor="@color/redColor"
-        android:textSize="@dimen/smallTextSize" />
+        android:textSize="@dimen/extraSmallSizeText" />
 
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
-        android:layout_marginBottom="@dimen/largeMargin"
-        android:layout_marginTop="@dimen/padding"
+        android:layout_marginBottom="@dimen/padding"
+        android:layout_marginTop="32dp"
         android:background="@android:color/darker_gray" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/padding"
-        android:text="Not Registered ? Then Register here" />
+        android:text="Already Registered ? "
+        android:textSize="@dimen/smallTextSize" />
 
+    <Button
+        android:id="@+id/loginHereFragmentBtn"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Login here"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textColor="@color/redColor" />
 
 </LinearLayout>
