@@ -7,15 +7,23 @@
     android:padding="@dimen/padding"
     tools:context="com.example.shishir.blood.CreateAccountUsingGmail">
 
-    <Button
+    <!--<Button-->
+        <!--android:id="@+id/loginWithFacebookBtn"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/smallBtnHeight"-->
+        <!--android:background="@drawable/back_of_facebook_button"-->
+        <!--android:text="Continue with Facebook"-->
+        <!--android:textAppearance="@android:style/TextAppearance"-->
+        <!--android:textColor="@color/white"-->
+        <!--android:textSize="@dimen/extraSmallSizeText" />-->
+    <TextView
+        android:id="@+id/loginResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <com.facebook.login.widget.LoginButton
         android:id="@+id/loginWithFacebookBtn"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/smallBtnHeight"
-        android:background="@drawable/back_of_facebook_button"
-        android:text="Continue with Facebook"
-        android:textAppearance="@android:style/TextAppearance"
-        android:textColor="@color/white"
-        android:textSize="@dimen/extraSmallSizeText" />
+        android:layout_height="wrap_content" />
 
     <TextView
         android:layout_width="wrap_content"

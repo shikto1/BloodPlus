@@ -41,11 +41,6 @@
             android:name=".Activity.SplashScreenActivity"
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.NoActionBar.Fullscreen">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <meta-data
@@ -80,7 +75,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.ChatActivity" />
-        <activity android:name=".Activity.RegisterLoginActivity"></activity>
+        <activity android:name=".Activity.RegisterLoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
     </application>
 
 </manifest>
