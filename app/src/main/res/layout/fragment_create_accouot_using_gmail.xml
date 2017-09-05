@@ -7,10 +7,14 @@
     android:padding="@dimen/padding"
     tools:context="com.example.shishir.blood.CreateAccountUsingGmail">
 
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/loginWithFacebook"
+    <Button
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="@dimen/smallBtnHeight"
+        android:background="@drawable/back_of_facebook_button"
+        android:text="Continue with Facebook"
+        android:textAppearance="@android:style/TextAppearance"
+        android:textColor="@color/white"
+        android:textSize="@dimen/extraSmallSizeText" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -36,11 +40,11 @@
         android:id="@+id/passwordETForLoginWithGmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/largeMargin"
         android:layout_marginTop="@dimen/padding"
         android:background="@drawable/background_of_edittext"
         android:ems="10"
         android:hint="Password"
-        android:layout_marginBottom="@dimen/largeMargin"
         android:inputType="textPassword"
         android:padding="@dimen/largeMargin"
         android:textSize="@dimen/smallTextSize" />
@@ -48,7 +52,7 @@
     <Button
         android:id="@+id/lognWithGmailBtn"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/smallBtnHeight"
         android:layout_marginTop="@dimen/padding"
         android:background="@drawable/background_of_button"
         android:text="Login"
@@ -67,7 +71,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
+        android:layout_height="0.5dp"
         android:layout_marginBottom="@dimen/largeMargin"
         android:layout_marginTop="@dimen/padding"
         android:background="@android:color/darker_gray" />
