@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">BLOOD+</string>
 
+    <string name="facebook_app_id">1133637963434990</string>
+    <string name="fb_login_protocol_scheme">fb1133637963434990</string>
+
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="action_settings">Log Out</string>
