@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +32,7 @@ public class AccountWithGmailFirstScreen extends Fragment implements View.OnClic
     EditText nameEt, emailEt, passEt, conPassEt;
     Button createAcBtn;
     String nameStr, emailStr, passStr, conPassStr;
+    FragmentManager fragmentManager;
 
     FirebaseAuth auth;
     DatabaseReference databaseReference;
@@ -51,6 +53,7 @@ public class AccountWithGmailFirstScreen extends Fragment implements View.OnClic
         emailEt = (EditText) view.findViewById(R.id.emailEtRegisterWithG);
         passEt = (EditText) view.findViewById(R.id.passwordEtRegisterWithG);
         conPassEt = (EditText) view.findViewById(R.id.cPassRegWithG);
+        fragmentManager = getActivity().getSupportFragmentManager();
 
         createAcBtn = (Button) view.findViewById(R.id.createAcUsingEmailBtn);
         createAcBtn.setOnClickListener(this);
@@ -75,7 +78,16 @@ public class AccountWithGmailFirstScreen extends Fragment implements View.OnClic
         } else if (!passStr.equals(conPassStr)) {
             ToastMessage("Password did not match");
         } else {
-            registerUser(emailStr, passStr);
+            Bundle bundle = new Bundle();
+            bundle.putString("name", nameStr);
+            bundle.putString("email", emailStr);
+            bundle.putString("pass", passStr);
+            AccountWithEmailSecondScreen secondF = new AccountWithEmailSecondScreen();
+            secondF.setArguments(bundle);
+            fragmentManager.beginTransaction().replace(R.id.parentLayoutRegisterLogin, secondF)
+                    .commit();
+            // registerUser(emailStr, passStr);
+
         }
     }
 
