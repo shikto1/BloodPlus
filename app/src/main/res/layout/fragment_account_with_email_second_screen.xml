@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding"
+    tools:context="com.example.shishir.blood.Fragment.AccountWithGmailFirstScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+
+        <EditText
+            android:id="@+id/contactAtRegisterLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/largeMargin"
+            android:background="@drawable/background_of_edittext"
+            android:ems="10"
+            android:hint="Contact Number"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:padding="@dimen/largeMargin"
+            android:textSize="@dimen/smallTextSize" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding">
+
+            <TextView
+                android:id="@+id/bloodGAtRegisterLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_of_edittext"
+                android:hint="Blood Group"
+                android:padding="@dimen/largeMargin"
+                android:textSize="@dimen/normalTextSize" />
+
+            <Spinner
+                android:id="@+id/bloodSpinnerAtRegisterLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/asBloodSpinner"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/dateOfBirthAtRegisterLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/bloodGAtRegisterLogin"
+                android:layout_marginTop="@dimen/padding"
+                android:background="@drawable/background_of_edittext"
+                android:ems="10"
+                android:hint="Date of birth"
+                android:maxLines="1"
+                android:padding="@dimen/largeMargin"
+                android:textSize="@dimen/smallTextSize" />
+
+            <TextView
+                android:id="@+id/lastDonationDAtRegisterLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/dateOfBirthAtRegisterLogin"
+                android:layout_marginTop="@dimen/padding"
+                android:background="@drawable/background_of_edittext"
+                android:ems="10"
+                android:hint="Last donation date"
+                android:maxLines="1"
+                android:padding="@dimen/largeMargin"
+                android:textSize="@dimen/smallTextSize" />
+        </RelativeLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/completeRegisterBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding"
+            android:background="@drawable/background_of_button"
+            android:text="Done"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normalTextSize"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
