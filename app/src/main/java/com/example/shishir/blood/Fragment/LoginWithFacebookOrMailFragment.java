@@ -34,6 +34,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class LoginWithFacebookOrMailFragment extends Fragment implements View.OnClickListener {
     // faceobook Login........
     LoginButton loginWithFacebookBtn;
@@ -46,6 +49,7 @@ public class LoginWithFacebookOrMailFragment extends Fragment implements View.On
     FragmentManager fragmentManager;
     ProgressDialog progressDialog;
     FirebaseAuth auth;
+    String emailStr, passStr;
 
 
     @Override
@@ -156,18 +160,18 @@ public class LoginWithFacebookOrMailFragment extends Fragment implements View.On
     }
 
     private void doSignIn() {
-        String emailSt = emailEt.getText().toString();
-        String passStr = passEt.getText().toString();
-        if (TextUtils.isEmpty(emailSt)) {
+        emailStr = emailEt.getText().toString();
+        passStr = passEt.getText().toString();
+        if (TextUtils.isEmpty(emailStr)) {
             ToastMessage("Enter Email !");
-        } else if (!emailSt.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]")) {
+        } else if (!emailValidator(emailStr)) {
             ToastMessage("Enter a valid Email !");
         } else if (TextUtils.isEmpty(passStr)) {
             ToastMessage("Enter Password !");
         } else {
-            progressDialog.setMessage("Registering...");
+            progressDialog.setMessage("Logging in...");
             progressDialog.show();
-            auth.signInWithEmailAndPassword(emailSt, passStr)
+            auth.signInWithEmailAndPassword(emailStr, passStr)
                     .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -190,5 +194,15 @@ public class LoginWithFacebookOrMailFragment extends Fragment implements View.On
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public boolean emailValidator(String email)
+    {
+        Pattern pattern;
+        Matcher matcher;
+        final String EMAIL_PATTERN = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        pattern = Pattern.compile(EMAIL_PATTERN);
+        matcher = pattern.matcher(email);
+        return matcher.matches();
     }
 }
