@@ -51,7 +51,7 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
 
         registerWIthEmail = (Button) view.findViewById(R.id.registerWithEmailBtn);
         loginHereBtnAtFBG = (Button) view.findViewById(R.id.loginHereFbEmail);
-        loginStatus= (TextView) view.findViewById(R.id.loginStatus);
+        loginStatus = (TextView) view.findViewById(R.id.loginStatus);
         fragmentManager = getActivity().getSupportFragmentManager();
 
 
@@ -118,7 +118,7 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
             e.printStackTrace();
         }
         loginStatus.setText("Name: " + first_name + " " + last_name + "\nGender: " + gender
-             + "\nEmail: " + email + "\n" + "id: " + id);
+                + "\nEmail: " + email + "\n" + "id: " + id);
 
     }
 
@@ -133,7 +133,10 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
         int id = v.getId();
         switch (id) {
             case R.id.registerWithEmailBtn: {
-                ToastMessage("I will do this later !");
+                fragmentManager.beginTransaction()
+                        .replace(R.id.parentLayoutRegisterLogin, new AccountWithGmailFirstScreen())
+                        .addToBackStack("s")
+                        .commit();
                 break;
             }
             case R.id.loginHereFbEmail: {
@@ -143,7 +146,8 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
             }
         }
     }
-    private void ToastMessage(String ss){
-        Toast.makeText(getActivity(),ss,Toast.LENGTH_SHORT).show();
+
+    private void ToastMessage(String ss) {
+        Toast.makeText(getActivity(), ss, Toast.LENGTH_SHORT).show();
     }
 }

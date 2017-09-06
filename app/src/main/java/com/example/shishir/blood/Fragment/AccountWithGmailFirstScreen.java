@@ -1,7 +1,9 @@
 package com.example.shishir.blood.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -13,30 +15,37 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.shishir.blood.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class AccountWithGmailFirstScreen extends Fragment implements View.OnClickListener {
 
 
-    TextInputLayout nameTextInLay, emailTextInLay, passTextInLay, conPassTextInLay;
     EditText nameEt, emailEt, passEt, conPassEt;
     Button createAcBtn;
     String nameStr, emailStr, passStr, conPassStr;
+
+    FirebaseAuth auth;
+    DatabaseReference databaseReference;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account_with_gmail_first_screen, container, false);
+        auth = FirebaseAuth.getInstance();
         findViewById(view);
         return view;
     }
 
     private void findViewById(View view) {
-
-        nameTextInLay = (TextInputLayout) view.findViewById(R.id.textINLayName);
-        emailTextInLay = (TextInputLayout) view.findViewById(R.id.textINLayEmail);
-        passTextInLay = (TextInputLayout) view.findViewById(R.id.textINLayPass);
-        conPassTextInLay = (TextInputLayout) view.findViewById(R.id.textINLayConPass);
 
         nameEt = (EditText) view.findViewById(R.id.nameEtRegisterWithG);
         emailEt = (EditText) view.findViewById(R.id.emailEtRegisterWithG);
@@ -49,60 +58,68 @@ public class AccountWithGmailFirstScreen extends Fragment implements View.OnClic
 
     @Override
     public void onClick(View v) {
+
         nameStr = nameEt.getText().toString();
         emailStr = emailEt.getText().toString();
-
+        passStr = passEt.getText().toString();
         conPassStr = conPassEt.getText().toString();
 
-        if (TextUtils.isEmpty(nameStr)) {
-            nameTextInLay.setErrorEnabled(true);
-            nameTextInLay.setError("Required !");
+        if (nameStr.length() == 0) {
+            ToastMessage("Enter your name please !");
+        } else if (emailStr.length() == 0) {
+            ToastMessage("Enter your email");
+        } else if (!emailStr.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+")) {
+            ToastMessage("Enter a valid email");
+        } else if (passStr.length() == 0) {
+            ToastMessage("Enter Password !");
+        } else if (!passStr.equals(conPassStr)) {
+            ToastMessage("Password did not match");
         } else {
-            nameTextInLay.setErrorEnabled(false);
+            registerUser(emailStr, passStr);
         }
-        if (emailIsValid(emailStr)) {
-            passStr = passEt.getText().toString();
-            if (passwordIsValid(passStr)) {
-                conPassStr = conPassEt.getText().toString();
-                if (passStr.equals(conPassStr)) {
-                    Toast.makeText(getActivity(), "Password did not match", Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void registerUser(String email, String password) {
+
+        auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (!task.isSuccessful()) {
+                    ToastMessage("Authentication Failed !");
                 } else {
-                    createNewAccount(emailStr, passStr);
+                    saveUserToFireBaseDatabase(task.getResult().getUser());
                 }
 
             }
-        }
+        });
+    }
+
+    private void saveUserToFireBaseDatabase(FirebaseUser user) {
+
+        String uiID = user.getUid();
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("Donors").child(uiID);
+
+        //For Single Value Input.............
+        // databaseReference.child('name').setValue(name).addOnCompletionListener.............................
+
+        HashMap<String, String> map = new HashMap<String, String>();
+        map.put("name", nameStr);
+        //    map.put("blood", bloodStr);
+        databaseReference.setValue(map).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()) {
+                    ToastMessage("Successfully Registered !");
+                    //   startActivity(new Intent(CreateNewAccouontActivity.this, AfterLoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+                    // finish();
+                }
+            }
+        });
 
     }
 
-    private boolean passwordIsValid(String passStr) {
-        if (TextUtils.isEmpty(passStr)) {
-            passTextInLay.setError("Required Password !");
-            return false;
-        } else if (passStr.length() < 5) {
-            passTextInLay.setError("Need at least 5 character !");
-            return false;
-        } else {
-            passTextInLay.setErrorEnabled(false);
-        }
-        return true;
-    }
-
-    private boolean emailIsValid(String emailStr) {
-        if (TextUtils.isEmpty(emailStr)) {
-            emailTextInLay.setError("Required !");
-            return false;
-        } else if (!emailStr.matches("^[a-zA-Z0-9#_~!$&'()*+,;=:.\\\"(),:;<>@\\\\[\\\\]\\\\\\\\]+@[a-zA-Z0-9-]+(\\\\.[a-zA-Z0-9-]+)*$")) {
-            emailTextInLay.setError("Email is not valid");
-            return false;
-        } else {
-            emailTextInLay.setErrorEnabled(false);
-        }
-
-        return true;
-    }
-
-    private void createNewAccount(String email, String password) {
-
+    private void ToastMessage(String msg) {
+        Toast.makeText(getActivity(), msg, Toast.LENGTH_SHORT).show();
     }
 }
