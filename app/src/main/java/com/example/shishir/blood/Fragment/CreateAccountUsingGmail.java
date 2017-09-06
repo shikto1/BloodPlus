@@ -1,4 +1,4 @@
-package com.example.shishir.blood;
+package com.example.shishir.blood.Fragment;
 
 
 import android.content.Intent;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.shishir.blood.Fragment.LoginWithFacebookOrMailFragment;
+import com.example.shishir.blood.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;

@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.shishir.blood.CreateAccountUsingGmail;
 import com.example.shishir.blood.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;

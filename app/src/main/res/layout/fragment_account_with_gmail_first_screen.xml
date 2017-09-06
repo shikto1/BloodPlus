@@ -1,0 +1,119 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/padding"
+    tools:context="com.example.shishir.blood.Fragment.AccountWithGmailFirstScreen">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textINLayName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/nameEtRegisterWithG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/background_of_edittext"
+                android:ems="10"
+                android:hint="Name"
+                android:inputType="textPersonName"
+                android:maxLines="1"
+                android:padding="@dimen/largeMargin"
+                android:textSize="@dimen/smallTextSize" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textINLayEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/emailEtRegisterWithG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding"
+                android:background="@drawable/background_of_edittext"
+                android:ems="10"
+                android:hint="Email"
+                android:inputType="textEmailAddress"
+                android:maxLines="1"
+                android:padding="@dimen/largeMargin"
+                android:textSize="@dimen/smallTextSize" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textINLayPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/passwordEtRegisterWithG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding"
+                android:background="@drawable/background_of_edittext"
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="@dimen/largeMargin"
+                android:textSize="@dimen/smallTextSize" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/textINLayConPass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/cPassRegWithG"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/padding"
+                android:background="@drawable/background_of_edittext"
+                android:ems="10"
+                android:hint="Confirm Password"
+                android:inputType="text"
+                android:maxLines="1"
+                android:padding="@dimen/largeMargin"
+                android:textSize="@dimen/smallTextSize" />
+
+        </android.support.design.widget.TextInputLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <Button
+            android:id="@+id/createAcUsingEmailBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/padding"
+            android:background="@drawable/background_of_button"
+            android:text="Next"
+            android:textAppearance="@android:style/TextAppearance"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normalTextSize"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
