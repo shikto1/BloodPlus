@@ -47,11 +47,14 @@ public class FirstActivity extends Activity implements View.OnClickListener {
                 break;
             }
             case R.id.loginButtonAtFirstAc: {
-                startActivity(new Intent(this, LoginActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                Intent intent = new Intent(this, RegisterLoginActivity.class);
+                intent.putExtra("rr", "login");
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 break;
             }
             case R.id.registerButton: {
-                Intent intent = new Intent(this, RegisterActivity.class);
+                Intent intent = new Intent(this, RegisterLoginActivity.class);
                 intent.putExtra("rr", "reg");
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
@@ -78,6 +81,15 @@ public class FirstActivity extends Activity implements View.OnClickListener {
                         finish();
                     }
                 }).show();
+    }
+
+    @Override
+    protected void onResume() {
+        View decorView = getWindow().getDecorView();
+        int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
+        decorView.setSystemUiVisibility(uiOptions);
+
+        super.onResume();
     }
 }
 

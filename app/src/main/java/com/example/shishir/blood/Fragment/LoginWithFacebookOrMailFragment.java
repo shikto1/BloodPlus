@@ -1,16 +1,22 @@
 package com.example.shishir.blood.Fragment;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.shishir.blood.Activity.NavigationActivity;
 import com.example.shishir.blood.R;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -20,6 +26,10 @@ import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,9 +41,11 @@ public class LoginWithFacebookOrMailFragment extends Fragment implements View.On
 
 
     Button loginWithEmailBtn, registerHBtn, forgotPassBtn;
+    EditText emailEt, passEt;
     TextView loginResult;
     FragmentManager fragmentManager;
-
+    ProgressDialog progressDialog;
+    FirebaseAuth auth;
 
 
     @Override
@@ -75,6 +87,12 @@ public class LoginWithFacebookOrMailFragment extends Fragment implements View.On
         forgotPassBtn = (Button) view.findViewById(R.id.forgotPasswordBtnAtFG);
         loginResult = (TextView) view.findViewById(R.id.loginResult);
         fragmentManager = getActivity().getSupportFragmentManager();
+
+        emailEt = (EditText) view.findViewById(R.id.emailEtAtLoginWithEmail);
+        passEt = (EditText) view.findViewById(R.id.passwordETFAtLoginWithEmail);
+
+        auth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(getActivity());
 
 
         loginWithFacebookBtn.setOnClickListener(this);
@@ -122,6 +140,7 @@ public class LoginWithFacebookOrMailFragment extends Fragment implements View.On
         int id = v.getId();
         switch (id) {
             case R.id.loginWithEmailBtn: {
+                doSignIn();
                 break;
             }
             case R.id.registerHereBtnAtFacebookGmail: {
@@ -134,6 +153,38 @@ public class LoginWithFacebookOrMailFragment extends Fragment implements View.On
 
             }
         }
+    }
+
+    private void doSignIn() {
+        String emailSt = emailEt.getText().toString();
+        String passStr = passEt.getText().toString();
+        if (TextUtils.isEmpty(emailSt)) {
+            ToastMessage("Enter Email !");
+        } else if (!emailSt.matches("[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]")) {
+            ToastMessage("Enter a valid Email !");
+        } else if (TextUtils.isEmpty(passStr)) {
+            ToastMessage("Enter Password !");
+        } else {
+            progressDialog.setMessage("Registering...");
+            progressDialog.show();
+            auth.signInWithEmailAndPassword(emailSt, passStr)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            progressDialog.dismiss();
+                            if (!task.isSuccessful()) {
+                                ToastMessage("Sign in with Email failed !");
+                            } else {
+                                startActivity(new Intent(getActivity(), NavigationActivity.class)
+                                        .setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK));
+                            }
+                        }
+                    });
+        }
+    }
+
+    private void ToastMessage(String s) {
+        Toast.makeText(getActivity(), s, Toast.LENGTH_SHORT).show();
     }
 
     @Override

@@ -1,6 +1,7 @@
 package com.example.shishir.blood.Fragment;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -42,6 +43,7 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
     Button registerWIthEmail, loginHereBtnAtFBG;
 
     FirebaseAuth auth;
+    ProgressDialog progressDialog;
 
     TextView loginStatus;
 
@@ -65,6 +67,7 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
         loginStatus = (TextView) view.findViewById(R.id.loginStatus);
         fragmentManager = getActivity().getSupportFragmentManager();
         auth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(getActivity());
 
 
         registerWIthEmail.setOnClickListener(this);
@@ -103,18 +106,24 @@ public class CreateAccountUsingGmail extends Fragment implements View.OnClickLis
     private void createAccountUsingFb(AccessToken accessToken) {
 
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
+        progressDialog.setMessage("Loading...");
+        progressDialog.show();
         auth.signInWithCredential(credential).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
+                progressDialog.dismiss();
                 if (!task.isSuccessful()) {
                     ToastMessage("Authentication Failed");
                 } else {
                     FirebaseUser user = task.getResult().getUser();
-                    Bundle b=new Bundle();
-                    b.putString("uid",user.getUid());
-                    b.putString("name",user.getDisplayName());
-                    b.putString("email",user.getEmail());
-                    b.putString("choice","fb");
+                    Bundle b = new Bundle();
+                    b.putString("uid", user.getUid());
+                    b.putString("name", user.getDisplayName());
+                    b.putString("email", user.getEmail());
+                    b.putString("choice", "fb");
+                    AccountWithEmailSecondScreen fragment2 = new AccountWithEmailSecondScreen();
+                    fragment2.setArguments(b);
+                    fragmentManager.beginTransaction().replace(R.id.parentLayoutRegisterLogin, fragment2).commit();
 
                 }
             }
