@@ -46,7 +46,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
 
         <meta-data
@@ -81,7 +80,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Activity.ChatActivity" />
-        <activity android:name=".Activity.RegisterLoginActivity"></activity>
+        <activity android:name=".Activity.RegisterLoginActivity" />
     </application>
 
 </manifest>
